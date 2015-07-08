@@ -15,6 +15,7 @@
     
         $("#left").click(function(){
             $("#1").addClass("selected");
+            photoBar.classList.add("animated");
         })
     })
     </script>
@@ -44,10 +45,11 @@
         }
         .bar {
             text-align: center;
+        }
+        .animated {
             animation-name: move;
-            animation-duration: 2s;
-            animation-direction: alternate-reverse;
-            animation-iteration-count: infinite;
+            animation-duration: 4s;
+            animation-fill-mode: forwards; <!-- which style to keep after the animation -->
         }
     </style>
 </head>
