@@ -1,0 +1,58 @@
+<head>
+    <script src = "jquery-1.11.3.js"></script>
+    <script>$(document).ready(function(){
+        
+        var photos = ["google-maps.jpg", "google-maps.jpg", "google-maps.jpg", "google-maps.jpg"];
+        for (var i=0; i < photos.length; i++) {
+            var img = new Image();
+            img.src = photos[i];
+        }
+    
+        $("#left").click(function(){
+            $("#1").addClass("selected");
+        })
+    })
+    </script>
+    <style>
+        p {
+            text-align: center;
+        }
+        body {
+            background-color: linen;
+        }
+        img {
+        }
+        .selected{
+            box-shadow:0px 12px 22px 1px #333;
+        }
+        table {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .bar {
+        }
+    </style>
+</head>
+
+<body>
+    <h1>test</h1>
+    
+    <p>
+        <div class="bar">
+                <img id="1" src="google-maps.jpg" alt="screenshot" style="width:200px;height:100px;">
+                <img id="2" src="google-maps.jpg" alt="screenshot" style="width:200px;height:100px;">
+                <img id="3" src="google-maps.jpg" alt="screenshot" style="width:200px;height:100px;">
+                <img id="4" src="google-maps.jpg" alt="screenshot" style="width:200px;height:100px;">
+                <img id="5" src="google-maps.jpg" alt="screenshot" style="width:200px;height:100px;">
+        </div>
+    </p>
+    
+    <p>
+        <button id="left">left</button>
+        <button id="right">right</button>
+    </p>
+    <p>
+        <button id="lastPage">last page</button>
+        <button id="nextPage">next page</button>
+    </p>
+</body>
