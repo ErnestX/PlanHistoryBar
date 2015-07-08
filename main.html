@@ -3,9 +3,12 @@
     <script>$(document).ready(function(){
         
         var photos = ["google-maps.jpg", "google-maps.jpg", "google-maps.jpg", "google-maps.jpg"];
+        var bar = document.createElement("div");
+        document.getElementById("barContainer").appendChild(bar);
         for (var i=0; i < photos.length; i++) {
             var img = new Image();
             img.src = photos[i];
+            bar.appendChild(img);
         }
     
         $("#left").click(function(){
@@ -29,8 +32,12 @@
             margin-left: auto;
             margin-right: auto;
         }
+/*
         .bar {
-        }
+            height: 233px;
+            width: 3550px;
+        } 
+*/
     </style>
 </head>
 
@@ -38,12 +45,8 @@
     <h1>test</h1>
     
     <p>
-        <div class="bar">
-                <img id="1" src="google-maps.jpg" alt="screenshot" style="width:200px;height:100px;">
-                <img id="2" src="google-maps.jpg" alt="screenshot" style="width:200px;height:100px;">
-                <img id="3" src="google-maps.jpg" alt="screenshot" style="width:200px;height:100px;">
-                <img id="4" src="google-maps.jpg" alt="screenshot" style="width:200px;height:100px;">
-                <img id="5" src="google-maps.jpg" alt="screenshot" style="width:200px;height:100px;">
+        <div id="barContainer">
+                
         </div>
     </p>
     
