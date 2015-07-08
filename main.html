@@ -2,13 +2,15 @@
     <script src = "jquery-1.11.3.js"></script>
     <script>$(document).ready(function(){
         
-        var photos = ["google-maps.jpg", "google-maps.jpg", "google-maps.jpg", "google-maps.jpg"];
-        var bar = document.createElement("div");
-        document.getElementById("barContainer").appendChild(bar);
+        var photos = ["google-maps.jpg", "google-maps.jpg", "google-maps.jpg", "google-maps.jpg", "google-maps.jpg"];
+        var photoBar = document.createElement("div");
+        document.getElementById("barContainer").appendChild(photoBar);
         for (var i=0; i < photos.length; i++) {
             var img = new Image();
             img.src = photos[i];
-            bar.appendChild(img);
+            img.height = 100;
+            img.width = 200;
+            photoBar.appendChild(img);
         }
     
         $("#left").click(function(){
@@ -17,6 +19,14 @@
     })
     </script>
     <style>
+        @keyframes move {
+            from {
+                transform: translateX(0px);
+            }
+            to {
+                transform: translateX(200px);
+            }
+        }
         p {
             text-align: center;
         }
@@ -25,19 +35,20 @@
         }
         img {
         }
-        .selected{
+        .selected {
             box-shadow:0px 12px 22px 1px #333;
         }
         table {
             margin-left: auto;
             margin-right: auto;
         }
-/*
         .bar {
-            height: 233px;
-            width: 3550px;
-        } 
-*/
+            text-align: center;
+            animation-name: move;
+            animation-duration: 2s;
+            animation-direction: alternate-reverse;
+            animation-iteration-count: infinite;
+        }
     </style>
 </head>
 
@@ -45,9 +56,7 @@
     <h1>test</h1>
     
     <p>
-        <div id="barContainer">
-                
-        </div>
+        <div class="bar" id="barContainer"> </div>
     </p>
     
     <p>
