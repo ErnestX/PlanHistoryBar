@@ -9,9 +9,11 @@ p {
 }
 #barContainer {
     height: 200px;
+    text-align: center;
 }
 .bar {
-    width: 1600px;
+    width: 1000px;
+    display: inline-block;
     position: relative;
     transition-property: left;
     transition-duration: .3s;

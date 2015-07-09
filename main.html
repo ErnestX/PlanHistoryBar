@@ -1,11 +1,10 @@
 <head>
     <script src = "jquery-1.11.3.js"></script>
     <script>$(document).ready(function(){
-        
         var photos = ["google-maps.jpg", "google-maps.jpg", "google-maps.jpg", "google-maps.jpg", "google-maps.jpg"];
         var photoBar = document.createElement("div");
     
-        var activePhoto = 0;
+        var activePhotoIndex = 0;
     
         photoBar.classList.add("bar");
         document.getElementById("barContainer").appendChild(photoBar);
@@ -17,13 +16,13 @@
         }
     
         $("#left").click(function(){
-            activePhoto++;
-            photoBar.style.left = activePhoto * 200;
+            activePhotoIndex++;
+            photoBar.style.left = activePhotoIndex * 200;
         })
         
         $("#right").click(function(){
-            activePhoto--;
-            photoBar.style.left = activePhoto * 200;
+            activePhotoIndex--;
+            photoBar.style.left = activePhotoIndex * 200;
         })
     })
     </script>
