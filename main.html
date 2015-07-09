@@ -17,8 +17,9 @@
         }
     
         $("#left").click(function(){
-            //photoBar.classList.add("animated");
-            photoBar.style.left = 200;
+            console.log("pressed");
+            activePhoto++;
+            photoBar.style.left = activePhoto * 200;
         })
     })
     </script>
