@@ -17,8 +17,12 @@
         }
     
         $("#left").click(function(){
-            console.log("pressed");
             activePhoto++;
+            photoBar.style.left = activePhoto * 200;
+        })
+        
+        $("#right").click(function(){
+            activePhoto--;
             photoBar.style.left = activePhoto * 200;
         })
     })
@@ -45,7 +49,7 @@
             width: 1600px;
             position: relative;
             transition-property: left;
-            transition-duration: .5s;
+            transition-duration: .3s;
             transition-timing-function: ease-in-out;
             left: 0px;
         }
