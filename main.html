@@ -4,8 +4,8 @@
         
         var photos = ["google-maps.jpg", "google-maps.jpg", "google-maps.jpg", "google-maps.jpg", "google-maps.jpg"];
         var photoBar = document.createElement("div");
+        photoBar.classList.add("bar");
         document.getElementById("barContainer").appendChild(photoBar);
-        photoBar.style.width = 2000;
         for (var i=0; i < photos.length; i++) {
             var img = new Image();
             img.src = photos[i];
@@ -14,7 +14,7 @@
         }
     
         $("#left").click(function(){
-            photoBar.classList.add("animated");
+            //photoBar.classList.add("animated");
         })
     })
     </script>
@@ -36,10 +36,11 @@
         #barContainer {
             height: 200px;
         }
-        .animated {
-            animation-name: move;
-            animation-duration: 4s;
-            animation-fill-mode: forwards; <!-- which style to keep after the animation -->
+        .bar {
+            width: 1600px;
+            transition-property: left;
+            transition-duration: .5s;
+            transition-timing-function: ease-in-out;
         }
         .photo {
             width: 200px;
