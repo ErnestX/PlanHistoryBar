@@ -5,16 +5,15 @@
         var photos = ["google-maps.jpg", "google-maps.jpg", "google-maps.jpg", "google-maps.jpg", "google-maps.jpg"];
         var photoBar = document.createElement("div");
         document.getElementById("barContainer").appendChild(photoBar);
+        photoBar.style.width = 2000;
         for (var i=0; i < photos.length; i++) {
             var img = new Image();
             img.src = photos[i];
-            img.height = 100;
-            img.width = 200;
+            img.classList.add("photo");
             photoBar.appendChild(img);
         }
     
         $("#left").click(function(){
-            $("#1").addClass("selected");
             photoBar.classList.add("animated");
         })
     })
@@ -31,35 +30,28 @@
         p {
             text-align: center;
         }
-        body {
-            background-color: linen;
-        }
-        img {
-        }
         .selected {
             box-shadow:0px 12px 22px 1px #333;
         }
-        table {
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .bar {
-            text-align: center;
+        #barContainer {
+            height: 200px;
         }
         .animated {
             animation-name: move;
             animation-duration: 4s;
             animation-fill-mode: forwards; <!-- which style to keep after the animation -->
         }
+        .photo {
+            width: 200px;
+            height: 150px;
+            float: left;
+        }
     </style>
 </head>
 
 <body>
-    <h1>test</h1>
-    
-    <p>
-        <div class="bar" id="barContainer"> </div>
-    </p>
+
+    <div id="barContainer"> </div>
     
     <p>
         <button id="left">left</button>
