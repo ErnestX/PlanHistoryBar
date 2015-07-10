@@ -14,15 +14,15 @@ p {
     border-color: aqua;
 }
 #barContainer {
-    height: 200px;
-    width: 1000px;
+    height: 160px;
+    width: 1400px;
     overflow: hidden;
 /*    display: inline-block;*/
     margin: 0 auto;
     text-align: left;
 }
 .bar {
-    width: 1800px; /*the width for loaded images*/
+    width: 2000px; /*the width for loaded images*/
     position: relative;
     transition-property: left;
     transition-duration: .3s;

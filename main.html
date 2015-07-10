@@ -1,9 +1,19 @@
 <!DOCTYPE html>
+<!--http://www.kirupa.com/html5/creating_a_sweet_content_slider.htm-->
 <html>
 <head>
-    <script src = "jquery-1.11.3.js"></script>
+    <script src="jquery-1.11.3.js"></script>
+    <script src="uiHelpers.js"></script>
     <script>$(document).ready(function(){
-        var photosData = ["google-maps.jpg", "google-maps.jpg", "google-maps.jpg", "google-maps.jpg", "google-maps.jpg", "google-maps.jpg"];
+        var photosData = ["google-maps.jpg", 
+                          "google-maps.jpg", 
+                          "google-maps.jpg", 
+                          "google-maps.jpg", 
+                          "google-maps.jpg", 
+                          "google-maps.jpg",
+                          "google-maps.jpg",
+                          "google-maps.jpg",
+                          "google-maps.jpg"];
         var photos = [];
         var photoBar = document.createElement("div");
     
@@ -11,6 +21,7 @@
     
         photoBar.classList.add("bar");
         document.getElementById("barContainer").appendChild(photoBar);
+        var i;
         for (i=0; i < photosData.length; i++) {
             var img = new Image();
             img.src = photosData[i];
@@ -23,19 +34,19 @@
     
         $("#left").click(function(){
             if (activePhotoIndex - 1 >= 0) {
-                photos[activePhotoIndex].classList.remove("selected");
+                unHighlightObject(photos[activePhotoIndex]);
                 activePhotoIndex--;
-                photos[activePhotoIndex].classList.add("selected");
-                photoBar.style.left = (-1 * activePhotoIndex * 200).toString() + "px";
+                highlightObject(photos[activePhotoIndex]);
+                moveObjectLeftToPos(photoBar, -1 * activePhotoIndex * 200);
             }
         })
         
         $("#right").click(function(){
             if (activePhotoIndex + 1 < photos.length) {
-                photos[activePhotoIndex].classList.remove("selected");
+                unHighlightObject(photos[activePhotoIndex]);
                 activePhotoIndex++;
-                photos[activePhotoIndex].classList.add("selected");
-                photoBar.style.left = (-1 * activePhotoIndex * 200).toString() + "px";
+                highlightObject(photos[activePhotoIndex]);
+                moveObjectLeftToPos(photoBar, -1 * activePhotoIndex * 200);
             }
         })
     })
