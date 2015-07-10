@@ -1,3 +1,6 @@
+body {
+/*    text-align: center;*/
+}
 h1 {
     text-align: center;
 }
@@ -9,11 +12,14 @@ p {
 }
 #barContainer {
     height: 200px;
-    text-align: center;
+    width: 1000px;
+    overflow: hidden;
+/*    display: inline-block;*/
+    margin: 0 auto;
+    text-align: left;
 }
 .bar {
-    width: 1000px;
-    display: inline-block;
+    width: 1200px; /*the width for loaded images*/
     position: relative;
     transition-property: left;
     transition-duration: .3s;
