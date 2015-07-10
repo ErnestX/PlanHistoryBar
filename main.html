@@ -1,28 +1,40 @@
 <head>
     <script src = "jquery-1.11.3.js"></script>
     <script>$(document).ready(function(){
-        var photos = ["google-maps.jpg", "google-maps.jpg", "google-maps.jpg", "google-maps.jpg", "google-maps.jpg", "google-maps.jpg"];
+        var photosData = ["google-maps.jpg", "google-maps.jpg", "google-maps.jpg", "google-maps.jpg", "google-maps.jpg", "google-maps.jpg"];
+        var photos = [];
         var photoBar = document.createElement("div");
     
         var activePhotoIndex = 0;
     
         photoBar.classList.add("bar");
         document.getElementById("barContainer").appendChild(photoBar);
-        for (var i=0; i < photos.length; i++) {
+        for (var i=0; i < photosData.length; i++) {
             var img = new Image();
-            img.src = photos[i];
+            img.src = photosData[i];
             img.classList.add("photo");
             photoBar.appendChild(img);
+            photos[i] = img;
         }
+        
+        photos[activePhotoIndex].classList.add("selected");
     
         $("#left").click(function(){
-            activePhotoIndex++;
-            photoBar.style.left = activePhotoIndex * 200;
+            if (activePhotoIndex - 1 > 0) {
+                photos[activePhotoIndex].classList.remove("selected");
+                activePhotoIndex--;
+                photos[activePhotoIndex].classList.add("selected");
+                photoBar.style.left = -1 * activePhotoIndex * 200;
+            }
         })
         
         $("#right").click(function(){
-            activePhotoIndex--;
-            photoBar.style.left = activePhotoIndex * 200;
+            if (activePhotoIndex + 1 < photos.length) {
+                photos[activePhotoIndex].classList.remove("selected");
+                activePhotoIndex++;
+                photos[activePhotoIndex].classList.add("selected");
+                photoBar.style.left = -1 * activePhotoIndex * 200;
+            }
         })
     })
     </script>

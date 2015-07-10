@@ -8,7 +8,10 @@ p {
     text-align: center;
 }
 .selected {
-    box-shadow:0px 12px 22px 1px #333;
+/*    box-shadow:0px 12px 22px 1px #333;*/
+    border-style: solid;
+    border-bottom-width: medium;
+    border-color: aqua;
 }
 #barContainer {
     height: 200px;
@@ -19,7 +22,7 @@ p {
     text-align: left;
 }
 .bar {
-    width: 1200px; /*the width for loaded images*/
+    width: 1800px; /*the width for loaded images*/
     position: relative;
     transition-property: left;
     transition-duration: .3s;
