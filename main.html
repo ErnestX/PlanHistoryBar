@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html>
 <head>
     <script src = "jquery-1.11.3.js"></script>
     <script>$(document).ready(function(){
@@ -9,7 +11,7 @@
     
         photoBar.classList.add("bar");
         document.getElementById("barContainer").appendChild(photoBar);
-        for (var i=0; i < photosData.length; i++) {
+        for (i=0; i < photosData.length; i++) {
             var img = new Image();
             img.src = photosData[i];
             img.classList.add("photo");
@@ -20,11 +22,11 @@
         photos[activePhotoIndex].classList.add("selected");
     
         $("#left").click(function(){
-            if (activePhotoIndex - 1 > 0) {
+            if (activePhotoIndex - 1 >= 0) {
                 photos[activePhotoIndex].classList.remove("selected");
                 activePhotoIndex--;
                 photos[activePhotoIndex].classList.add("selected");
-                photoBar.style.left = -1 * activePhotoIndex * 200;
+                photoBar.style.left = (-1 * activePhotoIndex * 200).toString() + "px";
             }
         })
         
@@ -33,7 +35,7 @@
                 photos[activePhotoIndex].classList.remove("selected");
                 activePhotoIndex++;
                 photos[activePhotoIndex].classList.add("selected");
-                photoBar.style.left = -1 * activePhotoIndex * 200;
+                photoBar.style.left = (-1 * activePhotoIndex * 200).toString() + "px";
             }
         })
     })
@@ -54,3 +56,4 @@
         <button id="nextPage">next page</button>
     </p>
 </body>
+</html>
