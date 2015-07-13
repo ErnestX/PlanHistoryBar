@@ -2,22 +2,31 @@ body {
 /*    text-align: center;*/
 }
 h1 {
-    text-align: center;
+/*    text-align: center;*/
 }
 p {
-    text-align: center;
+/*    text-align: center;*/
 }
 .selected {
 /*    box-shadow:0px 12px 22px 1px #333;*/
+
+    
     border-style: solid;
-    border-bottom-width: medium;
-    border-color: aqua;
+    border-width: 4px;
+    border-color: deepskyblue;
 }
+
+.unselected {
+    border-style: solid;
+    border-width: 4px;
+    border-color: white;
+}
+
 #barContainer {
     height: 160px;
     width: 1400px;
     overflow: hidden; /*mask*/
-    margin: 0 auto; /* put in the center of the screen*/
+/*    margin: 0 auto;  put in the center of the screen*/
     text-align: right;
 }
 #gradientMask {
@@ -27,38 +36,16 @@ p {
     height: inherit;
     width: inherit;
     
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&amp;0+91,1+100 */
-    background: -moz-linear-gradient(left,  
-        rgba(255,255,255,0) 0%, 
-        rgba(255,255,255,0) 91%, 
-        rgba(255,255,255,1) 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, 
-        left top, 
-        right top, 
-        color-stop(0%,rgba(255,255,255,0)), 
-        color-stop(91%,rgba(255,255,255,0)), 
-        color-stop(100%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(left,  
-        rgba(255,255,255,0) 0%,
-        rgba(255,255,255,0) 91%,
-        rgba(255,255,255,1) 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(left,  
-        rgba(255,255,255,0) 0%,
-        rgba(255,255,255,0) 91%,
-        rgba(255,255,255,1) 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(left,  
-        rgba(255,255,255,0) 0%,
-        rgba(255,255,255,0) 91%,
-        rgba(255,255,255,1) 100%); /* IE10+ */
-    background: linear-gradient(to right,  
-        rgba(255,255,255,0) 0%,
-        rgba(255,255,255,0) 91%,
-        rgba(255,255,255,1) 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', 
-        endColorstr='#ffffff',
-        GradientType=1 ); /* IE6-9 */
-
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&amp;0+75,1+100 */
+    background: -moz-linear-gradient(left,  rgba(255,255,255,0) 0%, rgba(255,255,255,0) 75%, rgba(255,255,255,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,255,255,0)), color-stop(75%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left,  rgba(255,255,255,0) 0%,rgba(255,255,255,0) 75%,rgba(255,255,255,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left,  rgba(255,255,255,0) 0%,rgba(255,255,255,0) 75%,rgba(255,255,255,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(left,  rgba(255,255,255,0) 0%,rgba(255,255,255,0) 75%,rgba(255,255,255,1) 100%); /* IE10+ */
+    background: linear-gradient(to right,  rgba(255,255,255,0) 0%,rgba(255,255,255,0) 75%,rgba(255,255,255,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=1 ); /* IE6-9 */
 }
+
 .bar {
     width: 2000px; /*the width for loaded images*/
     position: relative;
@@ -72,4 +59,5 @@ p {
     width: 200px;
     height: 150px;
     float: left;
+/*    margin-left: 3px;*/
 }

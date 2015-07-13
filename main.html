@@ -26,18 +26,19 @@
             var img = new Image();
             img.src = photosData[i];
             img.classList.add("photo");
+            img.classList.add("unselected");
             photoBar.appendChild(img);
             photos[i] = img;
         }
         
-        photos[activePhotoIndex].classList.add("selected");
+        highlightObject(photos[activePhotoIndex]);
     
         $("#left").click(function(){
             if (activePhotoIndex - 1 >= 0) {
                 unHighlightObject(photos[activePhotoIndex]);
                 activePhotoIndex--;
                 highlightObject(photos[activePhotoIndex]);
-                moveObjectLeftToPos(photoBar, -1 * activePhotoIndex * 200);
+                moveObjectLeftToPos(photoBar, -1 * activePhotoIndex * (200 + 4));
             }
         })
         
@@ -46,7 +47,7 @@
                 unHighlightObject(photos[activePhotoIndex]);
                 activePhotoIndex++;
                 highlightObject(photos[activePhotoIndex]);
-                moveObjectLeftToPos(photoBar, -1 * activePhotoIndex * 200);
+                moveObjectLeftToPos(photoBar, -1 * activePhotoIndex * (200 + 4));
             }
         })
     })
@@ -55,7 +56,7 @@
 </head>
 
 <body>
-    <h1>HISTORY</h1>
+<!--    <h1>HISTORY</h1>-->
     <div id="barContainer"> 
         <div id="gradientMask"></div>
     </div>

@@ -1,5 +1,6 @@
 function highlightObject(obj) {
     if (typeof(obj) == "object") {
+        obj.classList.remove("unselected");
         obj.classList.add("selected");
     } else {
         alertTypeCheckFailure();
@@ -9,6 +10,7 @@ function highlightObject(obj) {
 function unHighlightObject(obj) {
     if (typeof(obj) == "object") {
         obj.classList.remove("selected");
+        obj.classList.add("unselected");
     } else {
         alertTypeCheckFailure();
     }
