@@ -1,3 +1,7 @@
+function selectIndex(index) {
+    
+}
+
 function highlightObject(obj) {
     if (typeof(obj) == "object") {
         obj.classList.remove("unselected");
