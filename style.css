@@ -5,15 +5,13 @@ h1 {
 /*    text-align: center;*/
 }
 p {
-    text-align: center;
+/*    text-align: center;*/
 }
 .selected {
-/*    box-shadow:0px 12px 22px 1px #333;*/
-
-    
     border-style: solid;
     border-width: 4px;
     border-color: deepskyblue;
+    opacity: 0.5;
 }
 
 .unselected {
