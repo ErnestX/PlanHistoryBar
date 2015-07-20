@@ -1,4 +1,9 @@
 $photoWidth: 100px;
+$animationDuration: 0.3s;
+
+body{
+    background-color: #58585A;
+}
 
 .selected {
     padding-left: 50px;
@@ -23,7 +28,7 @@ $photoWidth: 100px;
     height: inherit;
     position: relative;
     transition-property: left;
-    transition-duration: .3s;
+    transition-duration: $animationDuration;
     transition-timing-function: ease-in-out;
     left: 0px;
 //    z-index: -1;
@@ -34,6 +39,6 @@ $photoWidth: 100px;
     height: auto;
     float: left;
     transition-property: padding;
-    transition-duration: .3s;
+    transition-duration: $animationDuration;
     transition-timing-function: ease-in-out;
 }

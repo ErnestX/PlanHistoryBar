@@ -1,9 +1,11 @@
+"use strict";
+
 function selectIndex(index) {
     
 }
 
 function highlightObject(obj) {
-    if (typeof(obj) == "object") {
+    if (typeof (obj) === "object") {
         obj.classList.remove("unselected");
         obj.classList.add("selected");
     } else {
@@ -12,7 +14,7 @@ function highlightObject(obj) {
 }
 
 function unHighlightObject(obj) {
-    if (typeof(obj) == "object") {
+    if (typeof (obj) === "object") {
         obj.classList.remove("selected");
         obj.classList.add("unselected");
     } else {
@@ -20,8 +22,8 @@ function unHighlightObject(obj) {
     }
 }
 
-function moveObjectLeftToPos(obj ,posFromLeft) {
-    if (typeof(obj) == "object" && typeof(posFromLeft) == "number") {
+function moveObjectLeftToPos(obj, posFromLeft) {
+    if (typeof (obj) === "object" && typeof (posFromLeft) === "number") {
         obj.style.left = posFromLeft.toString() + "px";
     } else {
         alertTypeCheckFailure();

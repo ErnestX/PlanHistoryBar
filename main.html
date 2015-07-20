@@ -21,7 +21,7 @@
                           "google-maps.jpg",
                           "google-maps.jpg",
                           "google-maps.jpg", 
-                            "google-maps.jpg" ];
+                          "google-maps.jpg"];
         var photos = [];
         var photoBar = document.createElement("div");
     
@@ -46,7 +46,7 @@
                 unHighlightObject(photos[activePhotoIndex]);
                 activePhotoIndex--;
                 highlightObject(photos[activePhotoIndex]);
-                moveObjectLeftToPos(photoBar, -1 * activePhotoIndex * (img.width + 3));
+//                moveObjectLeftToPos(photoBar, -1 * activePhotoIndex * (img.width + 3));
             }
         })
         
@@ -55,7 +55,7 @@
                 unHighlightObject(photos[activePhotoIndex]);
                 activePhotoIndex++;
                 highlightObject(photos[activePhotoIndex]);
-                moveObjectLeftToPos(photoBar, -1 * activePhotoIndex * (img.width + 3));
+//                moveObjectLeftToPos(photoBar, -1 * activePhotoIndex * (img.width + 3));
             }
         })
     })
