@@ -1,61 +1,43 @@
-body {
-/*    text-align: center;*/
-}
-h1 {
-/*    text-align: center;*/
-}
-p {
-/*    text-align: center;*/
-}
+/* line 3, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 .selected {
-    border-style: solid;
-    border-width: 4px;
-    border-color: deepskyblue;
-    opacity: 0.5;
-}
+  padding-left: 50px;
+  padding-right: 50px; }
 
+/* line 8, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 .unselected {
+  /*
     border-style: solid;
     border-width: 4px;
     border-color: transparent;
-}
+*/ }
 
+/* line 16, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 #barContainer {
-    height: 160px;
-    width: 1400px;
-    overflow: hidden; /*mask*/
-    margin: 0 auto;  /*put in the center of the screen*/
-    text-align: right;
-}
-#gradientMask {
-    position: absolute;
-    background-color: brown;
-    float: right;
-    height: inherit;
-    width: inherit;
-    
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&amp;0+82,1+100 */
-    background: -moz-linear-gradient(left,  rgba(255,255,255,0) 0%, rgba(255,255,255,0) 82%, rgba(255,255,255,1) 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,255,255,0)), color-stop(82%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(left,  rgba(255,255,255,0) 0%,rgba(255,255,255,0) 82%,rgba(255,255,255,1) 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(left,  rgba(255,255,255,0) 0%,rgba(255,255,255,0) 82%,rgba(255,255,255,1) 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(left,  rgba(255,255,255,0) 0%,rgba(255,255,255,0) 82%,rgba(255,255,255,1) 100%); /* IE10+ */
-    background: linear-gradient(to right,  rgba(255,255,255,0) 0%,rgba(255,255,255,0) 82%,rgba(255,255,255,1) 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=1 ); /* IE6-9 */
-}
+  height: 100px;
+  width: inherit;
+  overflow: hidden;
+  /*mask*/
+  margin: 0 auto;
+  /*put at the center of the screen*/
+  text-align: right; }
 
+/* line 24, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 .bar {
-    width: 2000px; /*the width for loaded images*/
-    position: relative;
-    transition-property: left;
-    transition-duration: .3s;
-    transition-timing-function: ease-in-out;
-    left: 0px;
-    z-index: -1;
-}
+  width: 2000px;
+  /*the width for loaded images = 20x*/
+  height: inherit;
+  position: relative;
+  transition-property: left;
+  transition-duration: .3s;
+  transition-timing-function: ease-in-out;
+  left: 0px;
+  z-index: -1; }
+
+/* line 35, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 .photo {
-    width: 200px;
-    height: 150px;
-    float: left;
-/*    margin-left: 3px;*/
-}
+  width: 100px;
+  height: auto;
+  float: left;
+  margin-left: 3px; }
+
+/*# sourceMappingURL=style.css.map */

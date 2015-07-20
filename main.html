@@ -10,10 +10,18 @@
                           "google-maps.jpg", 
                           "google-maps.jpg", 
                           "google-maps.jpg", 
+                          "google-maps.jpg", 
+                          "google-maps.jpg", 
+                          "google-maps.jpg", 
+                          "google-maps.jpg", 
+                          "google-maps.jpg", 
+                          "google-maps.jpg", 
+                          "google-maps.jpg", 
+                          "google-maps.jpg", 
                           "google-maps.jpg",
                           "google-maps.jpg",
-                          "google-maps.jpg",
-                          "google-maps.jpg"];
+                          "google-maps.jpg", 
+                            "google-maps.jpg" ];
         var photos = [];
         var photoBar = document.createElement("div");
     
@@ -38,7 +46,7 @@
                 unHighlightObject(photos[activePhotoIndex]);
                 activePhotoIndex--;
                 highlightObject(photos[activePhotoIndex]);
-                moveObjectLeftToPos(photoBar, -1 * activePhotoIndex * (200 + 8));
+                moveObjectLeftToPos(photoBar, -1 * activePhotoIndex * (img.width + 3));
             }
         })
         
@@ -47,19 +55,20 @@
                 unHighlightObject(photos[activePhotoIndex]);
                 activePhotoIndex++;
                 highlightObject(photos[activePhotoIndex]);
-                moveObjectLeftToPos(photoBar, -1 * activePhotoIndex * (200 + 8));
+                moveObjectLeftToPos(photoBar, -1 * activePhotoIndex * (img.width + 3));
             }
         })
     })
     </script>
-    <link rel=stylesheet type="text/css" href="style.css">
+    <link rel=stylesheet href="style.css">
 </head>
 
 <body>
-<!--    <h1>HISTORY</h1>-->
+    <div id="charts"></div>
     <div id="barContainer"> 
-        <div id="gradientMask"></div>
+<!--        <div id="gradientMask"></div>-->
     </div>
+    <div id="detailView"></div>
     
     <p>
         <button id="left">left</button>
