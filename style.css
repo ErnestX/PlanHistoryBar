@@ -1,19 +1,14 @@
 /* line 3, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 .selected {
-  margin-left: 50px;
-  margin-right: 50px; }
+  padding-left: 50px;
+  padding-right: 50px; }
 
 /* line 8, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 .unselected {
-  margin-left: 1.5px;
-  margin-right: 1.5px;
-  /*
-    border-style: solid;
-    border-width: 4px;
-    border-color: transparent;
-*/ }
+  padding-left: 1.5px;
+  padding-right: 1.5px; }
 
-/* line 18, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
+/* line 13, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 #barContainer {
   height: auto;
   width: inherit;
@@ -23,7 +18,7 @@
   /*put at the center of the screen*/
   text-align: right; }
 
-/* line 26, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
+/* line 21, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 .bar {
   width: 2000px;
   /*the width for loaded images = 20x*/
@@ -32,13 +27,15 @@
   transition-property: left;
   transition-duration: .3s;
   transition-timing-function: ease-in-out;
-  left: 0px;
-  z-index: -1; }
+  left: 0px; }
 
-/* line 37, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
+/* line 32, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 .photo {
   width: 100px;
   height: auto;
-  float: left; }
+  float: left;
+  transition-property: padding;
+  transition-duration: .3s;
+  transition-timing-function: ease-in-out; }
 
 /*# sourceMappingURL=style.css.map */
