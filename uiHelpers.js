@@ -1,13 +1,9 @@
 "use strict";
 
-function selectIndex(index) {
-    
-}
-
 function highlightObject(obj) {
     if (typeof (obj) === "object") {
-        obj.classList.remove("unselected");
         obj.classList.add("selected");
+        obj.classList.remove("unselected");
     } else {
         alertTypeCheckFailure();
     }
@@ -15,8 +11,8 @@ function highlightObject(obj) {
 
 function unHighlightObject(obj) {
     if (typeof (obj) === "object") {
-        obj.classList.remove("selected");
         obj.classList.add("unselected");
+        obj.classList.remove("selected");
     } else {
         alertTypeCheckFailure();
     }
@@ -28,6 +24,12 @@ function moveObjectLeftToPos(obj, posFromLeft) {
     } else {
         alertTypeCheckFailure();
     }
+}
+
+function getPlanAtIndex(index) {
+    var img = new Image();
+    img.src = "google-maps.jpg";
+    return img;
 }
 
 function alertTypeCheckFailure() {

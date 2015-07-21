@@ -5,34 +5,16 @@
     <script src="jquery-1.11.3.js"></script>
     <script src="uiHelpers.js"></script>
     <script>$(document).ready(function(){
-        var photosData = ["google-maps.jpg", 
-                          "google-maps.jpg", 
-                          "google-maps.jpg", 
-                          "google-maps.jpg", 
-                          "google-maps.jpg", 
-                          "google-maps.jpg", 
-                          "google-maps.jpg", 
-                          "google-maps.jpg", 
-                          "google-maps.jpg", 
-                          "google-maps.jpg", 
-                          "google-maps.jpg", 
-                          "google-maps.jpg", 
-                          "google-maps.jpg", 
-                          "google-maps.jpg",
-                          "google-maps.jpg",
-                          "google-maps.jpg", 
-                          "google-maps.jpg"];
         var photos = [];
         var photoBar = document.createElement("div");
     
-        var activePhotoIndex = 0;
+        var activePhotoIndex = 4;
     
         photoBar.classList.add("bar");
         document.getElementById("barContainer").appendChild(photoBar);
         var i;
-        for (i=0; i < photosData.length; i++) {
-            var img = new Image();
-            img.src = photosData[i];
+        for (i=0; i < 15; i++) {
+            var img = getPlanAtIndex(i);
             img.classList.add("photo");
             img.classList.add("unselected");
             photoBar.appendChild(img);
@@ -43,30 +25,40 @@
     
         $("#left").click(function(){
             if (activePhotoIndex - 1 >= 0) {
-                unHighlightObject(photos[activePhotoIndex]);
                 activePhotoIndex--;
-                highlightObject(photos[activePhotoIndex]);
-//                moveObjectLeftToPos(photoBar, -1 * activePhotoIndex * (img.width + 3));
+                selectIndex(activePhotoIndex);
             }
         })
         
         $("#right").click(function(){
             if (activePhotoIndex + 1 < photos.length) {
-                unHighlightObject(photos[activePhotoIndex]);
                 activePhotoIndex++;
-                highlightObject(photos[activePhotoIndex]);
-//                moveObjectLeftToPos(photoBar, -1 * activePhotoIndex * (img.width + 3));
+                selectIndex(activePhotoIndex);
             }
         })
+        
+        function selectIndex(planIndex) {
+            console.log(photos[planIndex].offsetLeft);
+            var i;
+            for (i=0; i < photos.length; i++) {
+                unHighlightObject(photos[i]);
+            }
+            
+            highlightObject(photos[planIndex]);
+//            moveObjectLeftToPos(photoBar, document.getElementById("barContainer").offsetWidth/2.0 -  activePhotoIndex * 100.0 - 145.0/2.0);
+//            moveObjectLeftToPos(photoBar, document.getElementById("barContainer").offsetWidth/2.0 -  photos[activePhotoIndex].offsetLeft);
+//            console.log(document.getElementById("barContainer").offsetWidth);
+            
+//            moveObjectLeftToPos(photoBar, -1 * planIndex * (img.width + 3));    
+        }
     })
     </script>
     <link rel=stylesheet href="style.css">
 </head>
 
 <body>
-    <div id="charts"></div>
     <div id="barContainer"> 
-<!--        <div id="gradientMask"></div>-->
+        <div id="charts"></div>
     </div>
     <div id="detailView"></div>
     
