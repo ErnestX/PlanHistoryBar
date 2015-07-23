@@ -29,7 +29,7 @@ body {
   height: inherit;
   position: relative;
   transition-property: left;
-  transition-duration: 0.25s;
+  transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
   text-align: center; }
 
@@ -39,7 +39,7 @@ body {
   height: auto;
   float: left;
   transition-property: padding;
-  transition-duration: 0.25s;
+  transition-duration: 0.2s;
   transition-timing-function: ease-in-out; }
 
 /*# sourceMappingURL=style.css.map */

@@ -5,51 +5,61 @@
     <script src="jquery-1.11.3.js"></script>
     <script src="uiHelpers.js"></script>
     <script>$(document).ready(function(){
-        var photos = [];
         var photoBar = document.createElement("div");
     
-        var activePhotoIndex = 4;
+        var activePhotoIndex = 3;
+        var rangeLeft = 0;
+        var rangeRight = 7;
     
         photoBar.classList.add("bar");
         document.getElementById("barContainer").appendChild(photoBar);
         var i;
-        for (i=0; i < 15; i++) {
+        for (i=rangeLeft; i < rangeRight; i++) {
             var img = getPlanAtIndex(i);
-            img.classList.add("photo");
-            img.classList.add("unselected");
+            initPlan(img);
             photoBar.appendChild(img);
-            photos[i] = img;
         }
         
-        highlightObject(photos[activePhotoIndex]);
-    
+//        highlightObject(photos[activePhotoIndex]);
+        selectIndex[activePhotoIndex];
+        
         $("#left").click(function(){
             if (activePhotoIndex - 1 >= 0) {
                 activePhotoIndex--;
                 selectIndex(activePhotoIndex);
+                
+//                if (rangeLeft > 0) {
+                    var newImg = initPlan(getPlanAtIndex(rangeLeft - 1));
+                    photoBar.insertBefore(document.createElement(newImg), photoBar.children[0]);
+                rangeLeft -= 1;
+//                }
             }
         })
         
-        $("#right").click(function(){
-            if (activePhotoIndex + 1 < photos.length) {
+        $("#right").click(function() {
+//            if (activePhotoIndex + 1 < photos.length) {
                 activePhotoIndex++;
                 selectIndex(activePhotoIndex);
-            }
+                
+                photoBar.removeChild(photoBar.children[0]);
+                rangeLeft+=1;
+//                console.log(activePhotoIndex);
+//            }
         })
         
         function selectIndex(planIndex) {
-            console.log(photos[planIndex].offsetLeft);
+//            console.log(photos[planIndex].offsetLeft);
             var i;
-            for (i=0; i < photos.length; i++) {
-                unHighlightObject(photos[i]);
+            for (i=0; i < rangeRight - rangeLeft + 1; i++) {
+                unHighlightObject(photoBar.children[i]);
             }
             
-            highlightObject(photos[planIndex]);
-//            moveObjectLeftToPos(photoBar, document.getElementById("barContainer").offsetWidth/2.0 -  activePhotoIndex * 100.0 - 145.0/2.0);
-//            moveObjectLeftToPos(photoBar, document.getElementById("barContainer").offsetWidth/2.0 -  photos[activePhotoIndex].offsetLeft);
-//            console.log(document.getElementById("barContainer").offsetWidth);
-            
-//            moveObjectLeftToPos(photoBar, -1 * planIndex * (img.width + 3));    
+            highlightObject(photoBar.children[planIndex - rangeLeft]);
+        }
+    
+        function initPlan(plan) {
+            img.classList.add("photo");
+            img.classList.add("unselected");
         }
     })
     </script>

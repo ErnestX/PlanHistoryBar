@@ -5,7 +5,7 @@ function highlightObject(obj) {
         obj.classList.add("selected");
         obj.classList.remove("unselected");
     } else {
-        alertTypeCheckFailure();
+        alertTypeCheckFailure(obj);
     }
 }
 
@@ -14,7 +14,7 @@ function unHighlightObject(obj) {
         obj.classList.add("unselected");
         obj.classList.remove("selected");
     } else {
-        alertTypeCheckFailure();
+        alertTypeCheckFailure(obj);
     }
 }
 
@@ -22,7 +22,8 @@ function moveObjectLeftToPos(obj, posFromLeft) {
     if (typeof (obj) === "object" && typeof (posFromLeft) === "number") {
         obj.style.left = posFromLeft.toString() + "px";
     } else {
-        alertTypeCheckFailure();
+        alertTypeCheckFailure(obj);
+        alertTypeCheckFailure(posFromLeft);
     }
 }
 
@@ -32,6 +33,6 @@ function getPlanAtIndex(index) {
     return img;
 }
 
-function alertTypeCheckFailure() {
-    console.log("type check failed");
+function alertTypeCheckFailure(data) {
+    console.log("type check failed: " + typeof(data));
 }
