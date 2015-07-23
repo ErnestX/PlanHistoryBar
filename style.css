@@ -18,26 +18,18 @@ body {
   width: inherit;
   overflow: hidden;
   /*mask*/
-  margin: 0 auto;
-  /*put at the center of the screen*/
-  text-align: right; }
-
-/* line 26, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
-.bar {
-  width: 2000px;
-  /*the width for loaded images = 20x*/
-  height: inherit;
-  position: relative;
-  transition-property: left;
-  transition-duration: 0.2s;
-  transition-timing-function: ease-in-out;
   text-align: center; }
 
-/* line 38, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
+/* line 26, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
+#bar {
+  width: auto;
+  height: inherit;
+  display: inline-block; }
+
+/* line 33, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 .photo {
   width: 100px;
   height: auto;
-  float: left;
   transition-property: padding;
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out; }

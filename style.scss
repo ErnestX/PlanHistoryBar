@@ -19,26 +19,20 @@ body{
     height: auto;
     width: inherit;
     overflow: hidden; /*mask*/
-    margin: 0 auto;  /*put at the center of the screen*/
-    text-align: right;
+//    margin: 0 auto;  /*put at the center of the screen*/
+    text-align: center;
 }
 
-.bar {
-    width: $photoWidth * 20; /*the width for loaded images = 20x*/
+#bar {
+    width: auto;
     height: inherit;
-    position: relative;
-    transition-property: left;
-    transition-duration: $animationDuration;
-    transition-timing-function: ease-in-out;
-//    left: 0px;
-    text-align: center;
-//    z-index: -1;
+//    position: relative;
+    display: inline-block;
 }
 
 .photo {
     width: $photoWidth;
     height: auto;
-    float: left;
     transition-property: padding;
     transition-duration: $animationDuration;
     transition-timing-function: ease-in-out;

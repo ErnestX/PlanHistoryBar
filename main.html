@@ -5,19 +5,16 @@
     <script src="jquery-1.11.3.js"></script>
     <script src="uiHelpers.js"></script>
     <script>$(document).ready(function(){
-        var photoBar = document.createElement("div");
     
         var activePhotoIndex = 3;
         var rangeLeft = 0;
         var rangeRight = 7;
-    
-        photoBar.classList.add("bar");
-        document.getElementById("barContainer").appendChild(photoBar);
+
         var i;
         for (i=rangeLeft; i < rangeRight; i++) {
             var img = getPlanAtIndex(i);
             initPlan(img);
-            photoBar.appendChild(img);
+            $("#bar").append(img);
         }
         
 //        highlightObject(photos[activePhotoIndex]);
@@ -30,25 +27,22 @@
                 
 //                if (rangeLeft > 0) {
                     var newImg = initPlan(getPlanAtIndex(rangeLeft - 1));
-                    photoBar.insertBefore(document.createElement(newImg), photoBar.children[0]);
+//                    photoBar.insertBefore(document.createElement(newImg), photoBar.children[0]);
+                $("bar").prepend(newImg);
                 rangeLeft -= 1;
 //                }
             }
         })
         
         $("#right").click(function() {
-//            if (activePhotoIndex + 1 < photos.length) {
                 activePhotoIndex++;
                 selectIndex(activePhotoIndex);
                 
                 photoBar.removeChild(photoBar.children[0]);
                 rangeLeft+=1;
-//                console.log(activePhotoIndex);
-//            }
         })
         
         function selectIndex(planIndex) {
-//            console.log(photos[planIndex].offsetLeft);
             var i;
             for (i=0; i < rangeRight - rangeLeft + 1; i++) {
                 unHighlightObject(photoBar.children[i]);
