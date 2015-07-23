@@ -1,5 +1,10 @@
 "use strict";
 
+function initPlan(plan) {
+    plan.classList.add("photo");
+    plan.classList.add("unselected");
+}
+
 function highlightObject(obj) {
     if (typeof (obj) === "object") {
         obj.classList.add("selected");

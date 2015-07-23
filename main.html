@@ -20,42 +20,31 @@
         selectIndex(activePhotoIndex);
         
         $("#left").click(function(){
-            if (activePhotoIndex - 1 >= 0) {
+//            if (activePhotoIndex - 1 >= 0) {
                 activePhotoIndex--;
                 selectIndex(activePhotoIndex);
                 
-                var newImg = initPlan(getPlanAtIndex(rangeLeft - 1));
+                var newImg = getPlanAtIndex(rangeLeft - 1);
+                initPlan(newImg);
                 $("#bar").prepend(newImg);
                 rangeLeft -= 1;
 //                }
-            }
         })
         
         $("#right").click(function() {
                 activePhotoIndex++;
                 selectIndex(activePhotoIndex);
                 
-//                photoBar.removeChild(photoBar.children[0]);
                 $("#bar").children().eq(0).remove();
                 rangeLeft+=1;
         })
         
         function selectIndex(planIndex) {
-//            var i;
-//            for (i=0; i < rangeRight - rangeLeft + 1; i++) {
-//                unHighlightObject(photoBar.children[i]);
-                $("#bar").children().removeClass("selected");
-                $("#bar").children().addClass("unselected");
-//            }
+            $("#bar").children().removeClass("selected");
+            $("#bar").children().addClass("unselected");
             
-//            highlightObject(photoBar.children[planIndex - rangeLeft]);
             $("#bar").children().eq(planIndex - rangeLeft).removeClass("unselected");
             $("#bar").children().eq(planIndex - rangeLeft).addClass("selected");
-        }
-    
-        function initPlan(plan) {
-            img.classList.add("photo");
-            img.classList.add("unselected");
         }
     })
     </script>
