@@ -20,23 +20,35 @@
         selectIndex(activePhotoIndex);
         
         $("#left").click(function(){
-//            if (activePhotoIndex - 1 >= 0) {
-                activePhotoIndex--;
-                selectIndex(activePhotoIndex);
+            // perform selection
+            activePhotoIndex--;
+            selectIndex(activePhotoIndex);
                 
-                var newImg = getPlanAtIndex(rangeLeft - 1);
-                initPlan(newImg);
-                $("#bar").prepend(newImg);
-                rangeLeft -= 1;
-//                }
+            // add new plan at left
+            var newImg = getPlanAtIndex(rangeLeft - 1);
+            initPlan(newImg);
+            $("#bar").prepend(newImg);
+            rangeLeft--;
+            
+            // delete plan at right
+            $("#bar").children().last().remove();
+            rangeRight--;
         })
         
         $("#right").click(function() {
-                activePhotoIndex++;
-                selectIndex(activePhotoIndex);
+            // perform selecttion
+            activePhotoIndex++;
+            selectIndex(activePhotoIndex);
                 
-                $("#bar").children().eq(0).remove();
-                rangeLeft+=1;
+            // delete plan at left
+            $("#bar").children().eq(0).remove();
+            rangeLeft++;
+            
+            // add new plan plan at right
+            var newImg = getPlanAtIndex(rangeRight + 1);
+            initPlan(newImg);
+            $("#bar").append(newImg);
+            rangeRight++;
         })
         
         function selectIndex(planIndex) {

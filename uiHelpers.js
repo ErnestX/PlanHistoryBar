@@ -5,24 +5,6 @@ function initPlan(plan) {
     plan.classList.add("unselected");
 }
 
-function highlightObject(obj) {
-    if (typeof (obj) === "object") {
-        obj.classList.add("selected");
-        obj.classList.remove("unselected");
-    } else {
-        alertTypeCheckFailure(obj);
-    }
-}
-
-function unHighlightObject(obj) {
-    if (typeof (obj) === "object") {
-        obj.classList.add("unselected");
-        obj.classList.remove("selected");
-    } else {
-        alertTypeCheckFailure(obj);
-    }
-}
-
 function moveObjectLeftToPos(obj, posFromLeft) {
     if (typeof (obj) === "object" && typeof (posFromLeft) === "number") {
         obj.style.left = posFromLeft.toString() + "px";
