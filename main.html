@@ -18,7 +18,6 @@
         }
         
         selectIndex(activePhotoIndex);
-//    console.log("test");
         
         $("#left").click(function(){
             if (activePhotoIndex - 1 >= 0) {
@@ -26,7 +25,7 @@
                 selectIndex(activePhotoIndex);
                 
                 var newImg = initPlan(getPlanAtIndex(rangeLeft - 1));
-                $("bar").prepend(newImg);
+                $("#bar").prepend(newImg);
                 rangeLeft -= 1;
 //                }
             }
@@ -36,7 +35,8 @@
                 activePhotoIndex++;
                 selectIndex(activePhotoIndex);
                 
-                photoBar.removeChild(photoBar.children[0]);
+//                photoBar.removeChild(photoBar.children[0]);
+                $("#bar").children().eq(0).remove();
                 rangeLeft+=1;
         })
         
@@ -44,12 +44,11 @@
 //            var i;
 //            for (i=0; i < rangeRight - rangeLeft + 1; i++) {
 //                unHighlightObject(photoBar.children[i]);
-//                $("#bar").children().removeClass("selected");
-//                $("#bar").children().addClass("unselected");
+                $("#bar").children().removeClass("selected");
+                $("#bar").children().addClass("unselected");
 //            }
             
 //            highlightObject(photoBar.children[planIndex - rangeLeft]);
-//            console.log($("#bar").children().contents());
             $("#bar").children().eq(planIndex - rangeLeft).removeClass("unselected");
             $("#bar").children().eq(planIndex - rangeLeft).addClass("selected");
         }
