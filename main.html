@@ -17,17 +17,15 @@
             $("#bar").append(img);
         }
         
-//        highlightObject(photos[activePhotoIndex]);
-        selectIndex[activePhotoIndex];
+        selectIndex(activePhotoIndex);
+//    console.log("test");
         
         $("#left").click(function(){
             if (activePhotoIndex - 1 >= 0) {
                 activePhotoIndex--;
                 selectIndex(activePhotoIndex);
                 
-//                if (rangeLeft > 0) {
-                    var newImg = initPlan(getPlanAtIndex(rangeLeft - 1));
-//                    photoBar.insertBefore(document.createElement(newImg), photoBar.children[0]);
+                var newImg = initPlan(getPlanAtIndex(rangeLeft - 1));
                 $("bar").prepend(newImg);
                 rangeLeft -= 1;
 //                }
@@ -43,12 +41,17 @@
         })
         
         function selectIndex(planIndex) {
-            var i;
-            for (i=0; i < rangeRight - rangeLeft + 1; i++) {
-                unHighlightObject(photoBar.children[i]);
-            }
+//            var i;
+//            for (i=0; i < rangeRight - rangeLeft + 1; i++) {
+//                unHighlightObject(photoBar.children[i]);
+//                $("#bar").children().removeClass("selected");
+//                $("#bar").children().addClass("unselected");
+//            }
             
-            highlightObject(photoBar.children[planIndex - rangeLeft]);
+//            highlightObject(photoBar.children[planIndex - rangeLeft]);
+//            console.log($("#bar").children().contents());
+            $("#bar").children().eq(planIndex - rangeLeft).removeClass("unselected");
+            $("#bar").children().eq(planIndex - rangeLeft).addClass("selected");
         }
     
         function initPlan(plan) {
