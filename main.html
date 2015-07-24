@@ -6,9 +6,9 @@
     <script src="uiHelpers.js"></script>
     <script>$(document).ready(function(){
     
-        var activePhotoIndex = 3;
+        var activePhotoIndex = 4;
         var rangeLeft = 0;
-        var rangeRight = 7;
+        var rangeRight = 9;
 
         var i;
         for (i=rangeLeft; i < rangeRight; i++) {
@@ -24,32 +24,44 @@
             activePhotoIndex--;
             selectIndex(activePhotoIndex);
                 
-            // add new plan at left
-            var newImg = getPlanAtIndex(rangeLeft - 1);
-            initPlan(newImg);
-            $("#bar").prepend(newImg);
-            rangeLeft--;
+            $("#bar").addClass("rightShiftting");
+            $("#bar").one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) {
             
-            // delete plan at right
-            $("#bar").children().last().remove();
-            rangeRight--;
-        })
+                // add new plan at left
+                var newImg = getPlanAtIndex(rangeLeft - 1);
+                initPlan(newImg);
+                $("#bar").prepend(newImg);
+                rangeLeft--;
+            
+                // delete plan at right
+                $("#bar").children().last().remove();
+                rangeRight--;
+                
+                $("#bar").removeClass("rightShiftting");
+            });
+        });
         
         $("#right").click(function() {
             // perform selecttion
             activePhotoIndex++;
             selectIndex(activePhotoIndex);
-                
-            // delete plan at left
-            $("#bar").children().eq(0).remove();
-            rangeLeft++;
             
-            // add new plan plan at right
-            var newImg = getPlanAtIndex(rangeRight + 1);
-            initPlan(newImg);
-            $("#bar").append(newImg);
-            rangeRight++;
-        })
+            $("#bar").addClass("leftShiftting");
+            $("#bar").one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) {
+                // delete plan at left
+                $("#bar").children().eq(0).remove();
+                rangeLeft++;
+            
+                // add new plan plan at right
+                var newImg = getPlanAtIndex(rangeRight + 1);
+                initPlan(newImg);
+                $("#bar").append(newImg);
+                rangeRight++;
+                
+                $("#bar").removeClass("leftShiftting");
+            });
+
+        });
         
         function selectIndex(planIndex) {
             $("#bar").children().removeClass("selected");
@@ -57,8 +69,10 @@
             
             $("#bar").children().eq(planIndex - rangeLeft).removeClass("unselected");
             $("#bar").children().eq(planIndex - rangeLeft).addClass("selected");
+            
+            console.log("select #" + planIndex.toString());
         }
-    })
+    });
     </script>
     <link rel=stylesheet href="style.css">
 </head>

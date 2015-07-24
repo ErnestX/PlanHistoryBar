@@ -24,14 +24,38 @@ body {
 #bar {
   width: auto;
   height: inherit;
+  position: relative;
   display: inline-block; }
 
 /* line 33, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 .photo {
   width: 100px;
   height: auto;
+  position: relative;
   transition-property: padding;
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out; }
+
+/* line 42, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
+.leftShiftting {
+  animation-name: shiftLeftAnimation;
+  animation-duration: 0.2s; }
+
+/* line 47, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
+.rightShiftting {
+  animation-name: shiftRightAnimation;
+  animation-duration: 0.2s; }
+
+@keyframes shiftLeftAnimation {
+  0% {
+    left: 0px; }
+  100% {
+    left: -100px; } }
+
+@keyframes shiftRightAnimation {
+  0% {
+    left: 0px; }
+  100% {
+    left: 100px; } }
 
 /*# sourceMappingURL=style.css.map */

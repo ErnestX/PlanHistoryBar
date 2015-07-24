@@ -26,14 +26,35 @@ body{
 #bar {
     width: auto;
     height: inherit;
-//    position: relative;
+    position: relative;
     display: inline-block;
 }
 
 .photo {
     width: $photoWidth;
     height: auto;
+    position: relative;
     transition-property: padding;
     transition-duration: $animationDuration;
     transition-timing-function: ease-in-out;
+}
+
+.leftShiftting {
+    animation-name: shiftLeftAnimation;
+    animation-duration: $animationDuration;
+}
+
+.rightShiftting {
+    animation-name: shiftRightAnimation;
+    animation-duration: $animationDuration;
+}
+
+@keyframes shiftLeftAnimation {
+    0% {left: 0px;}
+    100% {left: -1 * $photoWidth;}
+}
+
+@keyframes shiftRightAnimation {
+    0% {left: 0px;}
+    100% {left: $photoWidth;}
 }
