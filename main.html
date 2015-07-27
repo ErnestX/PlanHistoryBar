@@ -10,7 +10,7 @@
         var activePhotoIndex = 4;
 //        var rangeLeft = 0;
 //        var rangeRight = 9;
-        var barManager = new BarManager($("#bar"));
+        //var barManager = new BarManager($("#bar"));
 
 //        var i;
 //        for (i=rangeLeft; i < rangeRight; i++) 
@@ -19,7 +19,7 @@
 //            initPlan(img);
 //            $("#bar").append(img);
 //        }
-        
+        barManager.initBar($("#bar"));
         barManager.selectIndex(activePhotoIndex);
         
         $("#left").click(function()
