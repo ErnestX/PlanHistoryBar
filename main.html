@@ -8,18 +8,8 @@
     <script>$(document).ready(function()
     {
         var activePhotoIndex = 4;
-//        var rangeLeft = 0;
-//        var rangeRight = 9;
-        //var barManager = new BarManager($("#bar"));
 
-//        var i;
-//        for (i=rangeLeft; i < rangeRight; i++) 
-//        {
-//            var img = getPlanAtIndex(i);
-//            initPlan(img);
-//            $("#bar").append(img);
-//        }
-        barManager.initBar($("#bar"));
+        barManager.initWithBarAndRange($("#bar"), 0, 9);
         barManager.selectIndex(activePhotoIndex);
         
         $("#left").click(function()
