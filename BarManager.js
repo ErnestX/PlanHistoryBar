@@ -12,6 +12,7 @@ var barManager = {
             this.bar.append(img);
         }   
     }, 
+    
     /*
     does not move the bar
     */
@@ -24,25 +25,29 @@ var barManager = {
         this.bar.children().eq(planIndex - this.rangeLeft).addClass("selected");
             
         console.log("select #" + planIndex.toString());
-    }, 
+    },
+    
     /*
     moves the bar with animation. Adds and deletes plans so that the number of plans on screen stays the same
     */
     moveBarLeftByOnePlan: function() {
         this.bar.addClass("leftShiftting");
         this.bar.one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function() {
-            console.log(this.deletePlanAtLeft);
-            this.deletePlanAtLeft();
-            this.addNewPlanAtRight();
-            this.bar.removeClass("leftShiftting");
+//            console.log(this.deletePlanAtLeft);
+            barManager.deletePlanAtLeft();
+            barManager.addNewPlanAtRight();
+            barManager.bar.removeClass("leftShiftting");
         });
-    }, 
+    },
+    /*
+    moves the bar with animation. Adds and deletes plans so that the number of plans on screen stays the same
+    */
     moveBarRightByOnePlan: function() {
         this.bar.addClass("rightShiftting");
         this.bar.one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function() {
-            this.deletePlanAtRight();
-            this.addNewPlanAtLeft();
-            this.bar.removeClass("rightShiftting");
+            barManager.deletePlanAtRight();
+            barManager.addNewPlanAtLeft();
+            barManager.bar.removeClass("rightShiftting");
         });   
     }, 
     
@@ -65,7 +70,7 @@ var barManager = {
     deletePlanAtRight: function() {
         this.bar.children().last().remove();
         this.rangeRight--;
-    } 
+    }
 };
 //
 ///*
