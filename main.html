@@ -4,95 +4,37 @@
 <head>
     <script src="jquery-1.11.3.js"></script>
     <script src="uiHelpers.js"></script>
+    <script src="BarManager.js"></script>
     <script>$(document).ready(function()
     {
         var activePhotoIndex = 4;
-        var rangeLeft = 0;
-        var rangeRight = 9;
+//        var rangeLeft = 0;
+//        var rangeRight = 9;
+        var barManager = new BarManager($("#bar"));
 
-        var i;
-        for (i=rangeLeft; i < rangeRight; i++) 
-        {
-            var img = getPlanAtIndex(i);
-            initPlan(img);
-            $("#bar").append(img);
-        }
+//        var i;
+//        for (i=rangeLeft; i < rangeRight; i++) 
+//        {
+//            var img = getPlanAtIndex(i);
+//            initPlan(img);
+//            $("#bar").append(img);
+//        }
         
-        selectIndex(activePhotoIndex);
+        barManager.selectIndex(activePhotoIndex);
         
         $("#left").click(function()
         {
-            // perform selection
             activePhotoIndex--;
-            selectIndex(activePhotoIndex);
-                
-            $("#bar").addClass("rightShiftting");
-            $("#bar").one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) {
-                addNewPlanAtLeft();
-                deletePlanAtRight();
-                $("#bar").removeClass("rightShiftting");
-            });
+            barManager.selectIndex(activePhotoIndex);
+            barManager.moveBarRightByOnePlan();
         });
         
         $("#right").click(function() 
         {
-            // perform selecttion
             activePhotoIndex++;
-            selectIndex(activePhotoIndex);
-            
-            $("#bar").addClass("leftShiftting");
-            $("#bar").one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e) {
-                deletePlanAtLeft();
-                addNewPlanAtRight();
-                $("#bar").removeClass("leftShiftting");
-            });
-
+            barManager.selectIndex(activePhotoIndex);
+            barManager.moveBarLeftByOnePlan();
         });
-        
-        function selectIndex(planIndex) 
-        {
-            // unselect all plans on screen
-            $("#bar").children().removeClass("selected");
-            $("#bar").children().addClass("unselected");
-            // select plan
-            $("#bar").children().eq(planIndex - rangeLeft).removeClass("unselected");
-            $("#bar").children().eq(planIndex - rangeLeft).addClass("selected");
-            
-            console.log("select #" + planIndex.toString());
-        }
-
-        function addNewPlanAtLeft() 
-        {
-            var newImg = getPlanAtIndex(rangeLeft - 1);
-            initPlan(newImg);
-            $("#bar").prepend(newImg);
-            rangeLeft--;
-        }
-    
-        function addNewPlanAtRight()
-        {
-            var newImg = getPlanAtIndex(rangeRight + 1);
-            initPlan(newImg);
-            $("#bar").append(newImg);
-            rangeRight++;
-        }
-    
-        function deletePlanAtLeft()
-        {
-            $("#bar").children().eq(0).remove();
-            rangeLeft++;
-        }
-    
-        function deletePlanAtRight() 
-        {
-            $("#bar").children().last().remove();
-            rangeRight--;
-        }
-    
-        
-//        function autoLayout() {
-//            $("#bar").children().eq(planIndex - rangeLeft).offset().left;
-//        }
     });
     </script>
     <link rel=stylesheet href="style.css">

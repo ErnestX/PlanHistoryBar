@@ -5,14 +5,14 @@ function initPlan(plan) {
     plan.classList.add("unselected");
 }
 
-function moveObjectLeftToPos(obj, posFromLeft) {
-    if (typeof (obj) === "object" && typeof (posFromLeft) === "number") {
-        obj.style.left = posFromLeft.toString() + "px";
-    } else {
-        alertTypeCheckFailure(obj);
-        alertTypeCheckFailure(posFromLeft);
-    }
-}
+//function moveObjectLeftToPos(obj, posFromLeft) {
+//    if (typeof (obj) === "object" && typeof (posFromLeft) === "number") {
+//        obj.style.left = posFromLeft.toString() + "px";
+//    } else {
+//        alertTypeCheckFailure(obj);
+//        alertTypeCheckFailure(posFromLeft);
+//    }
+//}
 
 function getPlanAtIndex(index) {
     var img = new Image();
