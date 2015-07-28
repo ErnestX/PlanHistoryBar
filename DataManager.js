@@ -6,10 +6,7 @@ MY_GLOBAL.dataManager = {
     */
     getPlanAtIndex: function(index) {
         var newPlan = Object.create(MY_GLOBAL.planProto);
-//        console.log(newPlan);
-//      var img = new Image();
         newPlan.initWithThumbnail("google-maps.jpg");
-//        console.log(newPlan);
         return newPlan;
     }
 };
