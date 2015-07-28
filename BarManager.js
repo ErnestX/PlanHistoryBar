@@ -9,16 +9,20 @@ MY_GLOBAL.barManager = {
     init this.bar, this.rangeLeft, this.rangeRight and place the plans
     */
     initWithBarAndRange: function(b, l, r) {
+//        console.log(this);
         this.bar = b;
         this.rangeLeft = l;
         this.rangeRight = r;
         
         var i;
         for (i=this.rangeLeft; i < this.rangeRight; i++) {
-            var img = MY_GLOBAL.dataManager.getPlanAtIndex(i);
-            initPlan(img);
-            this.bar.append(img);
-        }   
+            var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(i);
+//            console.log(newPlan);
+//            initPlan(img);
+//            var thumbnail = new Image();
+//            thumbnail.src = newPlan.thumbnailSrc;
+            this.bar.append(newPlan.getThumbnailImage());
+        }
     }, 
     
     /*
@@ -59,15 +63,15 @@ MY_GLOBAL.barManager = {
     }, 
     
     addNewPlanAtLeft: function() {
-        var newImg = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeLeft - 1);
-        initPlan(newImg);
-        this.bar.prepend(newImg);
+        var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeLeft - 1);
+//        initPlan(newImg);
+        this.bar.prepend(newPlan.getThumbnailImage());
         this.rangeLeft--;
     }, 
     addNewPlanAtRight: function() {
-        var newImg = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeRight + 1);
-        initPlan(newImg);
-        this.bar.append(newImg);
+        var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeRight + 1);
+//        initPlan(newImg);
+        this.bar.append(newPlan.getThumbnailImage());
         this.rangeRight++;
     }, 
     deletePlanAtLeft: function() {
