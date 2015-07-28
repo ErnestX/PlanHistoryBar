@@ -1,6 +1,9 @@
 MY_GLOBAL.plan = {
-    thumbNailSrc: "", 
-//    initWith
+    thumbnailSrc: "", 
+    initWithThumbnail: function(s) {
+        plan.classList.add("photo");
+        plan.classList.add("unselected");    
+    }
 }
 function initPlan(plan) {
     plan.classList.add("photo");

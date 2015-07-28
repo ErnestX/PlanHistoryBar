@@ -15,7 +15,7 @@ MY_GLOBAL.barManager = {
         
         var i;
         for (i=this.rangeLeft; i < this.rangeRight; i++) {
-            var img = getPlanAtIndex(i);
+            var img = MY_GLOBAL.dataManager.getPlanAtIndex(i);
             initPlan(img);
             this.bar.append(img);
         }   
@@ -59,13 +59,13 @@ MY_GLOBAL.barManager = {
     }, 
     
     addNewPlanAtLeft: function() {
-        var newImg = getPlanAtIndex(this.rangeLeft - 1);
+        var newImg = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeLeft - 1);
         initPlan(newImg);
         this.bar.prepend(newImg);
         this.rangeLeft--;
     }, 
     addNewPlanAtRight: function() {
-        var newImg = getPlanAtIndex(this.rangeRight + 1);
+        var newImg = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeRight + 1);
         initPlan(newImg);
         this.bar.append(newImg);
         this.rangeRight++;
