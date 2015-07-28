@@ -3,28 +3,26 @@
 <html>
 <head>
     <script src="jquery-1.11.3.js"></script>
-    <script src="uiHelpers.js"></script>
+    <script src="GlobalDeclare.js"></script>
     <script src="BarManager.js"></script>
-    <script>$(document).ready(function()
-    {
-        var activePhotoIndex = 4;
+    <script>$(document).ready(function() {
+        MY_GLOBAL.activePhotoIndex = 4;
 
-        barManager.initWithBarAndRange($("#bar"), 0, 9);
-        barManager.selectIndex(activePhotoIndex);
+        MY_GLOBAL.barManager.initWithBarAndRange($("#bar"), 0, 9);
+        MY_GLOBAL.barManager.selectIndex(MY_GLOBAL.activePhotoIndex);
         
-        $("#left").click(function()
-        {
-            activePhotoIndex--;
-            barManager.selectIndex(activePhotoIndex);
-            barManager.moveBarRightByOnePlan();
+        $("#left").click(function() {
+            MY_GLOBAL.activePhotoIndex--;
+            MY_GLOBAL.barManager.selectIndex(MY_GLOBAL.activePhotoIndex);
+            MY_GLOBAL.barManager.moveBarRightByOnePlan();
         });
         
-        $("#right").click(function() 
-        {
-            activePhotoIndex++;
-            barManager.selectIndex(activePhotoIndex);
-            barManager.moveBarLeftByOnePlan();
+        $("#right").click(function() {
+            MY_GLOBAL.activePhotoIndex++;
+            MY_GLOBAL.barManager.selectIndex(MY_GLOBAL.activePhotoIndex);
+            MY_GLOBAL.barManager.moveBarLeftByOnePlan();
         });
+    
     });
     </script>
     <link rel=stylesheet href="style.css">

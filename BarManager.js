@@ -1,6 +1,6 @@
 "use strict";
 
-var barManager = {
+MY_GLOBAL.barManager = {
     bar: null, 
     rangeLeft: 0, 
     rangeRight: 0, 
@@ -41,9 +41,9 @@ var barManager = {
     moveBarLeftByOnePlan: function() {
         this.bar.addClass("leftShiftting");
         this.bar.one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function() {
-            barManager.deletePlanAtLeft();
-            barManager.addNewPlanAtRight();
-            barManager.bar.removeClass("leftShiftting");
+            MY_GLOBAL.barManager.deletePlanAtLeft();
+            MY_GLOBAL.barManager.addNewPlanAtRight();
+            MY_GLOBAL.barManager.bar.removeClass("leftShiftting");
         });
     },
     /*
@@ -52,9 +52,9 @@ var barManager = {
     moveBarRightByOnePlan: function() {
         this.bar.addClass("rightShiftting");
         this.bar.one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function() {
-            barManager.deletePlanAtRight(); //"this" no longer works here
-            barManager.addNewPlanAtLeft();
-            barManager.bar.removeClass("rightShiftting");
+            MY_GLOBAL.barManager.deletePlanAtRight(); //"this" no longer works here
+            MY_GLOBAL.barManager.addNewPlanAtLeft();
+            MY_GLOBAL.barManager.bar.removeClass("rightShiftting");
         });   
     }, 
     
