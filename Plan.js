@@ -1,11 +1,14 @@
 "use strict";
 
 MY_GLOBAL.planProto = {
-    thumbnailSrc: "", 
-    initWithThumbnail: function(t) { //TODO: add more para
-        MY_GLOBAL.typeChecker.assertIsString(t);
+    thumbnailSrc: '', 
+    previewSrc: '', 
+    initWithSrcs: function(thumbnailSource, previewSource) { //TODO: add more para
+        MY_GLOBAL.typeChecker.assertIsString(thumbnailSource);
+        MY_GLOBAL.typeChecker.assertIsString(previewSource);
         
-        this.thumbnailSrc = t;
+        this.thumbnailSrc = thumbnailSource;
+        this.previewSrc = previewSource;
     }, 
     
     getThumbnailImage: function() {
@@ -14,5 +17,13 @@ MY_GLOBAL.planProto = {
         thumbnail.classList.add("photo");
         thumbnail.classList.add("unselected");    
         return thumbnail;
+    }, 
+    
+    getPreviewImage: function() {
+        var image = new Image();
+        image.src = this.previewSrc;
+        image.classList.add("photo");
+        image.classList.add("unselected");    
+        return image;
     }
 };

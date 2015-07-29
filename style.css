@@ -18,16 +18,17 @@ body {
   width: inherit;
   overflow: hidden;
   /*mask*/
-  text-align: center; }
+  text-align: left; }
 
 /* line 26, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 #bar {
-  width: auto;
+  margin-left: -100px;
+  width: 200%;
   height: inherit;
   position: relative;
   display: inline-block; }
 
-/* line 33, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
+/* line 34, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 .photo {
   width: 100px;
   height: auto;
@@ -36,14 +37,29 @@ body {
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out; }
 
-/* line 42, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
+/* line 43, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
+.preview {
+  height: 300px;
+  width: auto; }
+
+/* line 48, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 .leftShiftting {
   animation-name: shiftLeftAnimation;
   animation-duration: 0.2s; }
 
-/* line 47, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
+/* line 53, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 .rightShiftting {
   animation-name: shiftRightAnimation;
+  animation-duration: 0.2s; }
+
+/* line 58, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
+.fadingIn {
+  animation-name: fadeInAnimation;
+  animation-duration: 0.2s; }
+
+/* line 63, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
+.fadingOut {
+  animation-name: fadeOutAnimation;
   animation-duration: 0.2s; }
 
 @keyframes shiftLeftAnimation {
@@ -57,5 +73,17 @@ body {
     left: 0px; }
   100% {
     left: 100px; } }
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@keyframes fadeOutAnimation {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
 
 /*# sourceMappingURL=style.css.map */

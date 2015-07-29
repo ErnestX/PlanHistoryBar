@@ -20,11 +20,12 @@ body{
     width: inherit;
     overflow: hidden; /*mask*/
 //    margin: 0 auto;  /*put at the center of the screen*/
-    text-align: center;
+    text-align: left;
 }
 
 #bar {
-    width: auto;
+    margin-left: -1 * $photoWidth; // one plan hidden left to the left screen edge
+    width: 200%; // allow at most two screens of plans been loaded onto the bar
     height: inherit;
     position: relative;
     display: inline-block;
@@ -39,6 +40,11 @@ body{
     transition-timing-function: ease-in-out;
 }
 
+.preview {    
+    height: 300px;
+    width: auto;
+}
+
 .leftShiftting {
     animation-name: shiftLeftAnimation;
     animation-duration: $animationDuration;
@@ -46,6 +52,16 @@ body{
 
 .rightShiftting {
     animation-name: shiftRightAnimation;
+    animation-duration: $animationDuration;
+}
+
+.fadingIn {
+    animation-name: fadeInAnimation;
+    animation-duration: $animationDuration;
+}
+
+.fadingOut {
+    animation-name: fadeOutAnimation;
     animation-duration: $animationDuration;
 }
 
@@ -57,4 +73,14 @@ body{
 @keyframes shiftRightAnimation {
     0% {left: 0px;}
     100% {left: $photoWidth;}
+}
+
+@keyframes fadeInAnimation {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+@keyframes fadeOutAnimation {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
 }

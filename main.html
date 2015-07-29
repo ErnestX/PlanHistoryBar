@@ -8,9 +8,9 @@
     <script src="Plan.js"></script>
     <script src="DataManager.js"></script>
     <script>$(document).ready(function() {
-        MY_GLOBAL.activePhotoIndex = 4;
+        MY_GLOBAL.activePhotoIndex = 5;
 
-        MY_GLOBAL.barManager.initWithBarAndRange($("#bar"), 0, 9);
+        MY_GLOBAL.barManager.initWithBarAndRange($("#bar"), 0, 11);
         MY_GLOBAL.barManager.selectIndex(MY_GLOBAL.activePhotoIndex);
         
         $("#left").click(function() {
@@ -34,7 +34,7 @@
         <div id="bar"></div>
 <!--        <div id="charts"></div>-->
     </div>
-    <div id="detailView"></div>
+    <div id="preview"></div>
     
     <p>
         <button id="left">left</button>
