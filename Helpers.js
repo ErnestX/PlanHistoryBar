@@ -4,53 +4,48 @@ var MY_GLOBAL = {};
 
 MY_GLOBAL.typeChecker = {
     assertIsString: function(data, potentialErrorMessage) {
-       if (typeof(potentialErrorMessage) !== "string") {
-           this.throwExceptionWithMessage('');
-       } else if (typeof(data) !== 'string') {
-           this.throwExceptionWithMessage(potentialErrorMessage);
+       if (typeof(data) !== 'string') {
+           this.throwTypeExceptionWithMessage(data, 'string', potentialErrorMessage);
        }
     }, 
     assertIsNumber: function(data, potentialErrorMessage) {
-        this.assertIsString(potentialErrorMessage,'');
         if (typeof(data) !== 'number') {
-            this.throwExceptionWithMessage(potentialErrorMessage);
+            this.throwTypeExceptionWithMessage(data, 'number', potentialErrorMessage);
         }
     }, 
     assertIsInteger: function(data, potentialErrorMessage) {
-        this.assertIsString(potentialErrorMessage,'');
         if ((typeof(data) !== 'number') || Math.floor(data) !== data) {
-            this.throwExceptionWithMessage(potentialErrorMessage);
+            this.throwTypeExceptionWithMessage(data, 'integer', potentialErrorMessage);
         }
     },
     assertIsObject: function(data, potentialErrorMessage) {
-        this.assertIsString(potentialErrorMessage,'');
         if (typeof(data) !== 'object') {
-            this.throwExceptionWithMessage(potentialErrorMessage);
+            this.throwTypeExceptionWithMessage(data, 'object', potentialErrorMessage);
         }
     }, 
     assertIsBoolean: function(data, potentialErrorMessage) {
-        this.assertIsString(potentialErrorMessage,'');
         if (typeof(data)!== 'boolean') {
-            this.throwExceptionWithMessage(potentialErrorMessage);
+            this.throwTypeExceptionWithMessage(data, 'boolean', potentialErrorMessage);
         }
     }, 
-    throwExceptionWithMessage: function(mess) {
-        this.assertIsString(mess, '');
-        throw {
-            name: "TypeError",
-            message: mess
-        };
+    throwTypeExceptionWithMessage: function(value, targetType, mess) {
+        this.assertIsString(targetType);
+        if (typeof(mess) !== 'undefined') {
+            throw 'TypeError: ' + value.toString() +' is not of ' + targetType + ' (' + mess.toString() + ')';
+        } else {
+            throw 'TypeError: ' + value.toString() +' is not of ' + targetType;
+        }
     }
 };
 
 MY_GLOBAL.assert = function(condition, potentialErrorMessage) {
-    MY_GLOBAL.typeChecker.assertIsBoolean(condition,'');
-    MY_GLOBAL.typeChecker.assertIsString(potentialErrorMessage,'');
+    MY_GLOBAL.typeChecker.assertIsBoolean(condition);
     
     if (!condition) {
-        throw {
-            name: 'AssertionFailure', 
-            message: potentialErrorMessage
-        };
+        if (typeof(potentialErrorMessage) !== 'undefined') {
+            throw 'AssertionFailure: ' + potentialErrorMessage.toString();
+        } else {
+            throw 'AssertionFailure';
+        }
     }
 };

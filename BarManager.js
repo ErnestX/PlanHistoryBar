@@ -9,10 +9,10 @@ MY_GLOBAL.barManager = {
     init this.bar, this.rangeLeft, this.rangeRight and place the plans
     */
     initWithBarAndRange: function(b, l, r) {
-        MY_GLOBAL.typeChecker.assertIsObject(b,'');
-        MY_GLOBAL.typeChecker.assertIsInteger(l,'');
-        MY_GLOBAL.typeChecker.assertIsInteger(r,'');
-        MY_GLOBAL.assert((l < r), '');
+        MY_GLOBAL.typeChecker.assertIsObject(b);
+        MY_GLOBAL.typeChecker.assertIsInteger(l);
+        MY_GLOBAL.typeChecker.assertIsInteger(r);
+        MY_GLOBAL.assert(l < r);
         
         this.bar = b;
         this.rangeLeft = l;
