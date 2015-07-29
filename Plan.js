@@ -3,6 +3,8 @@
 MY_GLOBAL.planProto = {
     thumbnailSrc: "", 
     initWithThumbnail: function(t) { //TODO: add more para
+        MY_GLOBAL.typeChecker.assertIsString(t);
+        
         this.thumbnailSrc = t;
     }, 
     

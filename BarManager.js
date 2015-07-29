@@ -29,6 +29,8 @@ MY_GLOBAL.barManager = {
     does not move the bar
     */
     selectIndex: function(planIndex) {
+        MY_GLOBAL.typeChecker.assertIsInteger(planIndex, 'planIndex not int');
+        
         // unselect all plans on screen
         this.bar.children().removeClass("selected");
         this.bar.children().addClass("unselected");
