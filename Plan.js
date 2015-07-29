@@ -22,8 +22,7 @@ MY_GLOBAL.planProto = {
     getPreviewImage: function() {
         var image = new Image();
         image.src = this.previewSrc;
-        image.classList.add("photo");
-        image.classList.add("unselected");    
+        image.classList.add("preview");
         return image;
     }
 };
