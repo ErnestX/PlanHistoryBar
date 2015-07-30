@@ -8,7 +8,11 @@ MY_GLOBAL.dataManager = {
         MY_GLOBAL.typeChecker.assertIsInteger(index);
         
         var newPlan = Object.create(MY_GLOBAL.planProto); //create empty plan
-        newPlan.initWithSrcs("google-maps.jpg", "google-maps.jpg");
+        if (index % 2 === 0) {
+            newPlan.initWithSrcs("google-maps.jpg", "google-maps.jpg");
+        } else {
+            newPlan.initWithSrcs("google-maps-doodled.jpg", "google-maps-doodled.jpg");
+        }
         return newPlan;
     }
 };

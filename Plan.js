@@ -21,6 +21,7 @@ MY_GLOBAL.planProto = {
     
     getPreviewWindowImage: function() {
         var image = new Image();
+        console.log(this.previewWindowSrc);
         image.src = this.previewWindowSrc;
         image.classList.add("previewWindow");
         return image;

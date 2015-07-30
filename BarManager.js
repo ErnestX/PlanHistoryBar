@@ -38,6 +38,8 @@ MY_GLOBAL.barManager = {
         this.bar.children().eq(planIndex - this.rangeLeft).removeClass("unselected");
         this.bar.children().eq(planIndex - this.rangeLeft).addClass("selected");
             
+        MY_GLOBAL.previewWindowManager.showPreviewWindowOfIndex(planIndex);
+        
         console.log("select #" + planIndex.toString());
     },
     
@@ -61,7 +63,7 @@ MY_GLOBAL.barManager = {
             MY_GLOBAL.barManager.deletePlanAtRight(); //"this" no longer works here
             MY_GLOBAL.barManager.addNewPlanAtLeft();
             MY_GLOBAL.barManager.bar.removeClass("rightShiftting");
-        });   
+        });
     }, 
     
     addNewPlanAtLeft: function() {
