@@ -46,7 +46,7 @@ MY_GLOBAL.barManager = {
     */
     moveBarLeftByOnePlan: function() {
         this.bar.addClass("leftShiftting");
-        this.bar.one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function() {
+        this.bar.one('animationend', function() {
             MY_GLOBAL.barManager.deletePlanAtLeft();
             MY_GLOBAL.barManager.addNewPlanAtRight();
             MY_GLOBAL.barManager.bar.removeClass("leftShiftting");
@@ -57,7 +57,7 @@ MY_GLOBAL.barManager = {
     */
     moveBarRightByOnePlan: function() {
         this.bar.addClass("rightShiftting");
-        this.bar.one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function() {
+        this.bar.one('animationend', function() {
             MY_GLOBAL.barManager.deletePlanAtRight(); //"this" no longer works here
             MY_GLOBAL.barManager.addNewPlanAtLeft();
             MY_GLOBAL.barManager.bar.removeClass("rightShiftting");
@@ -73,6 +73,7 @@ MY_GLOBAL.barManager = {
         var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeRight + 1);
         this.bar.append(newPlan.getThumbnailImage());
         this.rangeRight++;
+        // TODO: fade in
     }, 
     deletePlanAtLeft: function() {
         this.bar.children().eq(0).remove();
@@ -81,5 +82,6 @@ MY_GLOBAL.barManager = {
     deletePlanAtRight: function() {
         this.bar.children().last().remove();
         this.rangeRight--;
+        // TODO: fade out
     }
 };

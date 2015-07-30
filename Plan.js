@@ -2,13 +2,13 @@
 
 MY_GLOBAL.planProto = {
     thumbnailSrc: '', 
-    previewSrc: '', 
-    initWithSrcs: function(thumbnailSource, previewSource) { //TODO: add more para
+    previewWindowSrc: '', 
+    initWithSrcs: function(thumbnailSource, previewWindowSource) { //TODO: add more para
         MY_GLOBAL.typeChecker.assertIsString(thumbnailSource);
-        MY_GLOBAL.typeChecker.assertIsString(previewSource);
+        MY_GLOBAL.typeChecker.assertIsString(previewWindowSource);
         
         this.thumbnailSrc = thumbnailSource;
-        this.previewSrc = previewSource;
+        this.previewWindowSrc = previewWindowSource;
     }, 
     
     getThumbnailImage: function() {
@@ -19,10 +19,10 @@ MY_GLOBAL.planProto = {
         return thumbnail;
     }, 
     
-    getPreviewImage: function() {
+    getPreviewWindowImage: function() {
         var image = new Image();
-        image.src = this.previewSrc;
-        image.classList.add("preview");
+        image.src = this.previewWindowSrc;
+        image.classList.add("previewWindow");
         return image;
     }
 };

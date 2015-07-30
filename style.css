@@ -38,7 +38,7 @@ body {
   transition-timing-function: ease-in-out; }
 
 /* line 43, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
-.preview {
+.previewWindow {
   height: 500px;
   width: auto;
   display: block;
