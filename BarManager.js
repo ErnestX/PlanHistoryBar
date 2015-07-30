@@ -19,7 +19,7 @@ MY_GLOBAL.barManager = {
         this.rangeRight = r;
         
         var i;
-        for (i=this.rangeLeft; i < this.rangeRight; i++) {
+        for (i=this.rangeLeft; i <= this.rangeRight; i++) { // don't forget the =
             var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(i);
             this.bar.append(newPlan.getThumbnailImage());
         }
@@ -40,7 +40,7 @@ MY_GLOBAL.barManager = {
             
         MY_GLOBAL.previewWindowManager.showPreviewWindowOfIndex(planIndex);
         
-        console.log("select #" + planIndex.toString());
+        console.log("select #" + planIndex.toString() + " left: " + this.rangeLeft.toString() + " right: " + this.rangeRight.toString());
     },
     
     /*
@@ -67,23 +67,27 @@ MY_GLOBAL.barManager = {
     }, 
     
     addNewPlanAtLeft: function() {
-        var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeLeft - 1);
-        this.bar.prepend(newPlan.getThumbnailImage());
         this.rangeLeft--;
+        var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeLeft); //- 1);
+        this.bar.prepend(newPlan.getThumbnailImage());
+//        this.rangeLeft--;
     }, 
     addNewPlanAtRight: function() {
-        var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeRight + 1);
-        this.bar.append(newPlan.getThumbnailImage());
         this.rangeRight++;
+        var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeRight);// + 1);
+        this.bar.append(newPlan.getThumbnailImage());
+//        this.rangeRight++;
         // TODO: fade in
     }, 
     deletePlanAtLeft: function() {
-        this.bar.children().eq(0).remove();
         this.rangeLeft++;
+        this.bar.children().eq(0).remove();
+//        this.rangeLeft++;
     }, 
     deletePlanAtRight: function() {
-        this.bar.children().last().remove();
         this.rangeRight--;
+        this.bar.children().last().remove();
+//        this.rangeRight--;
         // TODO: fade out
     }
 };

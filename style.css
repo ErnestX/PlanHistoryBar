@@ -22,7 +22,6 @@ body {
 
 /* line 26, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 #bar {
-  margin-left: -100px;
   width: 200%;
   height: inherit;
   position: relative;
