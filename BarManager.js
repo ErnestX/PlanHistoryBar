@@ -12,16 +12,17 @@ MY_GLOBAL.barManager = {
         MY_GLOBAL.typeChecker.assertIsObject(b);
         MY_GLOBAL.typeChecker.assertIsInteger(l);
         MY_GLOBAL.typeChecker.assertIsInteger(r);
-        MY_GLOBAL.assert(l < r);
+        MY_GLOBAL.assert(l <= r);
         
         this.bar = b;
         this.rangeLeft = l;
-        this.rangeRight = r;
+        this.rangeRight = l - 1; //l is not a typo
         
         var i;
-        for (i=this.rangeLeft; i <= this.rangeRight; i++) { // don't forget the =
-            var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(i);
-            this.bar.append(newPlan.getThumbnailImage());
+        for (i=this.rangeLeft; i <= r; i++) { // don't forget the =
+//            var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(i);
+//            this.bar.append(MY_GLOBAL.barManager.renderThumbnailImageFromSource(newPlan.thumbnailSrc));
+            this.addNewPlanAtRight();
         }
         
         console.log("left: "+ this.rangeLeft.toString());
@@ -71,14 +72,14 @@ MY_GLOBAL.barManager = {
     
     addNewPlanAtLeft: function() {
         this.rangeLeft--;
-        var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeLeft); //- 1);
+        var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeLeft);
         console.log("left: "+ this.rangeLeft.toString());
-        this.bar.prepend(newPlan.getThumbnailImage());
+        this.bar.prepend(MY_GLOBAL.barManager.renderThumbnailImageFromSource(newPlan.thumbnailSrc));
     }, 
     addNewPlanAtRight: function() {
         this.rangeRight++;
-        var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeRight);// + 1);
-        this.bar.append(newPlan.getThumbnailImage());
+        var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeRight);
+        this.bar.append(MY_GLOBAL.barManager.renderThumbnailImageFromSource(newPlan.thumbnailSrc));
         console.log("right: " + this.rangeRight.toString());
         // FUTURE: fade in
     }, 
@@ -92,5 +93,15 @@ MY_GLOBAL.barManager = {
         this.bar.children().last().remove();
         console.log("right: " + this.rangeRight.toString());
         // FUTURE: fade out
+    }, 
+    
+    renderThumbnailImageFromSource: function(source) {
+        MY_GLOBAL.typeChecker.assertIsString(source);
+        
+        var thumbnail = new Image();
+        thumbnail.src = source;
+        thumbnail.classList.add("photo");
+        thumbnail.classList.add("unselected");    
+        return thumbnail;
     }
 };
