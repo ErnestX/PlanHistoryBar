@@ -80,7 +80,7 @@ MY_GLOBAL.barManager = {
         var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeRight);// + 1);
         this.bar.append(newPlan.getThumbnailImage());
         console.log("right: " + this.rangeRight.toString());
-        // TODO: fade in
+        // FUTURE: fade in
     }, 
     deletePlanAtLeft: function() {
         this.rangeLeft++;
@@ -91,6 +91,6 @@ MY_GLOBAL.barManager = {
         this.rangeRight--;
         this.bar.children().last().remove();
         console.log("right: " + this.rangeRight.toString());
-        // TODO: fade out
+        // FUTURE: fade out
     }
 };

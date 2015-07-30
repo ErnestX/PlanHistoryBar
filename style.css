@@ -18,17 +18,18 @@ body {
   width: inherit;
   overflow: hidden;
   /*mask*/
-  text-align: left; }
+  text-align: center; }
 
-/* line 26, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
+/* line 25, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 #bar {
-  margin-left: -100px;
-  width: 200%;
+  width: 2000px;
   height: inherit;
   position: relative;
-  display: inline-block; }
+  display: inline-block;
+  margin-left: -10000px;
+  margin-right: -10000px; }
 
-/* line 34, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
+/* line 36, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 .photo {
   width: 100px;
   height: auto;
@@ -37,7 +38,7 @@ body {
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out; }
 
-/* line 43, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
+/* line 45, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 .previewWindow {
   height: 500px;
   width: auto;
@@ -47,22 +48,22 @@ body {
   margin-top: 20px;
   -webkit-clip-path: polygon(0% 6%, 46% 6%, 50% 0%, 54% 6%, 100% 6%, 100% 100%, 0% 100%); }
 
-/* line 53, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
+/* line 55, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 .leftShiftting {
   animation-name: shiftLeftAnimation;
   animation-duration: 0.2s; }
 
-/* line 58, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
+/* line 60, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 .rightShiftting {
   animation-name: shiftRightAnimation;
   animation-duration: 0.2s; }
 
-/* line 63, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
+/* line 65, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 .fadingIn {
   animation-name: fadeInAnimation;
   animation-duration: 0.2s; }
 
-/* line 68, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
+/* line 70, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 .fadingOut {
   animation-name: fadeOutAnimation;
   animation-duration: 0.2s; }

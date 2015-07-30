@@ -14,8 +14,7 @@ MY_GLOBAL.previewWindowManager = {
         var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(i);
         this.previewWindow.addClass("fadingOut");
         this.previewWindow.one('animationend', function() {
-//            console.log('removed children');
-            MY_GLOBAL.previewWindowManager.previewWindow.children().remove(); //TODO: be careful of the mask
+            MY_GLOBAL.previewWindowManager.previewWindow.children().remove(); //NOTE: be careful about the mask
             MY_GLOBAL.previewWindowManager.previewWindow.append(newPlan.getPreviewWindowImage());
             MY_GLOBAL.previewWindowManager.previewWindow.addClass('fadingIn');
             MY_GLOBAL.previewWindowManager.previewWindow.removeClass('fadingOut');
