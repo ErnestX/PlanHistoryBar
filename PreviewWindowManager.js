@@ -9,6 +9,7 @@ MY_GLOBAL.previewWindowManager = {
         MY_GLOBAL.typeChecker.assertIsInteger(i);
         
         this.previewWindow = w;
+//        this.previewWindow.css('height', '700px');
         
         // create a container with two imgs
         this.frontImage = this.createPlaceHolderImage();
@@ -26,9 +27,9 @@ MY_GLOBAL.previewWindowManager = {
         var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(i);
         
         // Step1: change front img src and fadein
-//        this.frontImage.addClass('hidden');
+        this.frontImage.addClass('hidden');
         this.frontImage.attr('src', newPlan.previewWindowSrc);
-//        this.frontImage.removeClass('hidden');
+        this.frontImage.removeClass('hidden');
         this.frontImage.addClass('fadingIn');
         
 //        var newPreviewImage = this.renderPreviewWindowImageFromSource(newPlan.previewWindowSrc);

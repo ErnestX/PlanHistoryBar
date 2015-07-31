@@ -1,5 +1,5 @@
 $photoWidth: 100px;
-$animationDuration: 1s;
+$animationDuration: 0.25s;
 
 body{
     background-color: #58585A;
@@ -43,6 +43,7 @@ body{
 }
 
 #previewWindow {    
+    position: relative;
     height: 500px;
     width: 100%;
     display: block;
@@ -53,6 +54,7 @@ body{
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
+    text-align: center;
 }
 
 //.previewWindowImage {
@@ -66,9 +68,14 @@ body{
 //}
 
 .previewWindowImage {
-    position: absolute;
+    display: inline-block;
+    left: 0px;
+    right: 0px;
     margin-left: auto;
     margin-right: auto;
+    height: 100%;
+    width: auto;
+    position: absolute;
     -webkit-clip-path: polygon(0% 6%, 46% 6%, 50% 0%, 54% 6%, 100% 6%, 100% 100%, 0% 100%); //NOTE: doesn't work on IE or Firefox
 }
 
