@@ -46,39 +46,40 @@ body {
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
-  -webkit-clip-path: polygon(0% 6%, 46% 6%, 50% 0%, 54% 6%, 100% 6%, 100% 100%, 0% 100%);
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain; }
 
-/* line 58, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
-.previewWindowImage {
-  height: 100%;
-  width: auto;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  -webkit-clip-path: inherit; }
-
 /* line 68, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
+.previewWindowImage {
+  position: absolute;
+  -webkit-clip-path: polygon(0% 6%, 46% 6%, 50% 0%, 54% 6%, 100% 6%, 100% 100%, 0% 100%); }
+
+/* line 73, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 .leftShiftting {
   animation-name: shiftLeftAnimation;
   animation-duration: 1s; }
 
-/* line 73, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
+/* line 78, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 .rightShiftting {
   animation-name: shiftRightAnimation;
   animation-duration: 1s; }
 
-/* line 78, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
+/* line 83, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
+.hidden {
+  visibility: hidden; }
+
+/* line 87, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 .fadingIn {
   animation-name: fadeInAnimation;
-  animation-duration: 1s; }
+  animation-duration: 1s;
+  -webkit-clip-path: inherit; }
 
-/* line 83, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
+/* line 93, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 .fadingOut {
   animation-name: fadeOutAnimation;
-  animation-duration: 1s; }
+  animation-duration: 1s;
+  -webkit-clip-path: inherit; }
 
 @keyframes shiftLeftAnimation {
   0% {
