@@ -7,6 +7,7 @@ MY_GLOBAL.previewWindowManager = {
         MY_GLOBAL.typeChecker.assertIsInteger(i);
         
         this.previewWindow = w;
+        this.previewWindow.css('height', '550px');
         this.showPreviewWindowOfIndex(i);
     }, 
     
