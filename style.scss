@@ -42,14 +42,26 @@ body{
     transition-timing-function: ease-in-out;
 }
 
-.previewWindow {    
+#previewWindow {    
     height: 500px;
-    width: auto;
+    width: 680px/447px*500px;
     display: block;
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
     -webkit-clip-path: polygon(0% 6%, 46% 6%, 50% 0%, 54% 6%, 100% 6%, 100% 100%, 0% 100%); //NOTE: doesn't work on IE or Firefox
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain; // auto-resize
+}
+
+.previewWindowImage {
+    height: inherit;
+    width: inherit;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    -webkit-clip-path: inherit;
 }
 
 .leftShiftting {

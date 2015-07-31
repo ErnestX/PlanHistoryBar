@@ -9,20 +9,5 @@ MY_GLOBAL.planProto = {
         
         this.thumbnailSrc = thumbnailSource;
         this.previewWindowSrc = previewWindowSource;
-    }//, 
-    
-//    getThumbnailImage: function() {
-//        var thumbnail = new Image();
-//        thumbnail.src = this.thumbnailSrc;
-//        thumbnail.classList.add("photo");
-//        thumbnail.classList.add("unselected");    
-//        return thumbnail;
-//    }, 
-//    
-//    getPreviewWindowImage: function() {
-//        var image = new Image();
-//        image.src = this.previewWindowSrc;
-//        image.classList.add("previewWindow");
-//        return image;
-//    }
+    }
 };

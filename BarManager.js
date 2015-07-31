@@ -20,8 +20,6 @@ MY_GLOBAL.barManager = {
         
         var i;
         for (i=this.rangeLeft; i <= r; i++) { // don't forget the =
-//            var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(i);
-//            this.bar.append(MY_GLOBAL.barManager.renderThumbnailImageFromSource(newPlan.thumbnailSrc));
             this.addNewPlanAtRight();
         }
         
