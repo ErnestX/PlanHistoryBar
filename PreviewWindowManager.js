@@ -22,6 +22,8 @@ MY_GLOBAL.previewWindowManager = {
     }, 
     
     showPreviewForPlanIndex: function(i) {
+        MY_GLOBAL.typeChecker.assertIsInteger(i);
+        
         var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(i);
         
         // Step1: update front img src and fadein
@@ -41,6 +43,7 @@ MY_GLOBAL.previewWindowManager = {
             backImage.attr('src', newPlan.previewWindowSrc);
         });
     }, 
+    
     createPlaceHolderImage: function() {
         var image = $('<img>');
         image.addClass("previewWindowImage");

@@ -1,4 +1,4 @@
-$photoWidth: 100px;
+$thumbnailWidth: 100px;
 $defaultPreviewWindowHeight: 500px;
 $animationDuration: 0.25s;
 
@@ -24,8 +24,7 @@ body{
 }
 
 #bar {
-//    margin-left: -1 * $photoWidth; // one plan hidden left to the left screen edge
-    width: $photoWidth * 20; // allow at most 20 plans been loaded onto the bar
+    width: $thumbnailWidth * 20; // allow at most 20 plans been loaded onto the bar
     height: inherit;
     position: relative;
     display: inline-block;
@@ -33,8 +32,8 @@ body{
     margin-right: -10000px;
 }
 
-.photo {
-    width: $photoWidth;
+.thumbnail { 
+    width: $thumbnailWidth;
     height: auto;
     position: relative;
     transition-property: padding;
@@ -89,12 +88,12 @@ body{
 
 @keyframes shiftLeftAnimation {
     0% {left: 0px;}
-    100% {left: -1 * $photoWidth;}
+    100% {left: -1 * $thumbnailWidth;}
 }
 
 @keyframes shiftRightAnimation {
     0% {left: 0px;}
-    100% {left: $photoWidth;}
+    100% {left: $thumbnailWidth;}
 }
 
 @keyframes fadeInAnimation {

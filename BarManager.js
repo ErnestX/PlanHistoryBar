@@ -96,7 +96,7 @@ MY_GLOBAL.barManager = {
         
         var thumbnail = new Image();
         thumbnail.src = source;
-        thumbnail.classList.add("photo");
+        thumbnail.classList.add("thumbnail");
         thumbnail.classList.add("unselected");    
         return thumbnail;
     }
