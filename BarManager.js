@@ -39,8 +39,6 @@ MY_GLOBAL.barManager = {
         // select plan
         this.bar.children().eq(planIndex - this.rangeLeft).removeClass("unselected");
         this.bar.children().eq(planIndex - this.rangeLeft).addClass("selected");
-            
-        MY_GLOBAL.previewWindowManager.showPreviewWindowOfIndex(planIndex);
         
         console.log("select #" + planIndex.toString());
     },

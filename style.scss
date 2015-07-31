@@ -1,4 +1,5 @@
 $photoWidth: 100px;
+$defaultPreviewWindowHeight: 500px;
 $animationDuration: 0.25s;
 
 body{
@@ -24,7 +25,7 @@ body{
 
 #bar {
 //    margin-left: -1 * $photoWidth; // one plan hidden left to the left screen edge
-    width: $photoWidth * 20; // allow at most two screens of plans been loaded onto the bar
+    width: $photoWidth * 20; // allow at most 20 plans been loaded onto the bar
     height: inherit;
     position: relative;
     display: inline-block;
@@ -43,7 +44,7 @@ body{
 
 #previewWindow {    
     position: relative;
-    height: 500px;
+    height: $defaultPreviewWindowHeight;
     width: 100%;
     display: block;
     margin-left: auto;

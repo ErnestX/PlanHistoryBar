@@ -19,12 +19,14 @@
         $("#left").click(function() {
             MY_GLOBAL.activePhotoIndex--;
             MY_GLOBAL.barManager.selectIndex(MY_GLOBAL.activePhotoIndex);
+            MY_GLOBAL.previewWindowManager.showPreviewForPlanIndex(MY_GLOBAL.activePhotoIndex);
             MY_GLOBAL.barManager.moveBarRightByOnePlan();
         });
         
         $("#right").click(function() {
             MY_GLOBAL.activePhotoIndex++;
             MY_GLOBAL.barManager.selectIndex(MY_GLOBAL.activePhotoIndex);
+            MY_GLOBAL.previewWindowManager.showPreviewForPlanIndex(MY_GLOBAL.activePhotoIndex);
             MY_GLOBAL.barManager.moveBarLeftByOnePlan();
         });
     });

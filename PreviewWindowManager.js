@@ -9,7 +9,7 @@ MY_GLOBAL.previewWindowManager = {
         MY_GLOBAL.typeChecker.assertIsInteger(i);
         
         this.previewWindow = w;
-        /*NOTE: can dynamically adjust image size by setting window height, 
+        /*NOTE: can dynamically adjust image size by setting pewviewWindow's height, 
         e.g. this.previewWindow.css('height', '700px'); */
         
         // create two imgs place holders
@@ -18,10 +18,10 @@ MY_GLOBAL.previewWindowManager = {
         this.previewWindow.append(this.backImage);
         this.previewWindow.append(this.frontImage);
         
-        this.showPreviewWindowOfIndex(i);
+        this.showPreviewForPlanIndex(i);
     }, 
     
-    showPreviewWindowOfIndex: function(i) {
+    showPreviewForPlanIndex: function(i) {
         var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(i);
         
         // Step1: update front img src and fadein
