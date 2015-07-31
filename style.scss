@@ -23,11 +23,10 @@ body{
 }
 
 #bar {
-//    margin-left: -1 * $photoWidth; // one plan hidden left to the left screen edge;
+//    margin-left: -1 * $photoWidth; // one plan hidden left to the left screen edge
     width: $photoWidth * 20; // allow at most two screens of plans been loaded onto the bar
     height: inherit;
     position: relative;
-//    display: inline-block;
     display: inline-block;
     margin-left: -10000px; // hack: used to center the bar
     margin-right: -10000px;
@@ -50,32 +49,16 @@ body{
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
-//    -webkit-clip-path: polygon(0% 6%, 46% 6%, 50% 0%, 54% 6%, 100% 6%, 100% 100%, 0% 100%); //NOTE: doesn't work on IE or Firefox
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    text-align: center;
 }
 
-//.previewWindowImage {
-//    height: 100%;
-//    width: auto;
-////    object-fit:cover; //NOTE: doesn't work on IE
-//    display: block;
-//    margin-left: auto;
-//    margin-right: auto;
-////    -webkit-clip-path: inherit; //NOTE: doesn't work on IE or Firefox
-//}
-
 .previewWindowImage {
-    display: inline-block;
+    position: absolute; // absolute to previewWindow
     left: 0px;
     right: 0px;
     margin-left: auto;
     margin-right: auto;
     height: 100%;
     width: auto;
-    position: absolute;
     -webkit-clip-path: polygon(0% 6%, 46% 6%, 50% 0%, 54% 6%, 100% 6%, 100% 100%, 0% 100%); //NOTE: doesn't work on IE or Firefox
 }
 
