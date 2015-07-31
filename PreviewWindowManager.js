@@ -26,9 +26,9 @@ MY_GLOBAL.previewWindowManager = {
         var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(i);
         
         // Step1: change front img src and fadein
-        this.frontImage.addClass('hidden');
+//        this.frontImage.addClass('hidden');
         this.frontImage.attr('src', newPlan.previewWindowSrc);
-        this.frontImage.removeClass('hidden');
+//        this.frontImage.removeClass('hidden');
         this.frontImage.addClass('fadingIn');
         
 //        var newPreviewImage = this.renderPreviewWindowImageFromSource(newPlan.previewWindowSrc);
