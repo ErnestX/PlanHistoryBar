@@ -69,13 +69,19 @@ MY_GLOBAL.barManager = {
     addNewPlanAtLeft: function() {
         this.rangeLeft--;
         var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeLeft);
+        
+        //this.bar.prepend(MY_GLOBAL.barManager.renderThumbnailImageFromSource(newPlan.thumbnailSrc));
+        this.bar.prepend(MY_GLOBAL.planRenderer.renderDivFromPlan(newPlan));
+        
         console.log("left: "+ this.rangeLeft.toString());
-        this.bar.prepend(MY_GLOBAL.barManager.renderThumbnailImageFromSource(newPlan.thumbnailSrc));
     }, 
     addNewPlanAtRight: function() {
         this.rangeRight++;
         var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeRight);
-        this.bar.append(MY_GLOBAL.barManager.renderThumbnailImageFromSource(newPlan.thumbnailSrc));
+        
+        //this.bar.append(MY_GLOBAL.barManager.renderThumbnailImageFromSource(newPlan.thumbnailSrc));
+        this.bar.append(MY_GLOBAL.planRenderer.renderDivFromPlan(newPlan));
+        
         console.log("right: " + this.rangeRight.toString());
     }, 
     deletePlanAtLeft: function() {
