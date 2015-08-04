@@ -77,7 +77,6 @@ MY_GLOBAL.barManager = {
         var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeRight);
         this.bar.append(MY_GLOBAL.barManager.renderThumbnailImageFromSource(newPlan.thumbnailSrc));
         console.log("right: " + this.rangeRight.toString());
-        // FUTURE: fade in
     }, 
     deletePlanAtLeft: function() {
         this.rangeLeft++;
@@ -88,7 +87,6 @@ MY_GLOBAL.barManager = {
         this.rangeRight--;
         this.bar.children().last().remove();
         console.log("right: " + this.rangeRight.toString());
-        // FUTURE: fade out
     }, 
     
     renderThumbnailImageFromSource: function(source) {

@@ -28,12 +28,24 @@ MY_GLOBAL.typeChecker = {
             this.throwTypeExceptionWithMessage(data, 'boolean', potentialErrorMessage);
         }
     }, 
+    assertIsDate: function(data, potentialErrorMessage) {
+       if (!(data instanceof Date)) {
+           this.throwTypeExceptionWithMessage(data, 'Date', potentialErrorMessage);
+       } 
+    }, 
+    assertIsPlan: function(data, potentialErrorMessage) {
+       if (!(MY_GLOBAL.planProto.isPrototypeOf(data))) {
+           this.throwTypeExceptionWithMessage(data, 'Plan', potentialErrorMessage);
+       } 
+    }, 
     throwTypeExceptionWithMessage: function(value, targetType, mess) {
         this.assertIsString(targetType);
         if (typeof(mess) !== 'undefined') {
             throw 'TypeError: ' + value.toString() +' is not of ' + targetType + ' (' + mess.toString() + ')';
-        } else {
+        } else if(typeof(value) !== 'undefined'){
             throw 'TypeError: ' + value.toString() +' is not of ' + targetType;
+        } else {
+            throw 'TypeError: undefined' +' is not of ' + targetType;
         }
     }
 };
