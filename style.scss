@@ -42,9 +42,10 @@ body{
 }
 
 .planDiv {
-    width: $thumbnailWidth;
-    height: 100px;
+    width: auto;
+    height: auto;
 //    position: relative;
+    background-color: aqua;
     transition-property: padding;
     transition-duration: $animationDuration;
     transition-timing-function: ease-in-out;
