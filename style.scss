@@ -25,30 +25,31 @@ body{
 
 // PLAN--------------------------------------------------------------------------------
 .thumbnail { 
-    display: block;
+    display: block; // have to use block in order to overlap with name
     width: inherit;
     height: auto;
-    position: absolute;
+    position: relative; // do not have to abs to overlap! 
 }
 
 .saveName {
 //    vertical-align:middle;
-//    margin-top: -54px;
+    top:0px;
+    bottom: 0px;
     text-align: center;
-    display: block;
+    display: block; // have to use block in order to overlap with thumbnail
     width: inherit;
     word-wrap: break-word;
     position: absolute;
 }
 // TODO: inherit to 100%
 .thumbanilSaveNameContainer {
-    vertical-align: middle;
+//    vertical-align: middle;
     width: inherit;
-    height: 70px;
+    height: auto;
 }
 
 .timeStamp {
-    margin-top: auto;
+    margin-top: 3px;
     margin-bottom: auto;
     color: white;
     font-family: "Century Gothic";
