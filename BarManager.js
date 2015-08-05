@@ -16,7 +16,7 @@ MY_GLOBAL.barManager = {
         
         this.bar = b;
         this.rangeLeft = l;
-        this.rangeRight = l - 1; //l is not a typo
+        this.rangeRight = l - 1; //init as no plans on screen
         
         var i;
         for (i=this.rangeLeft; i <= r; i++) { // don't forget the =

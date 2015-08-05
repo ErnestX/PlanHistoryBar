@@ -10,7 +10,7 @@
     <script src="PreviewWindowManager.js"></script>
     <script src="PlanRenderer.js"></script>
     <script>$(document).ready(function() {
-        MY_GLOBAL.activePhotoIndex = 6;
+        MY_GLOBAL.activePhotoIndex = 6; // the initial index to select
 
         MY_GLOBAL.barManager.initWithBarAndRange($("#bar"), 0, 12);
         MY_GLOBAL.previewWindowManager.initWithPreviewWindowAndIndex($("#previewWindow"), MY_GLOBAL.activePhotoIndex);
@@ -36,18 +36,14 @@
 </head>
 
 <body>
-    <div id="barContainer"> 
-        <div id="bar"></div>
+    <div id="barContainer"> <!-- used to mask the bar -->
+        <div id="bar"></div> <!-- the real bar -->
     </div>
     <div id="previewWindow"></div>
     
     <p>
         <button id="left">left</button>
         <button id="right">right</button>
-    </p>
-    <p>
-        <button id="lastPage">last page</button>
-        <button id="nextPage">next page</button>
     </p>
 </body>
 </html>

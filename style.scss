@@ -1,5 +1,5 @@
 $thumbnailWidth: 100px;
-$defaultPreviewWindowHeight: 500px;
+$defaultPreviewWindowHeight: 550px;
 $animationDuration: 0.15s;
 
 // GENERAL-----------------------------------------------------------------------------
@@ -25,7 +25,7 @@ body{
 
 // PLAN--------------------------------------------------------------------------------
 .thumbnail { 
-    width: $thumbnailWidth;
+    width: inherit;
     height: auto;
 }
 
@@ -38,9 +38,14 @@ body{
     text-align: center;
 }
 
+.saveName {
+    width: inherit;
+    word-wrap: break-word;
+}
+
 .planDiv {
     display: inline-block;
-    width: auto;
+    width: $thumbnailWidth;
     height: auto;
 //    position: relative; // maybe this is not useful at all?
     transition-property: padding;
@@ -66,7 +71,7 @@ body{
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 7px;
+    margin-top: 10px;
 }
 
 .previewWindowImage {

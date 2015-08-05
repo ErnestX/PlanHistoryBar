@@ -12,11 +12,17 @@ MY_GLOBAL.planRenderer = {
         thumbnail.addClass("thumbnail");
         div.append(thumbnail); 
         
-        // TODO: render timestamp
+        // render timestamp
         var timeStampLabel = $('<p>');
         timeStampLabel.text(plan.timeStamp.getHours() + ':' + plan.timeStamp.getMinutes());
         timeStampLabel.addClass('timeStamp');
         div.append(timeStampLabel);
+        
+        // TODO: render name
+        var nameLabel = $('<p>');
+        nameLabel.text(plan.saveName);
+        nameLabel.addClass('saveName');
+        div.append(nameLabel);
         
         return div;
     }, 
