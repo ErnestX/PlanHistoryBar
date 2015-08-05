@@ -6,11 +6,23 @@ MY_GLOBAL.planRenderer = {
         div.addClass('planDiv');
         div.addClass('unselected');
         
+        var thumbanilSaveNameContainer = $('<div>');
+        thumbanilSaveNameContainer.addClass('thumbanilSaveNameContainer');
+        div.append(thumbanilSaveNameContainer);
+        
         // render thumbnail img
         var thumbnail = $('<img>');
         thumbnail.attr('src', plan.thumbnailSrc);
         thumbnail.addClass("thumbnail");
-        div.append(thumbnail); 
+//        div.append(thumbnail);
+        thumbanilSaveNameContainer.append(thumbnail);
+        
+        // TODO: render name
+        var nameLabel = $('<p>');
+        nameLabel.text(plan.saveName);
+        nameLabel.addClass('saveName');
+//        div.append(nameLabel);
+        thumbanilSaveNameContainer.append(nameLabel);
         
         // render timestamp
         var timeStampLabel = $('<p>');
@@ -18,16 +30,10 @@ MY_GLOBAL.planRenderer = {
         timeStampLabel.addClass('timeStamp');
         div.append(timeStampLabel);
         
-        // TODO: render name
-        var nameLabel = $('<p>');
-        nameLabel.text(plan.saveName);
-        nameLabel.addClass('saveName');
-        div.append(nameLabel);
-        
         return div;
     }, 
     
     calcLineCoordsFromPlan: function(plan) {
-        // FUTURE: call line renderer with coords
+        // FUTURE: call line renderer with coords or append coord onto an array
     }
 }

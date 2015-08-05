@@ -25,6 +25,22 @@ body{
 
 // PLAN--------------------------------------------------------------------------------
 .thumbnail { 
+    display: inline-block;
+    width: inherit;
+    height: auto;
+//    position: absolute;
+    position: relative;
+}
+
+.saveName {
+    text-align: center;
+    width: inherit;
+    word-wrap: break-word;
+    color: black;
+    position: relative;
+}
+// TODO: inherit to 100%
+.thumbanilSaveNameContainer {
     width: inherit;
     height: auto;
 }
@@ -38,16 +54,11 @@ body{
     text-align: center;
 }
 
-.saveName {
-    width: inherit;
-    word-wrap: break-word;
-}
-
 .planDiv {
     display: inline-block;
     width: $thumbnailWidth;
     height: auto;
-//    position: relative; // maybe this is not useful at all?
+    position: relative; 
     transition-property: padding;
     transition-duration: $animationDuration;
     transition-timing-function: ease-in-out;
