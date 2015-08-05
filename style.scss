@@ -25,24 +25,26 @@ body{
 
 // PLAN--------------------------------------------------------------------------------
 .thumbnail { 
-    display: inline-block;
+    display: block;
     width: inherit;
     height: auto;
-//    position: absolute;
-    position: relative;
+    position: absolute;
 }
 
 .saveName {
+//    vertical-align:middle;
+//    margin-top: -54px;
     text-align: center;
+    display: block;
     width: inherit;
     word-wrap: break-word;
-    color: black;
-    position: relative;
+    position: absolute;
 }
 // TODO: inherit to 100%
 .thumbanilSaveNameContainer {
+    vertical-align: middle;
     width: inherit;
-    height: auto;
+    height: 70px;
 }
 
 .timeStamp {
