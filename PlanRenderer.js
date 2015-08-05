@@ -11,7 +11,7 @@ MY_GLOBAL.planRenderer = {
         thumbnail.attr('src', plan.thumbnailSrc);
         thumbnail.addClass("thumbnail");
 //        thumbnail.addClass("unselected");  
-        divv.append(thumbnail); // append may not work b/c div is not in document yet???
+        divv.append(thumbnail); 
         
         return divv;
     }, 

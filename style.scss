@@ -33,6 +33,7 @@ body{
 }
 
 .thumbnail { 
+    display: inline-block;
     width: $thumbnailWidth;
     height: auto;
     position: relative;
@@ -42,10 +43,10 @@ body{
 }
 
 .planDiv {
+    display: inline-block;
     width: auto;
     height: auto;
-//    position: relative;
-    background-color: aqua;
+    position: relative;
     transition-property: padding;
     transition-duration: $animationDuration;
     transition-timing-function: ease-in-out;
