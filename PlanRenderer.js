@@ -2,18 +2,19 @@ MY_GLOBAL.planRenderer = {
     renderDivFromPlan: function(plan) {
         MY_GLOBAL.typeChecker.assertIsPlan(plan);
         
-        var divv = $('<div/>');
-        divv.addClass('planDiv');
-        divv.addClass('unselected');
+        var div = $('<div>');
+        div.addClass('planDiv');
+        div.addClass('unselected');
         
         // render thumbnail img
         var thumbnail = $('<img>');
         thumbnail.attr('src', plan.thumbnailSrc);
         thumbnail.addClass("thumbnail");
-//        thumbnail.addClass("unselected");  
-        divv.append(thumbnail); 
+        div.append(thumbnail); 
         
-        return divv;
+        // TODO: render date
+        
+        return div;
     }, 
     
     calcLineCoordsFromPlan: function(plan) {

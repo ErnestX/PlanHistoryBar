@@ -17,7 +17,7 @@ body{
 }
 
 #barContainer {
-    height: 100px; // was auto
+    height: auto; 
     width: inherit;
     overflow: hidden; /*mask*/
     text-align: center;
@@ -33,20 +33,15 @@ body{
 }
 
 .thumbnail { 
-    display: inline-block;
     width: $thumbnailWidth;
     height: auto;
-    position: relative;
-    transition-property: padding;
-    transition-duration: $animationDuration;
-    transition-timing-function: ease-in-out;
 }
 
 .planDiv {
     display: inline-block;
     width: auto;
     height: auto;
-    position: relative;
+//    position: relative; // maybe this is not useful at all?
     transition-property: padding;
     transition-duration: $animationDuration;
     transition-timing-function: ease-in-out;

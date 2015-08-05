@@ -70,7 +70,6 @@ MY_GLOBAL.barManager = {
         this.rangeLeft--;
         var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeLeft);
         
-//        this.bar.prepend(MY_GLOBAL.barManager.renderThumbnailImageFromSource(newPlan.thumbnailSrc));
         this.bar.prepend(MY_GLOBAL.planRenderer.renderDivFromPlan(newPlan));
         
         console.log("left: "+ this.rangeLeft.toString());
@@ -79,7 +78,6 @@ MY_GLOBAL.barManager = {
         this.rangeRight++;
         var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeRight);
         
-//        this.bar.append(MY_GLOBAL.barManager.renderThumbnailImageFromSource(newPlan.thumbnailSrc));
         this.bar.append(MY_GLOBAL.planRenderer.renderDivFromPlan(newPlan));
         
         console.log("right: " + this.rangeRight.toString());
@@ -93,21 +91,5 @@ MY_GLOBAL.barManager = {
         this.rangeRight--;
         this.bar.children().last().remove();
         console.log("right: " + this.rangeRight.toString());
-    }, 
-    
-    renderThumbnailImageFromSource: function(source) {
-        MY_GLOBAL.typeChecker.assertIsString(source);
-        
-//        var thumbnail = new Image();
-//        thumbnail.src = source;
-//        thumbnail.classList.add("thumbnail");
-//        thumbnail.classList.add("unselected");   
-        
-        var thumbnail = $('<img>');
-        thumbnail.attr('src', source);
-        thumbnail.addClass("thumbnail");
-        thumbnail.addClass("unselected");  
-        
-        return thumbnail;
     }
 };
