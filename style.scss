@@ -1,6 +1,6 @@
 $sideBarWidth: 120px;
 $thumbnailWidth: 80px;
-$initialPreviewWindowHeight: 600px;
+$initialPreviewWindowHeight: 550px;
 $animationDuration: 0.15s;
 
 // GENERAL-----------------------------------------------------------------------------
@@ -44,7 +44,8 @@ body{
 }
 
 .saveName {
-    margin-left: 3px;
+    // FIXME: center the label, both horizontally and vertically, automatically, regardless of the # of lines 
+    margin-left: 3.5px;
     margin-top: 19px;
     top: 0px;
     width: $thumbnailWidth - 6px; // padding
