@@ -28,24 +28,31 @@ body{
     display: block; // have to use block in order to overlap with name
     width: inherit;
     height: auto;
-    position: relative; // do not have to abs to overlap! 
+    position: relative; // do not have to be abs to overlap! 
 }
 
 .saveName {
-//    vertical-align:middle;
-    top:0px;
-    bottom: 0px;
-    text-align: center;
-    display: block; // have to use block in order to overlap with thumbnail
-    width: inherit;
-    word-wrap: break-word;
+    margin-left: 6px;
+    margin-top: 25px;
+    top: 0px;
+    width: $thumbnailWidth - 8px; // padding
     position: absolute;
+    display: block; // have to use block in order to overlap with thumbnail
+    
+    text-align: center;
+    word-wrap: break-word;
+    color: rgb(94,95,96);
+    font-family: "Avenir Next Condensed";
+    font-weight: bold;
+    font-size: 19px;
+    line-height: 17px;
 }
 // TODO: inherit to 100%
 .thumbanilSaveNameContainer {
-//    vertical-align: middle;
+    vertical-align: middle;
     width: inherit;
     height: auto;
+    display: relative;
 }
 
 .timeStamp {

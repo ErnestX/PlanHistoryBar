@@ -11,7 +11,7 @@ MY_GLOBAL.dataManager = {
         var date = new Date(); // get current time and date for debugging
         
         if (index % 2 === 0) {
-            newPlan.initWithFields(date, "MyLonnnnnnnngName", "google-maps.jpg", "google-maps.jpg");
+            newPlan.initWithFields(date, "MyLonnnngName", "google-maps.jpg", "google-maps.jpg");
         } else {
             newPlan.initWithFields(date, "MyName", "google-maps-doodled.jpg", "google-maps-doodled.jpg");
         }
