@@ -1,3 +1,4 @@
+$sideBarWidth: 120px;
 $thumbnailWidth: 100px;
 $defaultPreviewWindowHeight: 550px;
 $animationDuration: 0.15s;
@@ -7,16 +8,27 @@ body{
     background-color: #58585A;
 }
 
+#sideBar {
+    height: 100%;
+    width: $sideBarWidth;
+    position: absolute;
+}
+
+#browserContainer {
+    margin-left: $sideBarWidth;
+    padding-left: 10px
+}
+
 #barContainer {
     height: auto; 
-    width: inherit;
+    width: 100%;
     overflow: hidden; /*mask*/
     text-align: center;
 }
 
 #bar {
     width: $thumbnailWidth * 20; // allow at most 20 plans been loaded onto the bar
-    height: inherit;
+    height: 100%;
     position: relative;
     display: inline-block;
     margin-left: -10000px; // hack: used to center the bar
@@ -26,7 +38,7 @@ body{
 // PLAN--------------------------------------------------------------------------------
 .thumbnail { 
     display: block; // have to use block in order to overlap with name
-    width: inherit;
+    width: 100%;
     height: auto;
     position: relative; // do not have to be abs to overlap! 
 }
@@ -47,10 +59,10 @@ body{
     font-size: 19px;
     line-height: 17px;
 }
-// TODO: inherit to 100%
+
 .thumbanilSaveNameContainer {
     vertical-align: middle;
-    width: inherit;
+    width: 100%;
     height: auto;
     display: relative;
 }
