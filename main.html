@@ -9,11 +9,14 @@
     <script src="DataManager.js"></script>
     <script src="PreviewWindowManager.js"></script>
     <script src="PlanRenderer.js"></script>
+    <script src="LineGraphsRenderer.js"></script>
     <script>$(document).ready(function() {
         MY_GLOBAL.activePhotoIndex = 7; // the initial index to select
 
         MY_GLOBAL.barManager.initWithBarAndRange($("#bar"), 0, 14);
-        MY_GLOBAL.previewWindowManager.initWithPreviewWindowAndIndex($("#previewWindow"), MY_GLOBAL.activePhotoIndex);
+        MY_GLOBAL.
+        previewWindowManager.
+        initWithPreviewWindowAndIndex($("#previewWindow"), MY_GLOBAL.activePhotoIndex);
     
         MY_GLOBAL.barManager.selectIndex(MY_GLOBAL.activePhotoIndex);
         
@@ -29,6 +32,10 @@
             MY_GLOBAL.barManager.moveBarLeftByOnePlan();
             MY_GLOBAL.barManager.selectIndex(MY_GLOBAL.activePhotoIndex);
             MY_GLOBAL.previewWindowManager.showPreviewForPlanIndex(MY_GLOBAL.activePhotoIndex);
+        });
+    
+        $("#addIndicator").click(function() {
+            MY_GLOBAL.lineGraphsRenderer.createLineRendererOntoRow(0);
         });
     });
     </script>
@@ -46,6 +53,7 @@
         <p>
             <button id="left">left</button>
             <button id="right">right</button>
+            <button id="addIndicator">add indicator</button>
         </p>
     </div>
 </body>
