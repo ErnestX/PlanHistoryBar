@@ -15,5 +15,9 @@ MY_GLOBAL.planProto = {
         this.saveName = name;
         this.thumbnailSrc = thumbnailSource;
         this.previewWindowSrc = previewWindowSource;
+    }, 
+    
+    getValueOfIndicator: function(indicatorName) {
+        
     }
 };
