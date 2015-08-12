@@ -1,51 +1,51 @@
 'use strict';
 
-MY_GLOBAL.lineGraphsRenderer = {
+MY_GLOBAL.graphsRenderer = {
     rowRendererArray:[],
-    createLineRendererWithNameOntoRow: function(name, rowNum) {
+    createRendererWithNameOntoRow: function(name, rowNum) {
         MY_GLOBAL.typeChecker.assertIsString(name);
         MY_GLOBAL.typeChecker.assertIsInteger(rowNum);
         
         if (!(this.rowRendererProto.isPrototypeOf(this.rowRendererArray[rowNum]))) {
             // this row is currently empty. Create new renderer.
-            this.rowRendererArray.[rowNum] = Object.create(this.rowRendererProto); 
+            this.rowRendererArray[rowNum] = Object.create(this.rowRendererProto); 
         }
-        
-        this.rowRendererArray.[rowNum].createLineRendererWithName(name);
+        // delegate to rowRenderer
+        this.rowRendererArray[rowNum].createRendererWithName(name); 
     }, 
     
     rowRendererProto: {
-        lineRendererArray:[],
-        createLineRendererWithName: function(name) {
+        rendererArray:[],
+        createRendererWithName: function(name) {
             MY_GLOBAL.typeChecker.assertIsString(name);
             
-            if (this.getLineRendererWithName(name) !== null) {
+            if (this.getRendererWithName(name) !== null) {
                 // there are duplicates! 
                 throw "creation failed: a line renderer called " + name + " already exists!";
                 return;
             }
             
-            var newLineRenderer = Object.create(this.lineRendererProto);
-            newLineRenderer.initWithName(name);
-            this.lineRendererArray.push(newLineRenderer);
+            var newRenderer = Object.create(this.rendererProto);
+            newRenderer.initWithName(name);
+            this.rendererArray.push(newRenderer);
         },
         
-        getLineRendererWithName: function(name) {
+        getRendererWithName: function(name) {
             var i;
-            for (i=0; i<this.lineRendererArray.length(); i++) {
+            for (i=0; i<this.rendererArray.length(); i++) {
                 MY_GLOBAL.assert(this.
-                                 lineRendererProto.
-                                 isPrototypeOf(this.lineRendererArray[i]));   
+                                 rendererProto.
+                                 isPrototypeOf(this.rendererArray[i]));   
                 
-                if (name === this.lineRendererArray[i].name) {
-                    return this.lineRendererArray[i];
+                if (name === this.rendererArray[i].name) {
+                    return this.rendererArray[i];
                 }
             }
             
             return null;
         }, 
         
-        lineRendererProto: {
+        rendererProto: {
             name: '', 
             dataArray: [1,3,3,2,5,1,4], // fake data
             initWithName: function(name) {
@@ -56,6 +56,9 @@ MY_GLOBAL.lineGraphsRenderer = {
                 this.render();
             }, 
             render: function() {
+            
+                var newCanvas = $('<svg>');
+                
                 
             }, 
             thresholdArray:[],

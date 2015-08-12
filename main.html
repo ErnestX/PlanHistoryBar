@@ -9,7 +9,7 @@
     <script src="DataManager.js"></script>
     <script src="PreviewWindowManager.js"></script>
     <script src="PlanRenderer.js"></script>
-    <script src="LineGraphsRenderer.js"></script>
+    <script src="GraphsRenderer.js"></script>
     <script>$(document).ready(function() {
         MY_GLOBAL.activePhotoIndex = 7; // the initial index to select
 
@@ -35,9 +35,9 @@
         });
     
         $("#addIndicator").click(function() {
-            MY_GLOBAL.lineGraphsRenderer.createLineRendererWithNameOntoRow('testing', 0);
+            MY_GLOBAL.graphsRenderer.createLineRendererWithNameOntoRow('testing', 0);
         });
-    });
+    });z
     </script>
     <link rel=stylesheet href="style.css">
 </head>
@@ -46,6 +46,7 @@
     <div id = "sideBar">this is the side bar</div>
     <div id="browserContainer">
         <div id="barContainer"> <!-- used to mask the bar -->
+            <div id="graphsContainer"></div>
             <div id="bar"></div> <!-- the real bar -->
         </div>
         <div id="previewWindow"></div>

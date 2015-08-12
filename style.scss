@@ -19,11 +19,21 @@ body{
     padding-left: 10px
 }
 
+// BAR---------------------------------------------------------------------------------
+// TODO: rename to barGraphContainer
 #barContainer {
     height: auto; 
     width: 100%;
     overflow: hidden; /*mask*/
     text-align: center;
+}
+
+#graphsContainer {
+    
+}
+
+.line {
+    
 }
 
 #bar {
