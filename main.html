@@ -14,6 +14,7 @@
         MY_GLOBAL.activePhotoIndex = 7; // the initial index to select
 
         MY_GLOBAL.barManager.initWithBarAndRange($("#bar"), 0, 14);
+        MY_GLOBAL.graphsRenderer.initWithGraphContainer($('#graphsContainer')); // FIXME: rename to initWithGraphsContainer
         MY_GLOBAL.
         previewWindowManager.
         initWithPreviewWindowAndIndex($("#previewWindow"), MY_GLOBAL.activePhotoIndex);
@@ -35,9 +36,9 @@
         });
     
         $("#addIndicator").click(function() {
-            MY_GLOBAL.graphsRenderer.createLineRendererWithNameOntoRow('testing', 0);
+            MY_GLOBAL.graphsRenderer.createRendererWithNameOntoRow('testing', 0);
         });
-    });z
+    });
     </script>
     <link rel=stylesheet href="style.css">
 </head>

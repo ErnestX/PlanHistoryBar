@@ -14,14 +14,12 @@ MY_GLOBAL.planRenderer = {
         var thumbnail = $('<img>');
         thumbnail.attr('src', plan.thumbnailSrc);
         thumbnail.addClass("thumbnail");
-//        div.append(thumbnail);
         thumbanilSaveNameContainer.append(thumbnail);
         
         // TODO: render name
         var nameLabel = $('<p>');
         nameLabel.text(plan.saveName);
         nameLabel.addClass('saveName');
-//        div.append(nameLabel);
         thumbanilSaveNameContainer.append(nameLabel);
         
         // render timestamp
