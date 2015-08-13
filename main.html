@@ -5,12 +5,15 @@
     <script src="jquery-1.11.3.js"></script>
     <script src="snap.svg-min.js"></script>
     <script src="Helpers.js"></script>
+    
     <script src="PlansBarManager.js"></script>
+    <script src="PlansContainerAnimatior.js"></script>
     <script src="Plan.js"></script>
     <script src="DataManager.js"></script>
     <script src="PreviewWindowManager.js"></script>
     <script src="PlanRenderer.js"></script>
     <script src="GraphsRenderer.js"></script>
+    
     <script>$(document).ready(function() {
         MY_GLOBAL.activePhotoIndex = 7; // the initial index to select
 
@@ -19,19 +22,26 @@
         MY_GLOBAL.
         previewWindowManager.
         initWithPreviewWindowAndIndex($("#previewWindow"), MY_GLOBAL.activePhotoIndex);
+        MY_GLOBAL.plansContainerAnimator.initWithContainer($('#plansContainer'));
     
         MY_GLOBAL.plansBarManager.selectIndex(MY_GLOBAL.activePhotoIndex);
         
         $("#left").click(function() {
             MY_GLOBAL.activePhotoIndex--;
-            MY_GLOBAL.plansBarManager.moveBarRightByOnePlan();
+            MY_GLOBAL.plansContainerAnimator.animateShifting(false, function() {
+                MY_GLOBAL.plansBarManager.moveBarRightByOnePlan();    
+                console.log("called back");
+            });
             MY_GLOBAL.plansBarManager.selectIndex(MY_GLOBAL.activePhotoIndex);
             MY_GLOBAL.previewWindowManager.showPreviewForPlanIndex(MY_GLOBAL.activePhotoIndex);
         });
         
         $("#right").click(function() {
             MY_GLOBAL.activePhotoIndex++;
-            MY_GLOBAL.plansBarManager.moveBarLeftByOnePlan();
+            MY_GLOBAL.plansContainerAnimator.animateShifting(true, function() {
+                MY_GLOBAL.plansBarManager.moveBarLeftByOnePlan(); 
+                console.log("called back");
+            });
             MY_GLOBAL.plansBarManager.selectIndex(MY_GLOBAL.activePhotoIndex);
             MY_GLOBAL.previewWindowManager.showPreviewForPlanIndex(MY_GLOBAL.activePhotoIndex);
         });

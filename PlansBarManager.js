@@ -47,23 +47,15 @@ MY_GLOBAL.plansBarManager = {
     moves the plansBar with animation. Adds and deletes plans so that the number of plans on screen stays the same
     */
     moveBarLeftByOnePlan: function() {
-        this.plansBar.addClass("leftShiftting");
-        this.plansBar.one('animationend', function() {
-            MY_GLOBAL.plansBarManager.deletePlanAtLeft();
-            MY_GLOBAL.plansBarManager.addNewPlanAtRight();
-            MY_GLOBAL.plansBarManager.plansBar.removeClass("leftShiftting");
-        });
+        this.deletePlanAtLeft();
+        this.addNewPlanAtRight();
     },
     /*
     moves the plansBar with animation. Adds and deletes plans so that the number of plans on screen stays the same
     */
     moveBarRightByOnePlan: function() {
-        this.plansBar.addClass("rightShiftting");
-        this.plansBar.one('animationend', function() {
-            MY_GLOBAL.plansBarManager.deletePlanAtRight(); //"this" no longer works here
-            MY_GLOBAL.plansBarManager.addNewPlanAtLeft();
-            MY_GLOBAL.plansBarManager.plansBar.removeClass("rightShiftting");
-        });
+        this.deletePlanAtRight();
+        this.addNewPlanAtLeft();
     }, 
     
     addNewPlanAtLeft: function() {

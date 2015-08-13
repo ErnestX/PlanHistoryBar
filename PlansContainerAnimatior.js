@@ -13,10 +13,16 @@ MY_GLOBAL.plansContainerAnimator = {
         
         if (isToLeft) {
             this.container.addClass("leftShiftting");
+            this.container.one('animationend', function() {
+                MY_GLOBAL.plansContainerAnimator.container.removeClass("leftShiftting");
+            });
         } else {
             this.container.addClass("rightShiftting");
+            this.container.one('animationend', function() {
+                MY_GLOBAL.plansContainerAnimator.container.removeClass("rightShiftting");
+            });
         }
         
-        this.container.one('animationend', callBackFunction());
+        this.container.one('animationend', callBackFunction); // NOTE: do not write callBackFunction()!!! 
     }
 }
