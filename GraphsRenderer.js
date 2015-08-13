@@ -3,7 +3,7 @@
 MY_GLOBAL.graphsRenderer = {
     graphsContainer:null,
     rowRendererArray:[],
-    initWithGraphContainer: function(container){
+    initWithGraphsContainer: function(container){
         this.graphsContainer = container;
     },
     createRendererWithNameOntoRow: function(name, rowNum) {
@@ -68,10 +68,6 @@ MY_GLOBAL.graphsRenderer = {
             }, 
             render: function() {
                 console.log(this.graphContainer);
-//                var newCanvas = $('<svg width="100" height="100"><circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" /></svg>');
-//                var testSVG = $('<circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" />');
-//                newCanvas.append(testSVG);
-//                this.graphContainer.append(newCanvas);
                 var canvas = Snap("#graphsContainer");
                 var testCircle = canvas.circle(150, 150, 100);
             }, 
