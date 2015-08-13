@@ -23,7 +23,7 @@ MY_GLOBAL.graphsRenderer = {
         rendererArray:[],
         createRendererWithNameAndContainer: function(name, container) {
             MY_GLOBAL.typeChecker.assertIsString(name);
-            MY_GLOBAL.typeChecker.assertIsObject(container);
+            MY_GLOBAL.typeChecker.assertIsJQueryObject(container);
             
             if (this.getRendererWithName(name) !== null) {
                 // there are duplicates! 

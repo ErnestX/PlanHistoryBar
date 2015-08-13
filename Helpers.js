@@ -18,9 +18,19 @@ MY_GLOBAL.typeChecker = {
             this.throwTypeExceptionWithMessage(data, 'integer', potentialErrorMessage);
         }
     },
+    assertIsFunction: function(data, potentialErrorMessage) {
+        if (typeof(data) !== 'function') {
+            this.throwTypeExceptionWithMessage(data, 'object', potentialErrorMessage);
+        }
+    }, 
     assertIsObject: function(data, potentialErrorMessage) {
         if (typeof(data) !== 'object') {
             this.throwTypeExceptionWithMessage(data, 'object', potentialErrorMessage);
+        }
+    }, 
+    assertIsJQueryObject: function(data, potentialErrorMessage) {
+        if (!(data instanceof jQuery)) {
+            this.throwTypeExceptionWithMessage(data, 'jQuery', potentialErrorMessage);
         }
     }, 
     assertIsBoolean: function(data, potentialErrorMessage) {

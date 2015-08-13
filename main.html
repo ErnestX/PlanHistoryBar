@@ -30,7 +30,6 @@
             MY_GLOBAL.activePhotoIndex--;
             MY_GLOBAL.plansContainerAnimator.animateShifting(false, function() {
                 MY_GLOBAL.plansBarManager.moveBarRightByOnePlan();    
-                console.log("called back");
             });
             MY_GLOBAL.plansBarManager.selectIndex(MY_GLOBAL.activePhotoIndex);
             MY_GLOBAL.previewWindowManager.showPreviewForPlanIndex(MY_GLOBAL.activePhotoIndex);
@@ -40,7 +39,6 @@
             MY_GLOBAL.activePhotoIndex++;
             MY_GLOBAL.plansContainerAnimator.animateShifting(true, function() {
                 MY_GLOBAL.plansBarManager.moveBarLeftByOnePlan(); 
-                console.log("called back");
             });
             MY_GLOBAL.plansBarManager.selectIndex(MY_GLOBAL.activePhotoIndex);
             MY_GLOBAL.previewWindowManager.showPreviewForPlanIndex(MY_GLOBAL.activePhotoIndex);

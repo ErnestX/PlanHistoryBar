@@ -9,7 +9,7 @@ MY_GLOBAL.plansBarManager = {
     init this.plansBar, this.rangeLeft, this.rangeRight and place the plans
     */
     initWithBarAndRange: function(b, l, r) {
-        MY_GLOBAL.typeChecker.assertIsObject(b);
+        MY_GLOBAL.typeChecker.assertIsJQueryObject(b);
         MY_GLOBAL.typeChecker.assertIsInteger(l);
         MY_GLOBAL.typeChecker.assertIsInteger(r);
         MY_GLOBAL.assert(l <= r);

@@ -3,13 +3,13 @@
 MY_GLOBAL.plansContainerAnimator = {
     container: null, 
     initWithContainer: function(c) {
-        MY_GLOBAL.typeChecker.assertIsObject(c);
+        MY_GLOBAL.typeChecker.assertIsJQueryObject(c);
         
         this.container = c;
     }, 
     animateShifting: function(isToLeft, callBackFunction) {
         MY_GLOBAL.typeChecker.assertIsBoolean(isToLeft);
-        // TODO: check is function
+        MY_GLOBAL.typeChecker.assertIsFunction(callBackFunction);
         
         if (isToLeft) {
             this.container.addClass("leftShiftting");

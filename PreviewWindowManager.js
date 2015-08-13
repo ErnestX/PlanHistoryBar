@@ -5,7 +5,7 @@ MY_GLOBAL.previewWindowManager = {
     frontImage: null,
     backImage:null,
     initWithPreviewWindowAndIndex: function(w, i) {
-        MY_GLOBAL.typeChecker.assertIsObject(w);
+        MY_GLOBAL.typeChecker.assertIsJQueryObject(w);
         MY_GLOBAL.typeChecker.assertIsInteger(i);
         
         this.previewWindow = w;
