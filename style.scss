@@ -14,14 +14,14 @@ body{
     position: absolute;
 }
 
-#browserContainer {
+#bodyContainer {
     margin-left: $sideBarWidth;
     padding-left: 10px
 }
 
 // BAR---------------------------------------------------------------------------------
 // TODO: rename to plansBarGraphContainer
-#barContainer {
+#plansOuterContainer {
     height: auto; 
     width: 100%;
     overflow: hidden; /*mask*/

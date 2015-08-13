@@ -9,12 +9,12 @@ body {
   position: absolute; }
 
 /* line 17, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
-#browserContainer {
+#bodyContainer {
   margin-left: 120px;
   padding-left: 10px; }
 
 /* line 24, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
-#barContainer {
+#plansOuterContainer {
   height: auto;
   width: 100%;
   overflow: hidden;
