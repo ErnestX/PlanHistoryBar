@@ -14,7 +14,7 @@ body {
   padding-left: 10px; }
 
 /* line 24, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
-#barContainer {
+#plansBarContainer {
   height: auto;
   width: 100%;
   overflow: hidden;
@@ -22,7 +22,7 @@ body {
   text-align: center; }
 
 /* line 39, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
-#bar {
+#plansBar {
   width: 1600px;
   height: 100%;
   position: relative;

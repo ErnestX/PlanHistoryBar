@@ -1,12 +1,12 @@
 "use strict";
 
-MY_GLOBAL.barManager = {
-    bar: null, 
+MY_GLOBAL.plansBarManager = {
+    plansBar: null, 
     rangeLeft: 0, 
     rangeRight: 0, 
     
     /*
-    init this.bar, this.rangeLeft, this.rangeRight and place the plans
+    init this.plansBar, this.rangeLeft, this.rangeRight and place the plans
     */
     initWithBarAndRange: function(b, l, r) {
         MY_GLOBAL.typeChecker.assertIsObject(b);
@@ -14,7 +14,7 @@ MY_GLOBAL.barManager = {
         MY_GLOBAL.typeChecker.assertIsInteger(r);
         MY_GLOBAL.assert(l <= r);
         
-        this.bar = b;
+        this.plansBar = b;
         this.rangeLeft = l;
         this.rangeRight = l - 1; //init as no plans on screen
         
@@ -28,41 +28,41 @@ MY_GLOBAL.barManager = {
     }, 
     
     /*
-    does not move the bar
+    does not move the plansBar
     */
     selectIndex: function(planIndex) {
         MY_GLOBAL.typeChecker.assertIsInteger(planIndex, 'planIndex not int');
         
         // unselect all plans on screen
-        this.bar.children().removeClass("selected");
-        this.bar.children().addClass("unselected");
+        this.plansBar.children().removeClass("selected");
+        this.plansBar.children().addClass("unselected");
         // select plan
-        this.bar.children().eq(planIndex - this.rangeLeft).removeClass("unselected");
-        this.bar.children().eq(planIndex - this.rangeLeft).addClass("selected");
+        this.plansBar.children().eq(planIndex - this.rangeLeft).removeClass("unselected");
+        this.plansBar.children().eq(planIndex - this.rangeLeft).addClass("selected");
         
         console.log("select #" + planIndex.toString());
     },
     
     /*
-    moves the bar with animation. Adds and deletes plans so that the number of plans on screen stays the same
+    moves the plansBar with animation. Adds and deletes plans so that the number of plans on screen stays the same
     */
     moveBarLeftByOnePlan: function() {
-        this.bar.addClass("leftShiftting");
-        this.bar.one('animationend', function() {
-            MY_GLOBAL.barManager.deletePlanAtLeft();
-            MY_GLOBAL.barManager.addNewPlanAtRight();
-            MY_GLOBAL.barManager.bar.removeClass("leftShiftting");
+        this.plansBar.addClass("leftShiftting");
+        this.plansBar.one('animationend', function() {
+            MY_GLOBAL.plansBarManager.deletePlanAtLeft();
+            MY_GLOBAL.plansBarManager.addNewPlanAtRight();
+            MY_GLOBAL.plansBarManager.plansBar.removeClass("leftShiftting");
         });
     },
     /*
-    moves the bar with animation. Adds and deletes plans so that the number of plans on screen stays the same
+    moves the plansBar with animation. Adds and deletes plans so that the number of plans on screen stays the same
     */
     moveBarRightByOnePlan: function() {
-        this.bar.addClass("rightShiftting");
-        this.bar.one('animationend', function() {
-            MY_GLOBAL.barManager.deletePlanAtRight(); //"this" no longer works here
-            MY_GLOBAL.barManager.addNewPlanAtLeft();
-            MY_GLOBAL.barManager.bar.removeClass("rightShiftting");
+        this.plansBar.addClass("rightShiftting");
+        this.plansBar.one('animationend', function() {
+            MY_GLOBAL.plansBarManager.deletePlanAtRight(); //"this" no longer works here
+            MY_GLOBAL.plansBarManager.addNewPlanAtLeft();
+            MY_GLOBAL.plansBarManager.plansBar.removeClass("rightShiftting");
         });
     }, 
     
@@ -70,7 +70,7 @@ MY_GLOBAL.barManager = {
         this.rangeLeft--;
         var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeLeft);
         
-        this.bar.prepend(MY_GLOBAL.planRenderer.renderDivFromPlan(newPlan));
+        this.plansBar.prepend(MY_GLOBAL.planRenderer.renderDivFromPlan(newPlan));
         
         console.log("left: "+ this.rangeLeft.toString());
     }, 
@@ -78,18 +78,18 @@ MY_GLOBAL.barManager = {
         this.rangeRight++;
         var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeRight);
         
-        this.bar.append(MY_GLOBAL.planRenderer.renderDivFromPlan(newPlan));
+        this.plansBar.append(MY_GLOBAL.planRenderer.renderDivFromPlan(newPlan));
         
         console.log("right: " + this.rangeRight.toString());
     }, 
     deletePlanAtLeft: function() {
         this.rangeLeft++;
-        this.bar.children().eq(0).remove();
+        this.plansBar.children().eq(0).remove();
         console.log("left: "+ this.rangeLeft.toString());
     }, 
     deletePlanAtRight: function() {
         this.rangeRight--;
-        this.bar.children().last().remove();
+        this.plansBar.children().last().remove();
         console.log("right: " + this.rangeRight.toString());
     }
 };

@@ -20,8 +20,8 @@ body{
 }
 
 // BAR---------------------------------------------------------------------------------
-// TODO: rename to barGraphContainer
-#barContainer {
+// TODO: rename to plansBarGraphContainer
+#plansBarContainer {
     height: auto; 
     width: 100%;
     overflow: hidden; /*mask*/
@@ -36,12 +36,12 @@ body{
     
 }
 
-#bar {
-    width: $thumbnailWidth * 20; // allow at most 20 plans been loaded onto the bar
+#plansBar {
+    width: $thumbnailWidth * 20; // allow at most 20 plans been loaded onto the plansBar
     height: 100%;
     position: relative;
     display: inline-block;
-    margin-left: -10000px; // hack: used to center the bar
+    margin-left: -10000px; // hack: used to center the plansBar
     margin-right: -10000px;
 }
 
