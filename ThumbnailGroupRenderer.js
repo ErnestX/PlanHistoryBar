@@ -1,4 +1,4 @@
-MY_GLOBAL.planRenderer = {
+MY_GLOBAL.thumbnailGroupRenderer = {
     renderDivFromPlan: function(plan) {
         MY_GLOBAL.typeChecker.assertIsPlan(plan);
         
@@ -29,9 +29,9 @@ MY_GLOBAL.planRenderer = {
         div.append(timeStampLabel);
         
         return div;
-    }, 
-    
-    calcLineCoordsFromPlan: function(plan) {
-        // FUTURE: call line renderer with coords or append coord onto an array
     }
+//    calcIndicatorValueFromPlan: function(indicatorName, plan) {
+//        // TODO: call line renderer with coords or append coord onto an array
+//        return Object.create(MY_GLOBAL.dataPointProto);
+//    }
 }

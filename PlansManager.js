@@ -1,6 +1,6 @@
 "use strict";
 
-MY_GLOBAL.plansBarManager = {
+MY_GLOBAL.plansManager = {
     plansBar: null, 
     rangeLeft: 0, 
     rangeRight: 0, 
@@ -62,15 +62,16 @@ MY_GLOBAL.plansBarManager = {
         this.rangeLeft--;
         var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeLeft);
         
-        this.plansBar.prepend(MY_GLOBAL.planRenderer.renderDivFromPlan(newPlan));
+        this.plansBar.prepend(MY_GLOBAL.thumbnailGroupRenderer.renderDivFromPlan(newPlan));
         
         console.log("left: "+ this.rangeLeft.toString());
     }, 
     addNewPlanAtRight: function() {
         this.rangeRight++;
         var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeRight);
-        
-        this.plansBar.append(MY_GLOBAL.planRenderer.renderDivFromPlan(newPlan));
+        var newPlanJQuery = MY_GLOBAL.thumbnailGroupRenderer.renderDivFromPlan(newPlan);
+        this.plansBar.append(newPlanJQuery);
+        MY_GLOBAL.graphsRenderer.appendDataFromPlanAndRenderToAlignWithJQuery(newPlan, newPlanJQuery);
         
         console.log("right: " + this.rangeRight.toString());
     }, 

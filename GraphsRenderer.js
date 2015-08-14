@@ -22,8 +22,18 @@ MY_GLOBAL.graphsRenderer = {
             this.rowRendererArray[rowNum] = Object.create(this.rowRendererProto); 
         }
         // delegate to rowRenderer
-        this.rowRendererArray[rowNum].createRendererWithNameAndContainer(name, this.graphsContainer);  // FIXME: use a seperate container in the future
+        this.
+        rowRendererArray[rowNum].
+        createRendererWithNameAndContainer(name, this.graphsContainer);  // FIXME: use a seperate container in the future
     }, 
+    
+    appendDataFromPlanAndRenderToAlignWithJQuery: function(newPlan, newPlanJquery) {
+        MY_GLOBAL.typeChecker.assertIsObjectWithProto(MY_GLOBAL.planProto);
+        MY_GLOBAL.typeChecker.assertIsJQueryObject(newPlanJquery);
+        
+        
+        // TODO: stub
+    },
     
     rowRendererProto: {
         rendererArray:[],
@@ -60,7 +70,7 @@ MY_GLOBAL.graphsRenderer = {
         rendererProto: { // FIXME: in the future, create two sub-protos: line and ring 
             graphContainer: null, 
             name: '', 
-            dataPointArray: [1,3,3,2,5,1,4], // fake data
+            dataPointArray: [], 
             initWithNameAndContainer: function(name, container) {
                 console.log('inited renderer');
                 this.name = name;    
@@ -68,18 +78,24 @@ MY_GLOBAL.graphsRenderer = {
                 
                 this.render(); // FIXME: shouldn't be called here. for testing only
             },
+            
             appendDataPointAndRender: function(dataPoint) {
-                
+                MY_GLOBAL.
+                typeChecker.
+                assertIsObjectWithProto(dataPoint, MY_GLOBAL.dataPointProto);
                 
                 this.dataArray.push(dataPoint);
                 this.render();
-            }, 
+            },
+            
             render: function() {
+                console.log(this.dataPointArray);
                 var canvas = Snap('#' + this.graphContainer); // FIXME: for testing only. create a canvas property within init in the future
-                var testCircle = canvas.circle(10, 80, 100);
-                console.log(this.graphContainer);
-                console.log(document.getElementById(this.graphContainer).offsetWidth);
-            }, 
+                var canvasWidth = document.getElementById(this.graphContainer).offsetWidth;
+                var testCircle = canvas.circle(canvasWidth/2, 80, 40);
+                testCircle.attr({fill: "#FFFFFF"});
+            },
+            
             thresholdArray:[],
             thresholdProto: {
                 name: '', 
