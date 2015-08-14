@@ -66,6 +66,7 @@ MY_GLOBAL.plansManager = {
         
         console.log("left: "+ this.rangeLeft.toString());
     }, 
+    
     addNewPlanAtRight: function() {
         this.rangeRight++;
         var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeRight);
@@ -75,11 +76,13 @@ MY_GLOBAL.plansManager = {
         
         console.log("right: " + this.rangeRight.toString());
     }, 
+    
     deletePlanAtLeft: function() {
         this.rangeLeft++;
         this.plansBar.children().eq(0).remove();
         console.log("left: "+ this.rangeLeft.toString());
     }, 
+    
     deletePlanAtRight: function() {
         this.rangeRight--;
         this.plansBar.children().last().remove();

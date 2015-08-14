@@ -3,6 +3,7 @@
 MY_GLOBAL.graphsRenderer = {
     graphsContainer:null, // id without #
     rowRendererArray:[],
+    planDivPairArray:[],
     initWithGraphsContainerInString: function(container) {
         MY_GLOBAL.typeChecker.assertIsString(container);
         
@@ -17,22 +18,28 @@ MY_GLOBAL.graphsRenderer = {
         MY_GLOBAL.typeChecker.assertIsInteger(rowNum);
 
         if (!(this.rowRendererProto.isPrototypeOf(this.rowRendererArray[rowNum]))) {
-            // this row is currently empty. Create new renderer.
-            console.log('created new row renderer');
+            // this row is currently empty. Create new rowRenderer.
+            console.log('created new rowRenderer');
             this.rowRendererArray[rowNum] = Object.create(this.rowRendererProto); 
         }
         // delegate to rowRenderer
         this.
         rowRendererArray[rowNum].
-        createRendererWithNameAndContainer(name, this.graphsContainer);  // FIXME: use a seperate container in the future
+        createRendererWithNameAndContainer(name, this.graphsContainer);  // FIXME: use a seperate(sub) container in the future
     }, 
     
     appendDataFromPlanAndRenderToAlignWithJQuery: function(newPlan, newPlanJquery) {
-        MY_GLOBAL.typeChecker.assertIsObjectWithProto(MY_GLOBAL.planProto);
+        MY_GLOBAL.typeChecker.assertIsObjectWithProto(newPlan, MY_GLOBAL.planProto);
         MY_GLOBAL.typeChecker.assertIsJQueryObject(newPlanJquery);
         
-        
-        // TODO: stub
+        // TODO: update plan div pair array
+        this.renderAllRows();
+    },
+    
+    renderAllRows: function() {
+      for(var i=0; i<this.rowRendererArray.length; i++) {
+          this.rowRendererArray[i].renderRow();
+      }
     },
     
     rowRendererProto: {
@@ -42,14 +49,14 @@ MY_GLOBAL.graphsRenderer = {
             MY_GLOBAL.typeChecker.assertIsString(container);
             
             if (this.getRendererWithName(name) !== null) {
-                // there are duplicates! 
+                // there is a duplicate! 
                 throw "creation failed: a line renderer called " + name + " already exists!";
                 return;
             }
             
             var newRenderer = Object.create(this.rendererProto);
             newRenderer.initWithNameAndContainer(name, container);
-            this.rendererArray.push(newRenderer);
+            this.rendererArray.push(newRenderer); // assume we do not need to reorder indicators within the same row
         },
         
         getRendererWithName: function(name) {
@@ -67,10 +74,16 @@ MY_GLOBAL.graphsRenderer = {
             return null;
         }, 
         
+        renderRow: function() {
+            for (var i=0; i<this.rendererArray.length; i++) {
+                this.rendererArray[i].render();
+            }
+        }, 
+        
         rendererProto: { // FIXME: in the future, create two sub-protos: line and ring 
             graphContainer: null, 
             name: '', 
-            dataPointArray: [], 
+//            dataPointArray: [], // will make a singleton plan array instead
             initWithNameAndContainer: function(name, container) {
                 console.log('inited renderer');
                 this.name = name;    
@@ -89,7 +102,6 @@ MY_GLOBAL.graphsRenderer = {
             },
             
             render: function() {
-                console.log(this.dataPointArray);
                 var canvas = Snap('#' + this.graphContainer); // FIXME: for testing only. create a canvas property within init in the future
                 var canvasWidth = document.getElementById(this.graphContainer).offsetWidth;
                 var testCircle = canvas.circle(canvasWidth/2, 80, 40);
