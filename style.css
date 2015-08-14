@@ -13,13 +13,18 @@ body {
   margin-left: 120px;
   padding-left: 10px; }
 
-/* line 24, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
+/* line 23, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 #plansOuterContainer {
   height: auto;
   width: 100%;
   overflow: hidden;
   /*mask*/
   text-align: center; }
+
+/* line 30, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
+#graphsContainer {
+  width: 100%;
+  height: auto; }
 
 /* line 35, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 #plansContainer {

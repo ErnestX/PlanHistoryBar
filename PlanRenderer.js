@@ -16,7 +16,7 @@ MY_GLOBAL.planRenderer = {
         thumbnail.addClass("thumbnail");
         thumbanilSaveNameContainer.append(thumbnail);
         
-        // TODO: render name
+        // render name
         var nameLabel = $('<p>');
         nameLabel.text(plan.saveName);
         nameLabel.addClass('saveName');

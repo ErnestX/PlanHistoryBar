@@ -23,9 +23,9 @@ MY_GLOBAL.typeChecker = {
             this.throwTypeExceptionWithMessage(data, 'object', potentialErrorMessage);
         }
     }, 
-    assertIsObject: function(data, potentialErrorMessage) {
-        if (typeof(data) !== 'object') {
-            this.throwTypeExceptionWithMessage(data, 'object', potentialErrorMessage);
+    assertIsObjectWithProto: function(data, proto, potentialErrorMessage) {
+        if (!(proto.isPrototypeOf(data))) {
+            this.throwTypeExceptionWithMessage(data, proto.toString(), potentialErrorMessage);
         }
     }, 
     assertIsJQueryObject: function(data, potentialErrorMessage) {
