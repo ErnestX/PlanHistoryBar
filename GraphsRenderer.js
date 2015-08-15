@@ -112,16 +112,23 @@ MY_GLOBAL.graphsRenderer = {
                 
                 // render line
                 var x1, y1, x2, y2;
-                x1 = MY_GLOBAL.graphsRenderer.planDivPairArray[0].div.position().left;
+                var divAlignedWith = MY_GLOBAL.graphsRenderer.planDivPairArray[0].div;
+                x1 = divAlignedWith.position().left + divAlignedWith.outerWidth()/2;
                 console.log(x1);
-                y1 = Math.random() * 100;
+                y1 = Math.random() * 100 + 10;
                 for (var i=1; i<MY_GLOBAL.graphsRenderer.planDivPairArray.length; i++) {
-                    x2 = MY_GLOBAL.graphsRenderer.planDivPairArray[i].div.position().left;
-                    y2 = Math.random() * 100;
+                    var newPoint = canvas.circle(x1, y1, 5);
+                    newPoint.attr({
+                        fill: "#FFFFFF"
+                    });
+                    
+                    divAlignedWith = MY_GLOBAL.graphsRenderer.planDivPairArray[i].div;
+                    x2 = divAlignedWith.position().left + divAlignedWith.outerWidth()/2;
+                    y2 = Math.random() * 100 + 10;
                     
                     var newLine = canvas.line(x1, y1, x2, y2);
                     newLine.attr({
-                        stroke: "#FFFFFF" ,
+                        stroke: "#FFFFFF",
                         strokeWidth: 5
                     });
                     
