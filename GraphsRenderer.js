@@ -2,6 +2,7 @@
 
 MY_GLOBAL.graphsRenderer = {
     graphsContainer:null, // id without #
+    useFancyStyle: false, // switch between two line rendering strategies
     rowRendererArray:[],
     planDivPairArray:[],
     initWithGraphsContainerInString: function(container) {
@@ -28,11 +29,15 @@ MY_GLOBAL.graphsRenderer = {
         createRendererWithNameAndContainer(name, this.graphsContainer);  // FIXME: use a seperate(sub) container in the future
     }, 
     
-    appendDataFromPlanAndRenderToAlignWithJQuery: function(newPlan, newPlanJquery) {
+    appendDataFromPlanAndRenderAlignedWithJQuery: function(newPlan, newPlanJquery) {  // TODO: add prepend, delete methods
         MY_GLOBAL.typeChecker.assertIsObjectWithProto(newPlan, MY_GLOBAL.planProto);
         MY_GLOBAL.typeChecker.assertIsJQueryObject(newPlanJquery);
         
         // TODO: update plan div pair array
+        var newPair = Object.create(this.planDivPairProto);
+        newPair.initWithPlanAndDiv(newPlan, newPlanJquery);
+        this.planDivPairArray.push(newPair);
+        
         this.renderAllRows();
     },
     
@@ -104,8 +109,25 @@ MY_GLOBAL.graphsRenderer = {
             render: function() {
                 var canvas = Snap('#' + this.graphContainer); // FIXME: for testing only. create a canvas property within init in the future
                 var canvasWidth = document.getElementById(this.graphContainer).offsetWidth;
-                var testCircle = canvas.circle(canvasWidth/2, 80, 40);
-                testCircle.attr({fill: "#FFFFFF"});
+                
+                // render line
+                var x1, y1, x2, y2;
+                x1 = MY_GLOBAL.graphsRenderer.planDivPairArray[0].div.position().left;
+                console.log(x1);
+                y1 = Math.random() * 100;
+                for (var i=1; i<MY_GLOBAL.graphsRenderer.planDivPairArray.length; i++) {
+                    x2 = MY_GLOBAL.graphsRenderer.planDivPairArray[i].div.position().left;
+                    y2 = Math.random() * 100;
+                    
+                    var newLine = canvas.line(x1, y1, x2, y2);
+                    newLine.attr({
+                        stroke: "#FFFFFF" ,
+                        strokeWidth: 5
+                    });
+                    
+                    x1 = x2;
+                    y1 = y2;
+                }                
             },
             
             thresholdArray:[],
@@ -114,14 +136,17 @@ MY_GLOBAL.graphsRenderer = {
                 value: 0
             }
         }   
-    }
-};
-
-MY_GLOBAL.dataPointProto = {
-    dataValue: 0, 
-    xPos: 0, 
-    initWithdDataValueAndXPos: function(d, x) {
-        this.dataValue = d;
-        this.xPos = x;
+    }, 
+    
+    planDivPairProto: {
+        plan: null,
+        div: null,
+        initWithPlanAndDiv: function(p, d) {
+            MY_GLOBAL.typeChecker.assertIsObjectWithProto(p, MY_GLOBAL.planProto);
+            MY_GLOBAL.typeChecker.assertIsJQueryObject(d);
+            
+            this.plan = p;
+            this.div = d;
+        }
     }
 };

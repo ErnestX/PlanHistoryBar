@@ -72,7 +72,7 @@ MY_GLOBAL.plansManager = {
         var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeRight);
         var newPlanJQuery = MY_GLOBAL.thumbnailGroupRenderer.renderDivFromPlan(newPlan);
         this.plansBar.append(newPlanJQuery);
-        MY_GLOBAL.graphsRenderer.appendDataFromPlanAndRenderToAlignWithJQuery(newPlan, newPlanJQuery);
+        MY_GLOBAL.graphsRenderer.appendDataFromPlanAndRenderAlignedWithJQuery(newPlan, newPlanJQuery);
         
         console.log("right: " + this.rangeRight.toString());
     }, 
