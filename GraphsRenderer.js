@@ -110,12 +110,13 @@ MY_GLOBAL.graphsRenderer = {
                 var canvas = Snap('#' + this.graphContainer); // FIXME: for testing only. create a canvas property within init in the future
                 var canvasWidth = document.getElementById(this.graphContainer).offsetWidth;
                 
-                // render line
+                // init vars
                 var x1, y1, x2, y2;
                 var divAlignedWith = MY_GLOBAL.graphsRenderer.planDivPairArray[0].div;
                 x1 = divAlignedWith.position().left + divAlignedWith.outerWidth()/2;
                 console.log(x1);
                 y1 = Math.random() * 100 + 10;
+                
                 for (var i=1; i<MY_GLOBAL.graphsRenderer.planDivPairArray.length; i++) {
                     var newPoint = canvas.circle(x1, y1, 5);
                     newPoint.attr({
@@ -134,7 +135,13 @@ MY_GLOBAL.graphsRenderer = {
                     
                     x1 = x2;
                     y1 = y2;
-                }                
+                }     
+                
+                // add the last point
+                var newPoint = canvas.circle(x1, y1, 5);
+                newPoint.attr({
+                    fill: "#FFFFFF"
+                });
             },
             
             thresholdArray:[],
