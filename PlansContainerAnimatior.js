@@ -11,18 +11,26 @@ MY_GLOBAL.plansContainerAnimator = {
         MY_GLOBAL.typeChecker.assertIsBoolean(isToLeft);
         MY_GLOBAL.typeChecker.assertIsFunction(callBackFunction);
         
-        if (isToLeft) {
-            this.container.addClass("leftShiftting");
-            this.container.one('animationend', function() {
-                MY_GLOBAL.plansContainerAnimator.container.removeClass("leftShiftting");
-            });
-        } else {
-            this.container.addClass("rightShiftting");
-            this.container.one('animationend', function() {
-                MY_GLOBAL.plansContainerAnimator.container.removeClass("rightShiftting");
-            });
-        }
+        var realCallBackFunction = function() {
+            console.log
+            MY_GLOBAL.plansContainerAnimator.container.css('left', '0');
+            callBackFunction();
+        };
         
-        this.container.one('animationend', callBackFunction); // NOTE: do not write callBackFunction()!!! 
+        if (isToLeft) {
+//            this.container.addClass("leftShiftting");
+//            this.container.one('animationend', function() {
+//                MY_GLOBAL.plansContainerAnimator.container.removeClass("leftShiftting");
+//            });
+            this.container.velocity({left: "-=83"}, 150, realCallBackFunction);
+        } else {
+//            this.container.addClass("rightShiftting");
+//            this.container.one('animationend', function() {
+//                MY_GLOBAL.plansContainerAnimator.container.removeClass("rightShiftting");
+//            });
+            this.container.velocity({left: "+=83"}, 150, realCallBackFunction);
+        }
+//        this.container.css('left', 0);
+//        this.container.one('animationend', callBackFunction); // NOTE: do not write callBackFunction()!!! 
     }
 }
