@@ -20,15 +20,15 @@
     <script>$(document).ready(function() {
         MY_GLOBAL.activePhotoIndex = 7; // the initial index to select
 
-        MY_GLOBAL.plansRenderer.initWithContainer($("#plansBar"));
-        MY_GLOBAL.thumbnailsRenderer.initWithContainer($("#plansBar"));
+        MY_GLOBAL.plansRenderer.initWithContainer($("#thumbnailsBar"));
+        MY_GLOBAL.thumbnailsRenderer.initWithContainer($("#thumbnailsBar"));
         MY_GLOBAL.graphsRenderer.initWithGraphsContainerInString('#graphsContainer');
     
         MY_GLOBAL.
         previewWindowManager.
         initWithPreviewWindowAndIndex($("#previewWindow"), MY_GLOBAL.activePhotoIndex);
         MY_GLOBAL.plansContainerAnimator.initWithContainer($('#plansContainer'));
-        MY_GLOBAL.plansManager.initWithBarAndRange($("#plansBar"), 0, 14);
+        MY_GLOBAL.plansManager.initWithBarAndRange($("#thumbnailsBar"), 0, 14);
     
         MY_GLOBAL.plansManager.selectIndex(MY_GLOBAL.activePhotoIndex);
         
@@ -64,7 +64,7 @@
         <div id="plansOuterContainer"> <!-- used to mask the plansContainer -->
             <div id="plansContainer">
                 <svg id="graphsContainer"></svg>
-                <div id="plansBar"></div> <!-- the array of plans -->
+                <div id="thumbnailsBar"></div> <!-- the array of plans -->
             </div>
         </div>
         <div id="previewWindow"></div>

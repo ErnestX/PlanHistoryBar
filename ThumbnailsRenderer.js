@@ -7,20 +7,20 @@ MY_GLOBAL.thumbnailsRenderer = {
         this.thumbnailsContainer = c;
     }, 
     
-    syncAllThumbnailsYPosWithArray: function(midYPosArray) {
+    syncAllThumbnailsXPosWithArray: function(midXPosArray) {
         for(var i=0; i<this.thumbnailsContainer.children().length; i++) {
             this.thumbnailsContainer.children().eq(i).
-            css('left', this.midYPosToLeftEdgePos(midYPosArray[i]).toString() + 'px');
+            css('left', this.midXPosToLeftEdgePos(midXPosArray[i]).toString() + 'px');
         }
     }, 
     
-    appendThumbnailFromPlanAtMidYPos: function(p, midYPos) {
+    appendThumbnailFromPlanAtMidXPos: function(p, midXPos) {
         var newPlanJQuery = MY_GLOBAL.thumbnailDivRenderer.renderDivFromPlan(p);
-        newPlanJQuery.css('left', this.midYPosToLeftEdgePos(midYPos));
+        newPlanJQuery.css('left', this.midXPosToLeftEdgePos(midXPos));
         this.thumbnailsContainer.append(newPlanJQuery);
     },
     
-    prependThumbnailFromPlanAtMidYPos: function(p, midYPos) {
+    prependThumbnailFromPlanAtMidXPos: function(p, midXPos) {
         // TODO: stub
     },
     
@@ -32,7 +32,7 @@ MY_GLOBAL.thumbnailsRenderer = {
         this.thumbnailsContainer.children().last().remove();
     },
     
-    midYPosToLeftEdgePos: function(y) {
-        return y - MY_GLOBAL.thumbnailWidth/2;
+    midXPosToLeftEdgePos: function(x) {
+        return x - MY_GLOBAL.thumbnailWidth/2;
     }
 };

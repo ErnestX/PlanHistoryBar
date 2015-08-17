@@ -36,14 +36,14 @@ body{
 
 #plansContainer {
     height: 100%;
-    width: $thumbnailWidth * 20; // allow at most 20 plans been loaded onto the plansBar
+    width: $thumbnailWidth * 20; // allow at most 20 plans been loaded onto the thumbnailsBar
     position: relative;
     display: inline-block;
-    margin-left: -10000px; // hack: used to center the plansBar
+    margin-left: -10000px; // hack: used to center the thumbnailsBar
     margin-right: -10000px;
 }
 
-#plansBar {
+#thumbnailsBar {
     position: relative;
     display: block;
     height: 150px;
