@@ -48,5 +48,5 @@ MY_GLOBAL.previewWindowManager = {
         var image = $('<img>');
         image.addClass("previewWindowImage");
         return image;
-    },
-}
+    }
+};

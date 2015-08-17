@@ -1,4 +1,4 @@
-MY_GLOBAL.thumbnailGroupRenderer = {
+MY_GLOBAL.thumbnailsRenderer = {
     renderDivFromPlan: function(plan) {
         MY_GLOBAL.typeChecker.assertIsPlan(plan);
         
