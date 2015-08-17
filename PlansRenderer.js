@@ -1,6 +1,7 @@
 MY_GLOBAL.plansRenderer = {
     thumbnailWidth: 80, 
     thumbnailPadding: 1.5, 
+    selectedThumbnailPadding: 45, 
     plansContainer: null, 
     midYPosArray:[], 
     
@@ -17,6 +18,16 @@ MY_GLOBAL.plansRenderer = {
 //        // select plan
 //        this.plansContainer.children().eq(index).removeClass("unselected");
 //        this.plansContainer.children().eq(index).addClass("selected");
+        for (var i=0; i<this.midYPosArray.length; i++) {
+            if (i < index) {
+                this.midYPosArray[i] -= this.selectedThumbnailPadding;
+            } else if(i > index) {
+                this.midYPosArray[i] += this.selectedThumbnailPadding;
+            }
+        }
+        
+        this.centerYPosArrayRelativeToContainer();
+        this.syncAllThumbnailsYPosWithArray();
     }, 
     
     appendPlan: function(p) {
@@ -37,7 +48,7 @@ MY_GLOBAL.plansRenderer = {
         newPlanJQuery.css('left', this.midYPosToLeftEdgePos(newYPos));
         this.plansContainer.append(newPlanJQuery);
         
-        this.centerYPosArrayEntriesWithinPlansContainer();
+        this.centerYPosArrayRelativeToContainer();
         this.syncAllThumbnailsYPosWithArray();
         console.log(this.midYPosArray);
     }, 
@@ -56,7 +67,8 @@ MY_GLOBAL.plansRenderer = {
         this.plansContainer.children().last().remove();
     }, 
     
-    centerYPosArrayEntriesWithinPlansContainer: function() {
+    centerYPosArrayRelativeToContainer: function() {
+        // based on formula: mid-(y1+t) + mid-(y2+t) + ... + mid-(yn+t) = 0
         var sum = 0;
         for (var i=0; i<this.midYPosArray.length; i++) {
             sum += this.midYPosArray[i];
