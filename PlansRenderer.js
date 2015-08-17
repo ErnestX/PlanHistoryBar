@@ -1,6 +1,6 @@
 MY_GLOBAL.plansRenderer = {
     thumbnailWidth: 80, 
-    thumbnailPadding: 1.5, 
+    thumbnailPadding: 3, 
     selectedThumbnailPadding: 45, 
     plansContainer: null, 
     midYPosArray:[], 
@@ -12,12 +12,6 @@ MY_GLOBAL.plansRenderer = {
     }, 
     
     highlightPlanOnScreenAtIndex: function(index) {
-//       // unselect all plans on screen
-//        this.plansContainer.children().removeClass("selected");
-//        this.plansContainer.children().addClass("unselected");
-//        // select plan
-//        this.plansContainer.children().eq(index).removeClass("unselected");
-//        this.plansContainer.children().eq(index).addClass("selected");
         for (var i=0; i<this.midYPosArray.length; i++) {
             if (i < index) {
                 this.midYPosArray[i] -= this.selectedThumbnailPadding;
@@ -25,10 +19,24 @@ MY_GLOBAL.plansRenderer = {
                 this.midYPosArray[i] += this.selectedThumbnailPadding;
             }
         }
-        
         this.centerYPosArrayRelativeToContainer();
         this.syncAllThumbnailsYPosWithArray();
     }, 
+    
+    unhighlightAllPlansOnScreen: function() {
+        for (var i=1; i<this.midYPosArray.length; i++) {
+            if (this.midYPosArray[i] - this.midYPosArray[i-1] 
+                > this.thumbnailPadding + this.thumbnailWidth) {
+                // ...[][][] space []...
+                for (var j=0; j < i; j++) { //j from 0 to i-1
+                    this.midYPosArray[j] += (this.midYPosArray[i] - this.midYPosArray[i-1]) 
+                                            - (this.thumbnailWidth + this.thumbnailPadding);
+                }
+            }
+        }
+        this.centerYPosArrayRelativeToContainer();
+        this.syncAllThumbnailsYPosWithArray();
+    },
     
     appendPlan: function(p) {
         MY_GLOBAL.typeChecker.assertIsObjectWithProto(p, MY_GLOBAL.planProto);
@@ -60,10 +68,12 @@ MY_GLOBAL.plansRenderer = {
     }, 
     
     removeHeadPlan: function() {
+        this.midYPosArray.shift();
         this.plansContainer.children().eq(0).remove();
     }, 
     
     removeTailPlan: function() {
+        this.midYPosArray.pop();
         this.plansContainer.children().last().remove();
     }, 
     

@@ -39,8 +39,11 @@ MY_GLOBAL.plansManager = {
 //        // select plan
 //        this.plansBar.children().eq(planIndex - this.rangeLeft).removeClass("unselected");
 //        this.plansBar.children().eq(planIndex - this.rangeLeft).addClass("selected");
+        
+        MY_GLOBAL.plansRenderer.unhighlightAllPlansOnScreen();
         var planIndexInOnScreen =  planIndex - this.rangeLeft;
         MY_GLOBAL.plansRenderer.highlightPlanOnScreenAtIndex(planIndexInOnScreen);
+        
 //        console.log("select #" + planIndex.toString());
     },
     

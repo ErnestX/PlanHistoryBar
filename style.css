@@ -89,7 +89,7 @@ body {
   height: auto;
   position: absolute;
   transition-property: padding, left;
-  transition-duration: 0.15s;
+  transition-duration: 1s;
   transition-timing-function: ease-in-out; }
 
 /* line 104, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
@@ -126,12 +126,12 @@ body {
 /* line 147, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 .leftShiftting {
   animation-name: shiftLeftAnimation;
-  animation-duration: 0.15s; }
+  animation-duration: 1s; }
 
 /* line 152, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 .rightShiftting {
   animation-name: shiftRightAnimation;
-  animation-duration: 0.15s; }
+  animation-duration: 1s; }
 
 /* line 157, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 .hidden {
@@ -140,12 +140,12 @@ body {
 /* line 161, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 .fadingIn {
   animation-name: fadeInAnimation;
-  animation-duration: 0.15s; }
+  animation-duration: 1s; }
 
 /* line 166, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 .fadingOut {
   animation-name: fadeOutAnimation;
-  animation-duration: 0.15s; }
+  animation-duration: 1s; }
 
 @keyframes shiftLeftAnimation {
   0% {
