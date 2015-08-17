@@ -8,6 +8,7 @@
     <script src="Helpers.js"></script>
     
     <script src="PlansManager.js"></script>
+    <script src="PlansRenderer.js"></script>
     <script src="PlansContainerAnimatior.js"></script>
     <script src="Plan.js"></script>
     <script src="DataManager.js"></script>
@@ -18,12 +19,13 @@
     <script>$(document).ready(function() {
         MY_GLOBAL.activePhotoIndex = 7; // the initial index to select
 
-        MY_GLOBAL.plansManager.initWithBarAndRange($("#plansBar"), 0, 14);
+        MY_GLOBAL.plansRenderer.initWithContainer($("#plansBar"));
         MY_GLOBAL.graphsRenderer.initWithGraphsContainerInString('#graphsContainer');
         MY_GLOBAL.
         previewWindowManager.
         initWithPreviewWindowAndIndex($("#previewWindow"), MY_GLOBAL.activePhotoIndex);
         MY_GLOBAL.plansContainerAnimator.initWithContainer($('#plansContainer'));
+        MY_GLOBAL.plansManager.initWithBarAndRange($("#plansBar"), 0, 14);
     
         MY_GLOBAL.plansManager.selectIndex(MY_GLOBAL.activePhotoIndex);
         

@@ -4,7 +4,7 @@ MY_GLOBAL.plansManager = {
     plansBar: null, 
     rangeLeft: 0, 
     rangeRight: 0, 
-    
+
     /*
     init this.plansBar, this.rangeLeft, this.rangeRight and place the plans
     */
@@ -33,14 +33,15 @@ MY_GLOBAL.plansManager = {
     selectIndex: function(planIndex) {
         MY_GLOBAL.typeChecker.assertIsInteger(planIndex, 'planIndex not int');
         
-        // unselect all plans on screen
-        this.plansBar.children().removeClass("selected");
-        this.plansBar.children().addClass("unselected");
-        // select plan
-        this.plansBar.children().eq(planIndex - this.rangeLeft).removeClass("unselected");
-        this.plansBar.children().eq(planIndex - this.rangeLeft).addClass("selected");
-        
-        console.log("select #" + planIndex.toString());
+//        // unselect all plans on screen
+//        this.plansBar.children().removeClass("selected");
+//        this.plansBar.children().addClass("unselected");
+//        // select plan
+//        this.plansBar.children().eq(planIndex - this.rangeLeft).removeClass("unselected");
+//        this.plansBar.children().eq(planIndex - this.rangeLeft).addClass("selected");
+        var planIndexInOnScreen =  planIndex - this.rangeLeft;
+        MY_GLOBAL.plansRenderer.highlightPlanOnScreenAtIndex(planIndexInOnScreen);
+//        console.log("select #" + planIndex.toString());
     },
     
     /*
@@ -62,30 +63,34 @@ MY_GLOBAL.plansManager = {
         this.rangeLeft--;
         var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeLeft);
         
-        this.plansBar.prepend(MY_GLOBAL.thumbnailGroupRenderer.renderDivFromPlan(newPlan));
-        
-        console.log("left: "+ this.rangeLeft.toString());
+//        this.plansBar.prepend(MY_GLOBAL.thumbnailGroupRenderer.renderDivFromPlan(newPlan));
+        MY_GLOBAL.plansRenderer.prependPlan(newPlan);
+//        console.log("left: "+ this.rangeLeft.toString());
     }, 
     
     addNewPlanAtRight: function() {
         this.rangeRight++;
         var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeRight);
         var newPlanJQuery = MY_GLOBAL.thumbnailGroupRenderer.renderDivFromPlan(newPlan);
-        this.plansBar.append(newPlanJQuery);
+//        this.plansBar.append(newPlanJQuery);
         MY_GLOBAL.graphsRenderer.appendDataFromPlanAndRenderAlignedWithJQuery(newPlan, newPlanJQuery);
         
-        console.log("right: " + this.rangeRight.toString());
+        MY_GLOBAL.plansRenderer.appendPlan(newPlan);
+        
+//        console.log("right: " + this.rangeRight.toString());
     }, 
     
     deletePlanAtLeft: function() {
         this.rangeLeft++;
-        this.plansBar.children().eq(0).remove();
-        console.log("left: "+ this.rangeLeft.toString());
+//        this.plansBar.children().eq(0).remove();
+        MY_GLOBAL.plansRenderer.removeHeadPlan();
+//        console.log("left: "+ this.rangeLeft.toString());
     }, 
     
     deletePlanAtRight: function() {
         this.rangeRight--;
-        this.plansBar.children().last().remove();
-        console.log("right: " + this.rangeRight.toString());
+//        this.plansBar.children().last().remove();
+        MY_GLOBAL.plansRenderer.removeTailPlan();
+//        console.log("right: " + this.rangeRight.toString());
     }
 };
