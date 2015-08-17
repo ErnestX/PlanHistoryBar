@@ -30,13 +30,8 @@ MY_GLOBAL.graphsRenderer = {
                 x2To = midXPosArray[i].toString();
             }
             
-//            console.log(this.linesArray[i].attr('path'));
-            var attrArray = this.linesArray[i].attr('path');
-//            console.log(attrArray[0][2].toString());
-            console.log('M' + x1To + ',' + attrArray[0][2].toString() + 'L' + x2To + ',' + attrArray[1][2].toString());
-            $(this.linesArray[i].node).velocity({x1: x1To, x2: x2To}, {queue: false, duration: 1000});
-//            ({path: 'M' + x1To + ' ' + attrArray[0][2].toString() + 'L' + x2To + ' ' + attrArray[1][2].toString()}, {queue: false, duration: 1000});
-//            ({x1: x1To, x2: x2To}, {queue: false, duration: 1000});
+            $(this.linesArray[i].node).velocity({x1: x1To, x2: x2To}, 
+                                                {queue: false, duration: 1000});
         }
     }, 
     
@@ -61,38 +56,36 @@ MY_GLOBAL.graphsRenderer = {
 //            console.log(this.circlesArray[resultIndex].attr('cx'));
 //            console.log(midXPos);
             // FUTURE: uncomment the two logs above, and you see they can get dangerously close. It is unsure why cx would be smaller before adding the new line, perhaps due to the thumbnail being added first and the animation's started. 
-            if (parseInt(this.circlesArray[resultIndex].attr('cx'), 10) < midXPos) {
-                newLine = this.
-                graphsContainerRaphael.path('M' + parseInt(this.circlesArray[resultIndex].attr('cx'), 10).toString() 
-                                            + ',' + parseInt(this.circlesArray[resultIndex].attr('cy'), 10).toString()
-                                            + 'L' +  midXPos.toString() + ',' + fakeValue.toString());
+//            if (parseInt(this.circlesArray[resultIndex].attr('cx'), 10) < midXPos) {
+//                newLine = this.
+//                graphsContainerRaphael.
 //                line(this.circlesArray[resultIndex].attr('cx'), 
 //                     this.circlesArray[resultIndex].attr('cy'), 
 //                     midXPos, 
 //                     fakeValue);
-            } else {
-                newLine = this.
-                graphsContainerRaphael.path('M' + midXPos.toString() + ',' + fakeValue.toString() 
-                                            + 'L' + parseInt(this.circlesArray[resultIndex].attr('cx'), 10).toString() 
-                                            + ',' + parseInt(this.circlesArray[resultIndex].attr('cy'), 10).toString());
+////                console.log('true');
+//                
+//            } else {
+//                newLine = this.
+//                graphsContainerRaphael.
 //                line(midXPos,
 //                     fakeValue, 
 //                     this.circlesArray[resultIndex].attr('cx'), 
 //                     this.circlesArray[resultIndex].attr('cy'));
-            }
-
-            newLine.attr({
-                'stroke': '#FFFFFF',
-                'stroke-width': 5
-            });
-            this.linesArray.push(newLine);
+////                console.log('false');
+//            }
+//
+//            newLine.attr({
+//                stroke: '#FFFFFF',
+//                strokeWidth: 5
+//            });
+//            this.linesArray.push(newLine);
         }
         
         // add point
         var newPoint = this.graphsContainerRaphael.circle(midXPos, fakeValue, 10);
         newPoint.attr({
-            'fill':'#FFFFFF',
-            'stroke-width': 0
+            fill:'#FFFFFF',
         });
         this.circlesArray.push(newPoint);
 //        console.log('added point');
