@@ -13,14 +13,24 @@ MY_GLOBAL.graphsRenderer = {
     },
     
     syncAllDataPointsXPosWithArray: function(midXPosArray) {
+        // points
         for(var i=0; i<this.circlesArray.length; i++) {
             $(this.circlesArray[i].node).velocity({cx: midXPosArray[i].toString()}, 
                                                   {queue: false, duration: 1000});
         }
         
+        // lines
         for(var i=0; i<this.linesArray.length; i++) {
-            $(this.linesArray[i].node).velocity({x1: midXPosArray[i].toString(), 
-                                                 x2: midXPosArray[i+1].toString()}, 
+            var x1To, x2To;
+            if (midXPosArray[i] < midXPosArray[i+1]) {
+                x1To = midXPosArray[i].toString();
+                x2To = midXPosArray[i+1].toString();
+            } else {
+                x1To = midXPosArray[i+1].toString();
+                x2To = midXPosArray[i].toString();
+            }
+            
+            $(this.linesArray[i].node).velocity({x1: x1To, x2: x2To}, 
                                                 {queue: false, duration: 1000});
         }
     }, 
@@ -29,12 +39,12 @@ MY_GLOBAL.graphsRenderer = {
         var fakeValue = Math.random() * 100 + 30;
         
         // add line
-        if (this.circlesArray.length > 1) {
+        if (this.circlesArray.length > 0) {
             // Step1: find the closed circle's xPos to the new data point
             var closestDist = Infinity;
             var resultIndex = -1;
             for (var i=0; i<this.circlesArray.length; i++) {
-                var temp = Math.abs(this.circlesArray[i].attr('cx') - midXPos);
+                var temp = Math.abs(parseInt(this.circlesArray[i].attr('cx'), 10) - midXPos);
                 if (temp < closestDist) {
                     closestDist = temp;
                     resultIndex = i; 
@@ -43,13 +53,17 @@ MY_GLOBAL.graphsRenderer = {
             
             // Step2: draw line
             var newLine;
-            if (this.circlesArray[resultIndex].attr('cx') < midXPos) {
+//            console.log(this.circlesArray[resultIndex].attr('cx'));
+//            console.log(midXPos);
+            // FUTURE: uncomment the two logs above, and you see they can get dangerous close. It is unsure why cx would be smaller before adding the new line, perhaps due to the thumbnail being added first and the animation's started. 
+            if (parseInt(this.circlesArray[resultIndex].attr('cx'), 10) < midXPos) {
                 newLine = this.
                 graphsContainerSnap.
                 line(this.circlesArray[resultIndex].attr('cx'), 
                      this.circlesArray[resultIndex].attr('cy'), 
                      midXPos, 
                      fakeValue);
+//                console.log('true');
                 
             } else {
                 newLine = this.
@@ -58,15 +72,14 @@ MY_GLOBAL.graphsRenderer = {
                      fakeValue, 
                      this.circlesArray[resultIndex].attr('cx'), 
                      this.circlesArray[resultIndex].attr('cy'));
-                console.log('true');
+//                console.log('false');
             }
-//            console.log(this.circlesArray[resultIndex].attr('cy'));
+
             newLine.attr({
                 stroke: '#FFFFFF',
                 strokeWidth: 5
             });
             this.linesArray.push(newLine);
-            console.log("drawn line");
         }
         
         // add point
@@ -75,7 +88,7 @@ MY_GLOBAL.graphsRenderer = {
             fill:'#FFFFFF',
         });
         this.circlesArray.push(newPoint);
-        console.log('drawn point');
+//        console.log('added point');
     }, 
     
     prependDataPointFromPlanAtMidXPos: function(p, midXPos) {
@@ -85,10 +98,16 @@ MY_GLOBAL.graphsRenderer = {
     removeHeadDataPoint: function() {
         this.circlesArray[0].remove();
         this.circlesArray.shift();
+        
+        this.linesArray[0].remove();
+        this.linesArray.shift();
     }, 
     
     removeTailDataPoint: function() {
         this.circlesArray[this.circlesArray.length - 1].remove();
         this.circlesArray.pop();
+        
+        this.linesArray[this.linesArray.length - 1].remove();
+        this.linesArray.pop();
     }
 };
