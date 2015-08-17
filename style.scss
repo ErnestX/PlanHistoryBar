@@ -96,9 +96,9 @@ body{
     width: $thumbnailWidth;
     height: auto;
     position: absolute;//relative; 
-    transition-property: padding;
-    transition-duration: $animationDuration;
-    transition-timing-function: ease-in-out;
+//    transition-property: padding;
+//    transition-duration: $animationDuration;
+//    transition-timing-function: ease-in-out;
 }
 
 .selected {
