@@ -9,18 +9,21 @@
     
     <script src="PlansManager.js"></script>
     <script src="PlansRenderer.js"></script>
+    <script src="ThumbnailsRenderer.js"></script>
     <script src="PlansContainerAnimatior.js"></script>
     <script src="Plan.js"></script>
     <script src="DataManager.js"></script>
     <script src="PreviewWindowManager.js"></script>
-    <script src="ThumbnailsRenderer.js"></script>
+    <script src="ThumbnailDivRenderer.js"></script>
     <script src="GraphsRenderer.js"></script>
     
     <script>$(document).ready(function() {
         MY_GLOBAL.activePhotoIndex = 7; // the initial index to select
 
         MY_GLOBAL.plansRenderer.initWithContainer($("#plansBar"));
+        MY_GLOBAL.thumbnailsRenderer.initWithContainer($("#plansBar"));
         MY_GLOBAL.graphsRenderer.initWithGraphsContainerInString('#graphsContainer');
+    
         MY_GLOBAL.
         previewWindowManager.
         initWithPreviewWindowAndIndex($("#previewWindow"), MY_GLOBAL.activePhotoIndex);
@@ -67,7 +70,7 @@
         <div id="previewWindow"></div>
     
         <p>
-            <button id="left">left</button>
+<!--            <button id="left">left</button>-->
             <button id="right">right</button>
             <button id="addIndicator">add indicator</button>
         </p>

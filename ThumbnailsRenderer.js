@@ -1,37 +1,38 @@
 MY_GLOBAL.thumbnailsRenderer = {
-    renderDivFromPlan: function(plan) {
-        MY_GLOBAL.typeChecker.assertIsPlan(plan);
+    thumbnailsContainer: null, 
+    
+    initWithContainer: function(c) {
+        MY_GLOBAL.typeChecker.assertIsJQueryObject(c);
         
-        var div = $('<div>');
-        div.addClass('planDiv');
-        div.addClass('unselected');
-        
-        var thumbanilSaveNameContainer = $('<div>');
-        thumbanilSaveNameContainer.addClass('thumbanilSaveNameContainer');
-        div.append(thumbanilSaveNameContainer);
-        
-        // render thumbnail img
-        var thumbnail = $('<img>');
-        thumbnail.attr('src', plan.thumbnailSrc);
-        thumbnail.addClass("thumbnail");
-        thumbanilSaveNameContainer.append(thumbnail);
-        
-        // render name
-        var nameLabel = $('<p>');
-        nameLabel.text(plan.saveName);
-        nameLabel.addClass('saveName');
-        thumbanilSaveNameContainer.append(nameLabel);
-        
-        // render timestamp
-        var timeStampLabel = $('<p>');
-        timeStampLabel.text(plan.timeStamp.getHours() + ':' + plan.timeStamp.getMinutes());
-        timeStampLabel.addClass('timeStamp');
-        div.append(timeStampLabel);
-        
-        return div;
+        this.thumbnailsContainer = c;
+    }, 
+    
+    syncAllThumbnailsYPosWithArray: function(midYPosArray) {
+        for(var i=0; i<this.thumbnailsContainer.children().length; i++) {
+            this.thumbnailsContainer.children().eq(i).
+            css('left', this.midYPosToLeftEdgePos(midYPosArray[i]).toString() + 'px');
+        }
+    }, 
+    
+    appendThumbnailFromPlanAtMidYPos: function(p, midYPos) {
+        var newPlanJQuery = MY_GLOBAL.thumbnailDivRenderer.renderDivFromPlan(p);
+        newPlanJQuery.css('left', this.midYPosToLeftEdgePos(midYPos));
+        this.thumbnailsContainer.append(newPlanJQuery);
+    },
+    
+    prependThumbnailFromPlanAtMidYPos: function(p, midYPos) {
+        // TODO: stub
+    },
+    
+    removeHeadThumbnail: function() {
+        this.thumbnailsContainer.children().eq(0).remove();
+    },
+    
+    removeTailThumbnail: function() {
+        this.thumbnailsContainer.children().last().remove();
+    },
+    
+    midYPosToLeftEdgePos: function(y) {
+        return y - MY_GLOBAL.thumbnailWidth/2;
     }
-//    calcIndicatorValueFromPlan: function(indicatorName, plan) {
-//        // TODO: call line renderer with coords or append coord onto an array
-//        return Object.create(MY_GLOBAL.dataPointProto);
-//    }
-}
+};

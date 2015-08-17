@@ -66,7 +66,7 @@ MY_GLOBAL.plansManager = {
         this.rangeLeft--;
         var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeLeft);
         
-//        this.plansBar.prepend(MY_GLOBAL.thumbnailsRenderer.renderDivFromPlan(newPlan));
+//        this.plansBar.prepend(MY_GLOBAL.thumbnailDivRenderer.renderDivFromPlan(newPlan));
         MY_GLOBAL.plansRenderer.prependPlan(newPlan);
 //        console.log("left: "+ this.rangeLeft.toString());
     }, 
@@ -74,7 +74,7 @@ MY_GLOBAL.plansManager = {
     addNewPlanAtRight: function() {
         this.rangeRight++;
         var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeRight);
-        var newPlanJQuery = MY_GLOBAL.thumbnailsRenderer.renderDivFromPlan(newPlan);
+        var newPlanJQuery = MY_GLOBAL.thumbnailDivRenderer.renderDivFromPlan(newPlan);
 //        this.plansBar.append(newPlanJQuery);
         MY_GLOBAL.graphsRenderer.appendDataFromPlanAndRenderAlignedWithJQuery(newPlan, newPlanJQuery);
         
