@@ -16,7 +16,7 @@ MY_GLOBAL.graphsRenderer = {
         // points
         for(var i=0; i<this.circlesArray.length; i++) {
             $(this.circlesArray[i].node).velocity({cx: midXPosArray[i].toString()}, 
-                                                  {queue: false, duration: 1000});
+                                                  {queue: false, duration: 250});
         }
         
         // lines
@@ -31,7 +31,7 @@ MY_GLOBAL.graphsRenderer = {
             }
             
             $(this.linesArray[i].node).velocity({x1: x1To, x2: x2To}, 
-                                                {queue: false, duration: 1000});
+                                                {queue: false, duration: 250});
         }
     }, 
     
@@ -96,18 +96,26 @@ MY_GLOBAL.graphsRenderer = {
     },
     
     removeHeadDataPoint: function() {
-        this.circlesArray[0].remove();
-        this.circlesArray.shift();
+        if (typeof(this.circlesArray[0]) !== 'undefined') {
+            this.circlesArray[0].remove();
+            this.circlesArray.shift();
+        }
         
-        this.linesArray[0].remove();
-        this.linesArray.shift();
+        if (typeof(this.linesArray[0]) !== 'undefined') {
+            this.linesArray[0].remove();
+            this.linesArray.shift();
+        }
     }, 
     
     removeTailDataPoint: function() {
-        this.circlesArray[this.circlesArray.length - 1].remove();
-        this.circlesArray.pop();
+        if (typeof(this.circlesArray[this.circlesArray.length - 1]) !== 'undefined') {
+            this.circlesArray[this.circlesArray.length - 1].remove();
+            this.circlesArray.pop();
+        }
         
-        this.linesArray[this.linesArray.length - 1].remove();
-        this.linesArray.pop();
+        if (typeof(this.linesArray[this.linesArray.length - 1]) !== 'undefined') {
+            this.linesArray[this.linesArray.length - 1].remove();
+            this.linesArray.pop();
+        }
     }
 };

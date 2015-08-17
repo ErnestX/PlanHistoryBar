@@ -26,22 +26,25 @@ MY_GLOBAL.previewWindowManager = {
         
         var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(i);
         
-        // Step1: update front img src and fadein
-        this.frontImage.addClass('hidden');
-        this.frontImage.attr('src', newPlan.previewWindowSrc);
-        this.frontImage.removeClass('hidden');
-        this.frontImage.addClass('fadingIn');
+        if((newPlan !== null) && (typeof(newPlan) !== 'undefined')) {
         
-        // Step2: once finished fading in, remove css animation and update the back image
-        this.frontImage.one('animationend', function() {
-            MY_GLOBAL.
-            previewWindowManager.
-            frontImage.removeClass('fadingIn');
-            
-            MY_GLOBAL.
-            previewWindowManager.
-            backImage.attr('src', newPlan.previewWindowSrc);
-        });
+            // Step1: update front img src and fadein
+            this.frontImage.addClass('hidden');
+            this.frontImage.attr('src', newPlan.previewWindowSrc);
+            this.frontImage.removeClass('hidden');
+            this.frontImage.addClass('fadingIn');
+
+            // Step2: once finished fading in, remove css animation and update the back image
+            this.frontImage.one('animationend', function() {
+                MY_GLOBAL.
+                previewWindowManager.
+                frontImage.removeClass('fadingIn');
+
+                MY_GLOBAL.
+                previewWindowManager.
+                backImage.attr('src', newPlan.previewWindowSrc);
+            });
+        }
     }, 
     
     createPlaceHolderImage: function() {

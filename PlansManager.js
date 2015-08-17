@@ -39,31 +39,38 @@ MY_GLOBAL.plansManager = {
     moves the thumbnailsBar with animation. Adds and deletes plans so that the number of plans on screen stays the same
     */
     moveBarLeftByOnePlan: function() {
-        this.deletePlanAtLeft();
-        this.addNewPlanAtRight();
+        if (this.addNewPlanAtRight()) {
+            this.deletePlanAtLeft();
+        }
     },
     /*
     moves the thumbnailsBar with animation. Adds and deletes plans so that the number of plans on screen stays the same
     */
     moveBarRightByOnePlan: function() {
-        this.deletePlanAtRight();
-        this.addNewPlanAtLeft();
+        if (this.addNewPlanAtLeft()) {
+            this.deletePlanAtRight();
+        }
     }, 
     
+    /* return true if success */
     addNewPlanAtLeft: function() {
         this.rangeLeft--;
         var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeLeft);
-        
-        MY_GLOBAL.plansRenderer.prependPlan(newPlan);
+        if ((newPlan !== null) && (typeof(newPlan) !== 'undefined')) {
+            MY_GLOBAL.plansRenderer.prependPlan(newPlan);
+            return true;
+        }
+        return false;
     }, 
-    
+    /* return true if success */
     addNewPlanAtRight: function() {
         this.rangeRight++;
         var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeRight);
-//        var newPlanJQuery = MY_GLOBAL.thumbnailDivRenderer.renderDivFromPlan(newPlan);
-//        MY_GLOBAL.graphsRenderer.appendDataFromPlanAndRenderAlignedWithJQuery(newPlan, newPlanJQuery);
-        
-        MY_GLOBAL.plansRenderer.appendPlan(newPlan);
+        if((newPlan !== null) && (typeof(newPlan) !== 'undefined')) {
+            MY_GLOBAL.plansRenderer.appendPlan(newPlan);   
+            return true;
+        }
+        return false;
     }, 
     
     deletePlanAtLeft: function() {

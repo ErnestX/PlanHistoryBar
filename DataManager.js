@@ -1,20 +1,24 @@
 "use strict";
 
 MY_GLOBAL.dataManager = {
+    plansStore:[], 
+    addPlanInitedWithParas: function(name, src, timeStamp) {
+        MY_GLOBAL.typeChecker.assertIsString(name);
+        MY_GLOBAL.typeChecker.assertIsString(src);
+        MY_GLOBAL.typeChecker.assertIsString(timeStamp);
+        var newDate = new Date(timeStamp);
+        
+        var newPlan = Object.create(MY_GLOBAL.planProto);
+        newPlan.initWithFields(newDate, name, src, src);
+        
+        this.plansStore.push(newPlan);
+    },
+    
     /*
     returns fully initialized plan
     */
     getPlanAtIndex: function(index) {
         MY_GLOBAL.typeChecker.assertIsInteger(index);
-        
-        var newPlan = Object.create(MY_GLOBAL.planProto); //create empty plan for debugging
-        var date = new Date(); // get current time and date for debugging
-        
-        if (index % 2 === 0) {
-            newPlan.initWithFields(date, "MyLonnnngName", "google-maps.jpg", "google-maps.jpg");
-        } else {
-            newPlan.initWithFields(date, "MyName", "google-maps-doodled.jpg", "google-maps-doodled.jpg");
-        }
-        return newPlan;
+        return this.plansStore[index];
     }
 };

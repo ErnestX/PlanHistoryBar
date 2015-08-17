@@ -9,7 +9,7 @@ MY_GLOBAL.thumbnailsRenderer = {
     
     syncAllThumbnailsXPosWithArray: function(midXPosArray) {
         for(var i=0; i<this.thumbnailsContainer.children().length; i++) {
-            this.thumbnailsContainer.children().eq(i).velocity({left: this.midXPosToLeftEdgePos(midXPosArray[i]).toString()}, {queue: false, duration: 1000});
+            this.thumbnailsContainer.children().eq(i).velocity({left: this.midXPosToLeftEdgePos(midXPosArray[i]).toString()}, {queue: false, duration: 250});
         }
     }, 
     
