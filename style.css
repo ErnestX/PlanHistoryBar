@@ -41,7 +41,7 @@ body {
 #thumbnailsBar {
   position: relative;
   display: block;
-  height: 150px; }
+  height: 100px; }
 
 /* line 53, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 .thumbnail {
@@ -88,7 +88,7 @@ body {
   width: 80px;
   height: auto;
   position: absolute;
-  transition-property: padding, left;
+  transition-property: padding;
   transition-duration: 1s;
   transition-timing-function: ease-in-out; }
 

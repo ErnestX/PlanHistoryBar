@@ -70,11 +70,13 @@ MY_GLOBAL.plansRenderer = {
     removeHeadPlan: function() {
         this.midXPosArray.shift();
         MY_GLOBAL.thumbnailsRenderer.removeHeadThumbnail();
+        MY_GLOBAL.graphsRenderer.removeHeadDataPoint();
     }, 
     
     removeTailPlan: function() {
         this.midXPosArray.pop();
         MY_GLOBAL.thumbnailsRenderer.removeTailThumbnail();
+        MY_GLOBAL.graphsRenderer.removeTailDataPoint();
     }, 
     
     centerXPosArrayRelativeToContainer: function() {
