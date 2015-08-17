@@ -1,5 +1,5 @@
 MY_GLOBAL.graphsRenderer = {
-    graphsContainerRaphael:null,
+    graphsContainerSnap:null,
     circlesArray:[],
     linesArray:[],
     
@@ -9,7 +9,7 @@ MY_GLOBAL.graphsRenderer = {
         if (container.charAt(0) === '#') {
             container = container.slice(1); // remove '#'
         }
-        this.graphsContainerRaphael = Raphael(container); // Snap('#' + container)
+        this.graphsContainerSnap = Snap('#' + container);
     },
     
     syncAllDataPointsXPosWithArray: function(midXPosArray) {
@@ -55,35 +55,35 @@ MY_GLOBAL.graphsRenderer = {
             var newLine;
 //            console.log(this.circlesArray[resultIndex].attr('cx'));
 //            console.log(midXPos);
-            // FUTURE: uncomment the two logs above, and you see they can get dangerously close. It is unsure why cx would be smaller before adding the new line, perhaps due to the thumbnail being added first and the animation's started. 
-//            if (parseInt(this.circlesArray[resultIndex].attr('cx'), 10) < midXPos) {
-//                newLine = this.
-//                graphsContainerRaphael.
-//                line(this.circlesArray[resultIndex].attr('cx'), 
-//                     this.circlesArray[resultIndex].attr('cy'), 
-//                     midXPos, 
-//                     fakeValue);
-////                console.log('true');
-//                
-//            } else {
-//                newLine = this.
-//                graphsContainerRaphael.
-//                line(midXPos,
-//                     fakeValue, 
-//                     this.circlesArray[resultIndex].attr('cx'), 
-//                     this.circlesArray[resultIndex].attr('cy'));
-////                console.log('false');
-//            }
-//
-//            newLine.attr({
-//                stroke: '#FFFFFF',
-//                strokeWidth: 5
-//            });
-//            this.linesArray.push(newLine);
+            // FUTURE: uncomment the two logs above, and you see they can get dangerous close. It is unsure why cx would be smaller before adding the new line, perhaps due to the thumbnail being added first and the animation's started. 
+            if (parseInt(this.circlesArray[resultIndex].attr('cx'), 10) < midXPos) {
+                newLine = this.
+                graphsContainerSnap.
+                line(this.circlesArray[resultIndex].attr('cx'), 
+                     this.circlesArray[resultIndex].attr('cy'), 
+                     midXPos, 
+                     fakeValue);
+//                console.log('true');
+                
+            } else {
+                newLine = this.
+                graphsContainerSnap.
+                line(midXPos,
+                     fakeValue, 
+                     this.circlesArray[resultIndex].attr('cx'), 
+                     this.circlesArray[resultIndex].attr('cy'));
+//                console.log('false');
+            }
+
+            newLine.attr({
+                stroke: '#FFFFFF',
+                strokeWidth: 5
+            });
+            this.linesArray.push(newLine);
         }
         
         // add point
-        var newPoint = this.graphsContainerRaphael.circle(midXPos, fakeValue, 10);
+        var newPoint = this.graphsContainerSnap.circle(midXPos, fakeValue, 10);
         newPoint.attr({
             fill:'#FFFFFF',
         });
