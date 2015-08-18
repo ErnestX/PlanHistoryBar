@@ -1,5 +1,6 @@
 MY_GLOBAL.graphsRenderer = {
     graphsContainerSnap:null,
+    // NOTE: invariable: circlesArray and linesArray are in order
     circlesArray:[],
     linesArray:[],
     
@@ -48,38 +49,19 @@ MY_GLOBAL.graphsRenderer = {
         
         // add line
         if (this.circlesArray.length > 0) {
-            // Step1: find the closed circle's xPos to the new data point
-            var closestDist = Infinity;
-            var resultIndex = -1;
-            for (var i=0; i<this.circlesArray.length; i++) {
-                var temp = Math.abs(parseInt(this.circlesArray[i].attr('cx'), 10) - midXPos);
-                if (temp < closestDist) {
-                    closestDist = temp;
-                    resultIndex = i; 
-                }
-            }
-            
-            // Step2: draw line
             var newLine;
-//            console.log(this.circlesArray[resultIndex].attr('cx'));
-//            console.log(midXPos);
-            // FUTURE: uncomment the two logs above, and you see they can get dangerous close. It is unsure why cx would be smaller before adding the new line, perhaps due to the thumbnail being added first and the animation's started. 
-            if (parseInt(this.circlesArray[resultIndex].attr('cx'), 10) < midXPos) {
-                newLine = this.
-                graphsContainerSnap.
-                line(this.circlesArray[resultIndex].attr('cx'), 
-                     this.circlesArray[resultIndex].attr('cy'), 
-                     midXPos, fakeValue);
-//                console.log('true');
+            var fromIndex;
+            if (appendOrNot) {
+                fromIndex = this.circlesArray.length - 1;
+                newLine = this.graphsContainerSnap.line(this.circlesArray[fromIndex].attr('cx'), 
+                                                        this.circlesArray[fromIndex].attr('cy'), 
+                                                        midXPos, fakeValue);
             } else {
-                newLine = this.
-                graphsContainerSnap.
-                line(midXPos,fakeValue, 
-                     this.circlesArray[resultIndex].attr('cx'), 
-                     this.circlesArray[resultIndex].attr('cy'));
-//                console.log('false');
+                fromIndex = 0;
+                newLine = this.graphsContainerSnap.line(midXPos,fakeValue, 
+                                                        this.circlesArray[fromIndex].attr('cx'), 
+                                                        this.circlesArray[fromIndex].attr('cy'));
             }
-
             newLine.attr({
                 stroke: '#FFFFFF',
                 strokeWidth: 5
@@ -101,7 +83,6 @@ MY_GLOBAL.graphsRenderer = {
         } else {
             this.circlesArray.unshift(newPoint);
         }
-//        console.log('added point');
     },
     
     removeHeadDataPoint: function() {
