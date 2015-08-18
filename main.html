@@ -37,15 +37,12 @@
         MY_GLOBAL.
         previewWindowManager.
         initWithPreviewWindowAndIndex($("#previewWindow"), MY_GLOBAL.activePhotoIndex);
-        MY_GLOBAL.plansContainerAnimator.initWithContainer($('#plansContainer'));
         MY_GLOBAL.plansManager.initWithSize(5);
     
         MY_GLOBAL.plansManager.selectIndex(MY_GLOBAL.activePhotoIndex);
         
         $("#left").click(function() {
-            MY_GLOBAL.plansContainerAnimator.animateShifting(false, function() {
-                MY_GLOBAL.plansManager.moveBarRightByOnePlan();    
-            });
+            MY_GLOBAL.plansManager.moveBarRightByOnePlan();    
             if (MY_GLOBAL.plansManager.selectIndex(MY_GLOBAL.activePhotoIndex - 1)) {
                 MY_GLOBAL.activePhotoIndex--;
             }
@@ -53,9 +50,7 @@
         });
         
         $("#right").click(function() {
-            MY_GLOBAL.plansContainerAnimator.animateShifting(true, function() {
-                MY_GLOBAL.plansManager.moveBarLeftByOnePlan(); 
-            });
+            MY_GLOBAL.plansManager.moveBarLeftByOnePlan(); 
             if (MY_GLOBAL.plansManager.selectIndex(MY_GLOBAL.activePhotoIndex + 1)) {
                 MY_GLOBAL.activePhotoIndex++;
             }
