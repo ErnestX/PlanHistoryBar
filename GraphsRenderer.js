@@ -36,6 +36,14 @@ MY_GLOBAL.graphsRenderer = {
     }, 
     
     appendDataPointFromPlanAtMidXPos: function(p, midXPos) {
+        this.addDataPoint(p, midXPos, true);
+    }, 
+    
+    prependDataPointFromPlanAtMidXPos: function(p, midXPos) {
+        this.addDataPoint(p, midXPos, false);
+    },
+    
+    addDataPoint: function(p, midXPos, appendOrNot) {
         var fakeValue = Math.random() * 100 + 30;
         
         // add line
@@ -61,15 +69,12 @@ MY_GLOBAL.graphsRenderer = {
                 graphsContainerSnap.
                 line(this.circlesArray[resultIndex].attr('cx'), 
                      this.circlesArray[resultIndex].attr('cy'), 
-                     midXPos, 
-                     fakeValue);
+                     midXPos, fakeValue);
 //                console.log('true');
-                
             } else {
                 newLine = this.
                 graphsContainerSnap.
-                line(midXPos,
-                     fakeValue, 
+                line(midXPos,fakeValue, 
                      this.circlesArray[resultIndex].attr('cx'), 
                      this.circlesArray[resultIndex].attr('cy'));
 //                console.log('false');
@@ -79,7 +84,11 @@ MY_GLOBAL.graphsRenderer = {
                 stroke: '#FFFFFF',
                 strokeWidth: 5
             });
-            this.linesArray.push(newLine);
+            if (appendOrNot) {
+                this.linesArray.push(newLine);
+            } else {
+                this.linesArray.unshift(newLine);
+            }
         }
         
         // add point
@@ -87,13 +96,12 @@ MY_GLOBAL.graphsRenderer = {
         newPoint.attr({
             fill:'#FFFFFF',
         });
-        this.circlesArray.push(newPoint);
+        if (appendOrNot) {
+            this.circlesArray.push(newPoint);
+        } else {
+            this.circlesArray.unshift(newPoint);
+        }
 //        console.log('added point');
-    }, 
-    
-    prependDataPointFromPlanAtMidXPos: function(p, midXPos) {
-        // TODO: stub
-        this.appendDataPointFromPlanAtMidXPos(p, midXPos);
     },
     
     removeHeadDataPoint: function() {
@@ -109,6 +117,7 @@ MY_GLOBAL.graphsRenderer = {
     }, 
     
     removeTailDataPoint: function() {
+        console.log('removeing');
         if (typeof(this.circlesArray[this.circlesArray.length - 1]) !== 'undefined') {
             this.circlesArray[this.circlesArray.length - 1].remove();
             this.circlesArray.pop();

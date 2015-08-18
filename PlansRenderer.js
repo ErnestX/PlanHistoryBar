@@ -58,11 +58,9 @@ MY_GLOBAL.plansRenderer = {
         this.centerXPosArrayRelativeToContainer();
         MY_GLOBAL.thumbnailsRenderer.syncAllThumbnailsXPosWithArray(this.midXPosArray);
         MY_GLOBAL.graphsRenderer.syncAllDataPointsXPosWithArray(this.midXPosArray);
-//        console.log(this.midXPosArray);
     }, 
     
     prependPlan: function(p) {
-        // TODO: REFACTOR
         MY_GLOBAL.typeChecker.assertIsObjectWithProto(p, MY_GLOBAL.planProto);
         
         var newXPos;
@@ -70,15 +68,15 @@ MY_GLOBAL.plansRenderer = {
             // the first plan. Put at the center
             newXPos = this.plansContainer.width()/2;
         } else {
-            // follow the first entry
+            // before the first entry
             newXPos = this.midXPosArray[0] 
                 - MY_GLOBAL.thumbnailWidth 
                 - MY_GLOBAL.thumbnailPadding;
         }
-        this.midXPosArray.push(newXPos);
+        this.midXPosArray.unshift(newXPos);
     
-        MY_GLOBAL.thumbnailsRenderer.appendThumbnailFromPlanAtMidXPos(p, newXPos);
-        MY_GLOBAL.graphsRenderer.appendDataPointFromPlanAtMidXPos(p, newXPos);
+        MY_GLOBAL.thumbnailsRenderer.prependThumbnailFromPlanAtMidXPos(p, newXPos);
+        MY_GLOBAL.graphsRenderer.prependDataPointFromPlanAtMidXPos(p, newXPos);
         
         this.centerXPosArrayRelativeToContainer();
         MY_GLOBAL.thumbnailsRenderer.syncAllThumbnailsXPosWithArray(this.midXPosArray);

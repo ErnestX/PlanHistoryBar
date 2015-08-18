@@ -1,7 +1,6 @@
 "use strict";
 
 MY_GLOBAL.plansManager = {
-//    thumbnailsBar: null, 
     size: 0,
     rangeLeft: 0, 
     rangeRight: -1, 
@@ -11,15 +10,10 @@ MY_GLOBAL.plansManager = {
     */
     initWithSize: function(s) {
         MY_GLOBAL.typeChecker.assertIsInteger(s);
-        
-        
-//        this.thumbnailsBar = b;
         this.size = s;
-        
-//        for (var i=this.rangeLeft; i < s; i++) { // don't forget the =
+
         for (var i=0; i < s; i++) { // try get full size
             this.tryAddNewPlanAtRight();
-            console.log('trying');
         }
     }, 
     
@@ -43,43 +37,38 @@ MY_GLOBAL.plansManager = {
     moves the thumbnailsBar with animation. Adds and deletes plans so that the number of plans on screen stays the same
     */
     moveBarLeftByOnePlan: function() {
-//        if (this.tryAddNewPlanAtRight()) {
         this.tryAddNewPlanAtRight();
         this.tryDeletePlanAtLeft();
-//        }
+        console.log('l:' + this.rangeLeft.toString() + ',' + 'r:' + this.rangeRight.toString());
     },
     /*
     moves the thumbnailsBar with animation. Adds and deletes plans so that the number of plans on screen stays the same
     */
     moveBarRightByOnePlan: function() {
-//        if (this.tryAddNewPlanAtLeft()) {
         this.tryAddNewPlanAtLeft();
         this.tryDeletePlanAtRight();
-//        }
+//        console.log('moving right');
+        console.log('l:' + this.rangeLeft.toString() + ',' + 'r:' + this.rangeRight.toString());
     }, 
     
-//    /* return true if success */
     tryAddNewPlanAtLeft: function() {
         if (this.rangeLeft > 0) {
             var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeLeft - 1);
             if ((newPlan !== null) && (typeof(newPlan) !== 'undefined')) {
                 MY_GLOBAL.plansRenderer.prependPlan(newPlan);
                 this.rangeLeft--;
-    //            return true;
+//                console.log('added' + (this.rangeLeft-1).toString());
             }
-    //        return false;
         }
     }, 
-//    /* return true if success */
+    
     tryAddNewPlanAtRight: function() {
         var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeRight + 1);
         if((newPlan !== null) && (typeof(newPlan) !== 'undefined')) {
             MY_GLOBAL.plansRenderer.appendPlan(newPlan);   
             this.rangeRight++;
-            console.log('added');
-//            return true;
+//            console.log('added' + (this.rangeRight+1).toString());
         }
-//        return false;
     }, 
     
     tryDeletePlanAtLeft: function() {
@@ -87,6 +76,7 @@ MY_GLOBAL.plansManager = {
         if (this.rangeRight - this.rangeLeft >= this.size - 1) {
             this.rangeLeft++;
             MY_GLOBAL.plansRenderer.removeHeadPlan();
+//            console.log('removed' + (this.rangeLeft - 1).toString());
         }
     }, 
     
@@ -95,31 +85,7 @@ MY_GLOBAL.plansManager = {
         if (this.rangeRight - this.rangeLeft >= this.size - 1) {
             this.rangeRight--;
             MY_GLOBAL.plansRenderer.removeTailPlan();
+//            console.log('removed' + (this.rangeRight + 1).toString());
         }
     }
-    
-    
-    
-    
-    
-//    tryIncreaseRangeRight: function() {
-//       this.rangeRight++; 
-//    }, 
-//    tryDecreaseRangeRight: function() {
-//        // only when at full size
-//        if (this.rangeRight - this.rangeLeft > this.size) {
-//            this.rangeRight--;
-//        }
-//    },
-//    tryIncreaseRangeLeft: function() {
-//        // only when at full size
-//        if (this.rangeRight - this.rangeLeft > this.size) {
-//            this.rangeLeft++;
-//        }
-//    }, 
-//    tryDecreaseRangeLeft: function() {
-//        if (this.rangeLeft > 0) {
-//            this.rangeLeft--;
-//        }
-//    }
 };
