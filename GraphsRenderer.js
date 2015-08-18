@@ -45,7 +45,7 @@ MY_GLOBAL.graphsRenderer = {
     },
     
     addDataPoint: function(p, midXPos, appendOrNot) {
-        var fakeValue = Math.random() * 100 + 30;
+        var value = p.getValueOfIndicator('testing');
         
         // add line
         if (this.circlesArray.length > 0) {
@@ -55,10 +55,10 @@ MY_GLOBAL.graphsRenderer = {
                 fromIndex = this.circlesArray.length - 1;
                 newLine = this.graphsContainerSnap.line(this.circlesArray[fromIndex].attr('cx'), 
                                                         this.circlesArray[fromIndex].attr('cy'), 
-                                                        midXPos, fakeValue);
+                                                        midXPos, value);
             } else {
                 fromIndex = 0;
-                newLine = this.graphsContainerSnap.line(midXPos,fakeValue, 
+                newLine = this.graphsContainerSnap.line(midXPos,value, 
                                                         this.circlesArray[fromIndex].attr('cx'), 
                                                         this.circlesArray[fromIndex].attr('cy'));
             }
@@ -74,7 +74,7 @@ MY_GLOBAL.graphsRenderer = {
         }
         
         // add point
-        var newPoint = this.graphsContainerSnap.circle(midXPos, fakeValue, 10);
+        var newPoint = this.graphsContainerSnap.circle(midXPos, value, 10);
         newPoint.attr({
             fill:'#FFFFFF',
         });
