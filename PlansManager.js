@@ -33,7 +33,10 @@ MY_GLOBAL.plansManager = {
             MY_GLOBAL.plansRenderer.unhighlightAllPlansOnScreen();
             var planIndexInOnScreen =  planIndex - this.rangeLeft;
             MY_GLOBAL.plansRenderer.highlightPlanOnScreenAtIndex(planIndexInOnScreen);
+            console.log('selected' + planIndex.toString());
+            return true;
         }
+        return false;
     },
     
     /*
@@ -81,8 +84,7 @@ MY_GLOBAL.plansManager = {
     
     tryDeletePlanAtLeft: function() {
         // only when at full size
-        console.log(this.rangeLeft, this.rangeRight);
-        if (this.rangeRight - this.rangeLeft > this.size) {
+        if (this.rangeRight - this.rangeLeft >= this.size - 1) {
             this.rangeLeft++;
             MY_GLOBAL.plansRenderer.removeHeadPlan();
         }
@@ -90,7 +92,7 @@ MY_GLOBAL.plansManager = {
     
     tryDeletePlanAtRight: function() {
         // only when at full size
-        if (this.rangeRight - this.rangeLeft > this.size) {
+        if (this.rangeRight - this.rangeLeft >= this.size - 1) {
             this.rangeRight--;
             MY_GLOBAL.plansRenderer.removeTailPlan();
         }

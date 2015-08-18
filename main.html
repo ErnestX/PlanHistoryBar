@@ -35,8 +35,10 @@
         MY_GLOBAL.dataManager.addPlanInitedWithParas('name2', '', '');
         MY_GLOBAL.dataManager.addPlanInitedWithParas('name2', '', '');
         MY_GLOBAL.dataManager.addPlanInitedWithParas('name2', '', '');
+        MY_GLOBAL.dataManager.addPlanInitedWithParas('name2', '', '');
+        MY_GLOBAL.dataManager.addPlanInitedWithParas('name2', '', '');
     
-        MY_GLOBAL.activePhotoIndex = 7; // the initial index to select
+        MY_GLOBAL.activePhotoIndex = 0; // the initial index to select
 
         MY_GLOBAL.plansRenderer.initWithContainer($("#thumbnailsBar"));
         MY_GLOBAL.thumbnailsRenderer.initWithContainer($("#thumbnailsBar"));
@@ -51,20 +53,24 @@
         MY_GLOBAL.plansManager.selectIndex(MY_GLOBAL.activePhotoIndex);
         
         $("#left").click(function() {
-            MY_GLOBAL.activePhotoIndex--;
+//            MY_GLOBAL.activePhotoIndex--;
             MY_GLOBAL.plansContainerAnimator.animateShifting(false, function() {
                 MY_GLOBAL.plansManager.moveBarRightByOnePlan();    
             });
-            MY_GLOBAL.plansManager.selectIndex(MY_GLOBAL.activePhotoIndex);
+            if (MY_GLOBAL.plansManager.selectIndex(MY_GLOBAL.activePhotoIndex - 1)) {
+                MY_GLOBAL.activePhotoIndex--;
+            }
             MY_GLOBAL.previewWindowManager.showPreviewForPlanIndex(MY_GLOBAL.activePhotoIndex);
         });
         
         $("#right").click(function() {
-            MY_GLOBAL.activePhotoIndex++;
+//            MY_GLOBAL.activePhotoIndex++;
             MY_GLOBAL.plansContainerAnimator.animateShifting(true, function() {
                 MY_GLOBAL.plansManager.moveBarLeftByOnePlan(); 
             });
-            MY_GLOBAL.plansManager.selectIndex(MY_GLOBAL.activePhotoIndex);
+            if (MY_GLOBAL.plansManager.selectIndex(MY_GLOBAL.activePhotoIndex + 1)) {
+                MY_GLOBAL.activePhotoIndex++;
+            }
             MY_GLOBAL.previewWindowManager.showPreviewForPlanIndex(MY_GLOBAL.activePhotoIndex);
         });
     
@@ -88,7 +94,7 @@
         <div id="previewWindow"></div>
     
         <p>
-<!--            <button id="left">left</button>-->
+            <button id="left">left</button>
             <button id="right">right</button>
 <!--            <button id="addIndicator">add indicator</button>-->
         </p>

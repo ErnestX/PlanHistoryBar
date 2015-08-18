@@ -20,7 +20,9 @@ MY_GLOBAL.thumbnailsRenderer = {
     },
     
     prependThumbnailFromPlanAtMidXPos: function(p, midXPos) {
-        // TODO: stub
+        var newPlanJQuery = MY_GLOBAL.thumbnailDivRenderer.renderDivFromPlan(p);
+        newPlanJQuery.css('left', this.midXPosToLeftEdgePos(midXPos));
+        this.thumbnailsContainer.prepend(newPlanJQuery);
     },
     
     removeHeadThumbnail: function() {

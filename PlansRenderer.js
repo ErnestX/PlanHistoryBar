@@ -62,9 +62,27 @@ MY_GLOBAL.plansRenderer = {
     }, 
     
     prependPlan: function(p) {
+        // TODO: REFACTOR
         MY_GLOBAL.typeChecker.assertIsObjectWithProto(p, MY_GLOBAL.planProto);
         
-        this.plansContainer.prepend(MY_GLOBAL.thumbnailDivRenderer.renderDivFromPlan(p));
+        var newXPos;
+        if (this.midXPosArray.length === 0) {
+            // the first plan. Put at the center
+            newXPos = this.plansContainer.width()/2;
+        } else {
+            // follow the first entry
+            newXPos = this.midXPosArray[0] 
+                - MY_GLOBAL.thumbnailWidth 
+                - MY_GLOBAL.thumbnailPadding;
+        }
+        this.midXPosArray.push(newXPos);
+    
+        MY_GLOBAL.thumbnailsRenderer.appendThumbnailFromPlanAtMidXPos(p, newXPos);
+        MY_GLOBAL.graphsRenderer.appendDataPointFromPlanAtMidXPos(p, newXPos);
+        
+        this.centerXPosArrayRelativeToContainer();
+        MY_GLOBAL.thumbnailsRenderer.syncAllThumbnailsXPosWithArray(this.midXPosArray);
+        MY_GLOBAL.graphsRenderer.syncAllDataPointsXPosWithArray(this.midXPosArray);
     }, 
     
     removeHeadPlan: function() {

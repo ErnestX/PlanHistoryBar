@@ -93,6 +93,7 @@ MY_GLOBAL.graphsRenderer = {
     
     prependDataPointFromPlanAtMidXPos: function(p, midXPos) {
         // TODO: stub
+        this.appendDataPointFromPlanAtMidXPos(p, midXPos);
     },
     
     removeHeadDataPoint: function() {
