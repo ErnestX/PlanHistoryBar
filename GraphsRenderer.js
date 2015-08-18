@@ -117,7 +117,6 @@ MY_GLOBAL.graphsRenderer = {
     }, 
     
     removeTailDataPoint: function() {
-        console.log('removeing');
         if (typeof(this.circlesArray[this.circlesArray.length - 1]) !== 'undefined') {
             this.circlesArray[this.circlesArray.length - 1].remove();
             this.circlesArray.pop();

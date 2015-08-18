@@ -18,14 +18,17 @@
     <script src="GraphsRenderer.js"></script>
     
     <script>$(document).ready(function() {
-        MY_GLOBAL.dataManager.addPlanInitedWithParas('name1', '', '');
-        MY_GLOBAL.dataManager.addPlanInitedWithParas('name2', '', '');
-        MY_GLOBAL.dataManager.addPlanInitedWithParas('name2', '', '');
-        MY_GLOBAL.dataManager.addPlanInitedWithParas('name2', '', '');
-        MY_GLOBAL.dataManager.addPlanInitedWithParas('name2', '', '');
-        MY_GLOBAL.dataManager.addPlanInitedWithParas('name2', '', '');
+        MY_GLOBAL.dataManager.addPlanInitedWithParas('000', 'google-maps.jpg', 'December 17, 1995 03:23:00');
+        MY_GLOBAL.dataManager.addPlanInitedWithParas('111', 'google-maps.jpg', 'December 17, 1995 03:20:00');
+        MY_GLOBAL.dataManager.addPlanInitedWithParas('222', 'google-maps-doodled.jpg', 'December 17, 1995 03:15:00');
+        MY_GLOBAL.dataManager.addPlanInitedWithParas('333', 'google-maps-doodled.jpg', 'December 17, 1995 05:24:00');
+        MY_GLOBAL.dataManager.addPlanInitedWithParas('444', 'google-maps.jpg', 'December 17, 1995 10:04:00');
+        MY_GLOBAL.dataManager.addPlanInitedWithParas('555', 'google-maps-doodled.jpg', 'December 17, 1995 03:24:00');
+        MY_GLOBAL.dataManager.addPlanInitedWithParas('666', 'google-maps.jpg', 'December 17, 1995 01:50:00');
+        MY_GLOBAL.dataManager.addPlanInitedWithParas('777', 'google-maps.jpg', 'December 17, 1995 05:30:00');
+        MY_GLOBAL.dataManager.addPlanInitedWithParas('888', 'google-maps-doodled.jpg', 'December 17, 1995 12:40:00');
     
-        MY_GLOBAL.activePhotoIndex = 1; // the initial index to select
+        MY_GLOBAL.activePhotoIndex = 0; // the initial index to select
 
         MY_GLOBAL.plansRenderer.initWithContainer($("#thumbnailsBar"));
         MY_GLOBAL.thumbnailsRenderer.initWithContainer($("#thumbnailsBar"));
@@ -35,7 +38,7 @@
         previewWindowManager.
         initWithPreviewWindowAndIndex($("#previewWindow"), MY_GLOBAL.activePhotoIndex);
         MY_GLOBAL.plansContainerAnimator.initWithContainer($('#plansContainer'));
-        MY_GLOBAL.plansManager.initWithSize(3);
+        MY_GLOBAL.plansManager.initWithSize(5);
     
         MY_GLOBAL.plansManager.selectIndex(MY_GLOBAL.activePhotoIndex);
         

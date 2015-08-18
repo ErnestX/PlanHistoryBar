@@ -47,7 +47,6 @@ MY_GLOBAL.plansManager = {
     moveBarRightByOnePlan: function() {
         this.tryAddNewPlanAtLeft();
         this.tryDeletePlanAtRight();
-//        console.log('moving right');
         console.log('l:' + this.rangeLeft.toString() + ',' + 'r:' + this.rangeRight.toString());
     }, 
     
@@ -57,7 +56,6 @@ MY_GLOBAL.plansManager = {
             if ((newPlan !== null) && (typeof(newPlan) !== 'undefined')) {
                 MY_GLOBAL.plansRenderer.prependPlan(newPlan);
                 this.rangeLeft--;
-//                console.log('added' + (this.rangeLeft-1).toString());
             }
         }
     }, 
@@ -67,25 +65,22 @@ MY_GLOBAL.plansManager = {
         if((newPlan !== null) && (typeof(newPlan) !== 'undefined')) {
             MY_GLOBAL.plansRenderer.appendPlan(newPlan);   
             this.rangeRight++;
-//            console.log('added' + (this.rangeRight+1).toString());
         }
     }, 
     
     tryDeletePlanAtLeft: function() {
         // only when at full size
-        if (this.rangeRight - this.rangeLeft >= this.size - 1) {
+        if (this.rangeRight - this.rangeLeft > this.size - 1) { // should not delete when euqal to size
             this.rangeLeft++;
             MY_GLOBAL.plansRenderer.removeHeadPlan();
-//            console.log('removed' + (this.rangeLeft - 1).toString());
         }
     }, 
     
     tryDeletePlanAtRight: function() {
         // only when at full size
-        if (this.rangeRight - this.rangeLeft >= this.size - 1) {
+        if (this.rangeRight - this.rangeLeft > this.size - 1) { // should not delete when euqal to size
             this.rangeRight--;
             MY_GLOBAL.plansRenderer.removeTailPlan();
-//            console.log('removed' + (this.rangeRight + 1).toString());
         }
     }
 };
