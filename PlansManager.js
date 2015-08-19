@@ -1,7 +1,8 @@
 "use strict";
 
 MY_GLOBAL.plansManager = {
-    maxNumOfPlansLoaded: 0,
+    maxNumOfLoadedPlans: 0,
+    /* invariant: rangeRight - rangeLeft + 1 <= maxNumOfLoadedPlans */
     rangeLeft: 0, 
     rangeRight: -1, 
 
@@ -10,7 +11,7 @@ MY_GLOBAL.plansManager = {
     */
     initWithMaxSize: function(s) {
         MY_GLOBAL.typeChecker.assertIsInteger(s);
-        this.maxNumOfPlansLoaded = s;
+        this.maxNumOfLoadedPlans = s;
 
         for (var i=0; i < s; i++) { // try get full size
             this.tryAddNewPlanAtRight();
@@ -70,7 +71,7 @@ MY_GLOBAL.plansManager = {
     
     tryDeletePlanAtLeft: function() {
         // only when at full size
-        if (this.rangeRight - this.rangeLeft > this.maxNumOfPlansLoaded - 1) { // should not delete when euqal to size
+        if (this.rangeRight - this.rangeLeft > this.maxNumOfLoadedPlans - 1) { // should not delete when euqal to size
             this.rangeLeft++;
             MY_GLOBAL.plansRenderer.removeHeadPlan();
         }
@@ -78,7 +79,7 @@ MY_GLOBAL.plansManager = {
     
     tryDeletePlanAtRight: function() {
         // only when at full size
-        if (this.rangeRight - this.rangeLeft > this.maxNumOfPlansLoaded - 1) { // should not delete when euqal to size
+        if (this.rangeRight - this.rangeLeft > this.maxNumOfLoadedPlans - 1) { // should not delete when euqal to size
             this.rangeRight--;
             MY_GLOBAL.plansRenderer.removeTailPlan();
         }
