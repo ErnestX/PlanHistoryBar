@@ -1,7 +1,6 @@
 MY_GLOBAL.plansRenderer = {
     plansContainer: null, 
     midXPosArray:[], 
-    selectedIndexOnScreen: NaN,
     
     initWithContainer: function(c) {
         MY_GLOBAL.typeChecker.assertIsJQueryObject(c);
@@ -10,8 +9,6 @@ MY_GLOBAL.plansRenderer = {
     }, 
     
     highlightPlanOnScreenAtIndex: function(index) {
-        this.selectedIndexOnScreen = index;
-        
         for (var i=0; i<this.midXPosArray.length; i++) {
             if (i < index) {
                 this.midXPosArray[i] -= MY_GLOBAL.selectedThumbnailPadding;
@@ -19,15 +16,13 @@ MY_GLOBAL.plansRenderer = {
                 this.midXPosArray[i] += MY_GLOBAL.selectedThumbnailPadding;
             }
         }
-        this.centerXPosArrayRelativeToSelected();
+        this.centerXPosRelativeToPlan(index);
         
         MY_GLOBAL.thumbnailsRenderer.syncAllThumbnailsXPosWithArray(this.midXPosArray);
         MY_GLOBAL.graphsRenderer.syncAllDataPointsXPosWithArray(this.midXPosArray);
     }, 
     
     unhighlightAllPlansOnScreen: function() {
-        this.selectedIndexOnScreen = NaN;
-        
         for (var i=1; i<this.midXPosArray.length; i++) {
             if (this.midXPosArray[i] - this.midXPosArray[i-1] 
                 > MY_GLOBAL.thumbnailPadding + MY_GLOBAL.thumbnailWidth) {
@@ -38,7 +33,6 @@ MY_GLOBAL.plansRenderer = {
                 }
             }
         }
-        this.centerXPosArrayRelativeToSelected();
         
         MY_GLOBAL.thumbnailsRenderer.syncAllThumbnailsXPosWithArray(this.midXPosArray);
         MY_GLOBAL.graphsRenderer.syncAllDataPointsXPosWithArray(this.midXPosArray);
@@ -58,11 +52,9 @@ MY_GLOBAL.plansRenderer = {
                 + MY_GLOBAL.thumbnailPadding;
         }
         this.midXPosArray.push(newXPos);
-    
+        
         MY_GLOBAL.thumbnailsRenderer.appendThumbnailFromPlanAtMidXPos(p, newXPos);
         MY_GLOBAL.graphsRenderer.appendDataPointFromPlanAtMidXPos(p, newXPos);
-        
-        this.centerXPosArrayRelativeToSelected();
         
         MY_GLOBAL.thumbnailsRenderer.syncAllThumbnailsXPosWithArray(this.midXPosArray);
         MY_GLOBAL.graphsRenderer.syncAllDataPointsXPosWithArray(this.midXPosArray);
@@ -86,8 +78,6 @@ MY_GLOBAL.plansRenderer = {
         MY_GLOBAL.thumbnailsRenderer.prependThumbnailFromPlanAtMidXPos(p, newXPos);
         MY_GLOBAL.graphsRenderer.prependDataPointFromPlanAtMidXPos(p, newXPos);
         
-        this.centerXPosArrayRelativeToSelected();
-        
         MY_GLOBAL.thumbnailsRenderer.syncAllThumbnailsXPosWithArray(this.midXPosArray);
         MY_GLOBAL.graphsRenderer.syncAllDataPointsXPosWithArray(this.midXPosArray);
     }, 
@@ -104,13 +94,15 @@ MY_GLOBAL.plansRenderer = {
         MY_GLOBAL.graphsRenderer.removeTailDataPoint();
     }, 
     
-    centerXPosArrayRelativeToSelected: function() {
-        if (isNaN(this.selectedIndexOnScreen)) {
+    centerXPosRelativeToPlan: function(index) {
+        if (isNaN(index) 
+            || typeof(this.midXPosArray[index]) === 'undefined') {
+            console.log('ATTENTION: index is NAN')
             this.centerXPosArrayRelativeToContainer();
         } else {
             // based on formula: translation = midX - selectedPlan.midX
             var midX = this.plansContainer.width()/2;
-            var translation = midX - this.midXPosArray[this.selectedIndexOnScreen];
+            var translation = midX - this.midXPosArray[index];
 
             for (var i=0; i<this.midXPosArray.length; i++) {
                 this.midXPosArray[i] += translation;

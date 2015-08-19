@@ -100,7 +100,7 @@ MY_GLOBAL.plansManager = {
         MY_GLOBAL.plansRenderer.unhighlightAllPlansOnScreen();
         var planIndexInOnScreen =  planIndex - this.rangeLeft;
         MY_GLOBAL.plansRenderer.highlightPlanOnScreenAtIndex(planIndexInOnScreen);
-        console.log('selected' + planIndex.toString());
+        console.log('selected ' + planIndex.toString());
 
         return true;
     },
@@ -138,17 +138,19 @@ MY_GLOBAL.plansManager = {
     }, 
     
     resetWithRangeLeft: function(rl) {
-        MY_GLOBAL.assert(rl >= 0);
+        if (rl < 0) {
+            rl = 0;
+        }
         // Step1: delete everything
         var r = this.rangeRight;
         for (var i=this.rangeLeft; i<=r; i++) {
             this.tryDeletePlanAtRight();
         }
-
+        console.log('deleted everything');
         // Step2: reset ranges
         this.rangeLeft = rl;
         this.rangeRight = rl-1;
-        
+
         // Step3: load
         for (var i=0; i < this.maxNumOfLoadedPlans; i++) { // try get full size
             this.tryAddNewPlanAtRight();
