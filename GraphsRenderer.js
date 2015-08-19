@@ -17,7 +17,7 @@ MY_GLOBAL.graphsRenderer = {
         // points
         for(var i=0; i<this.circlesArray.length; i++) {
             $(this.circlesArray[i].node).velocity({cx: midXPosArray[i].toString()}, 
-                                                  {queue: false, duration: 250});
+                                                  {queue: false, duration: MY_GLOBAL.animationDuration});
         }
         
         // lines
@@ -32,7 +32,7 @@ MY_GLOBAL.graphsRenderer = {
             }
             
             $(this.linesArray[i].node).velocity({x1: x1To, x2: x2To}, 
-                                                {queue: false, duration: 250});
+                                                {queue: false, duration: MY_GLOBAL.animationDuration});
         }
     }, 
     
@@ -63,9 +63,13 @@ MY_GLOBAL.graphsRenderer = {
                                                         this.circlesArray[fromIndex].attr('cy'));
             }
             newLine.attr({
+                opacity: 0.0,
                 stroke: '#FFFFFF',
                 strokeWidth: 5
             });
+            
+            $(newLine.node).velocity({opacity: 1.0}, {queue: false, duration: MY_GLOBAL.animationDuration});
+            
             if (appendOrNot) {
                 this.linesArray.push(newLine);
             } else {
@@ -76,8 +80,12 @@ MY_GLOBAL.graphsRenderer = {
         // add point
         var newPoint = this.graphsContainerSnap.circle(midXPos, value, 10);
         newPoint.attr({
-            fill:'#FFFFFF',
+            opacity: 0.0,
+            fill:'#FFFFFF'
         });
+        
+        $(newPoint.node).velocity({opacity: 1.0}, {queue: false, duration: MY_GLOBAL.animationDuration});
+        
         if (appendOrNot) {
             this.circlesArray.push(newPoint);
         } else {

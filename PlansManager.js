@@ -40,7 +40,7 @@ MY_GLOBAL.plansManager = {
             && (targetRight <= this.rangeRight)) {
             // tl...rl...tr...rr
             // Step1: remove  tr+1...rr
-            var r = this.rangeRight;
+            var r = this.rangeRight; // have to create const r b/c rangeRight changes within the loop when a plan gets deleted
             for (var i=targetRight+1; i<=r; i++) {
                 this.tryDeletePlanAtRight();
             }
@@ -140,13 +140,11 @@ MY_GLOBAL.plansManager = {
     resetWithRangeLeft: function(rl) {
         MY_GLOBAL.assert(rl >= 0);
         // Step1: delete everything
-        console.log('l:' + this.rangeLeft.toString() + ', r:' + this.rangeRight.toString());
         var r = this.rangeRight;
         for (var i=this.rangeLeft; i<=r; i++) {
             this.tryDeletePlanAtRight();
-            console.log(i);
         }
-        console.log('im here');
+
         // Step2: reset ranges
         this.rangeLeft = rl;
         this.rangeRight = rl-1;
