@@ -17,6 +17,7 @@
     <script src="GraphsRenderer.js"></script>
     
     <script>$(document).ready(function() {
+        var numOfPlans = 45;
         for (var i=0; i< 5; i++) {
             MY_GLOBAL.dataManager.addPlanInitedWithParas('000', 'google-maps.jpg', 'December 17, 1995 03:23:00');
             MY_GLOBAL.dataManager.addPlanInitedWithParas('111', 'google-maps.jpg', 'December 17, 1995 03:20:00');
@@ -29,40 +30,68 @@
             MY_GLOBAL.dataManager.addPlanInitedWithParas('888', 'google-maps-doodled.jpg', 'December 17, 1995 12:40:00');
         }
 
-        MY_GLOBAL.activePhotoIndex = 0; // the initial index to select
-
+        var activePhotoIndex = 0; // the initial index to select
+        var screenSizeInNumOfPlan = 15;
+    
         MY_GLOBAL.plansRenderer.initWithContainer($("#thumbnailsBar"));
         MY_GLOBAL.thumbnailsRenderer.initWithContainer($("#thumbnailsBar"));
         MY_GLOBAL.graphsRenderer.initWithGraphsContainerInString('#graphsContainer');
     
         MY_GLOBAL.
         previewWindowManager.
-        initWithPreviewWindowAndIndex($("#previewWindow"), MY_GLOBAL.activePhotoIndex);
-        MY_GLOBAL.plansManager.initWithMaxSize(5);
+        initWithPreviewWindowAndIndex($("#previewWindow"), activePhotoIndex);
+        MY_GLOBAL.plansManager.initWithMaxSize(screenSizeInNumOfPlan);
     
-        MY_GLOBAL.plansManager.selectIndex(MY_GLOBAL.activePhotoIndex);
+        MY_GLOBAL.plansManager.selectIndex(activePhotoIndex);
         
         $("#left").click(function() {
-            if (MY_GLOBAL.plansManager.selectIndex(MY_GLOBAL.activePhotoIndex - 1)) {
-                MY_GLOBAL.activePhotoIndex--;
+            if (MY_GLOBAL.plansManager.selectIndex(activePhotoIndex - 1)) {
+                activePhotoIndex--;
             }
-            MY_GLOBAL.previewWindowManager.showPreviewForPlanIndex(MY_GLOBAL.activePhotoIndex);
+            MY_GLOBAL.previewWindowManager.showPreviewForPlanIndex(activePhotoIndex);
         });
         
         $("#right").click(function() {
-            if (MY_GLOBAL.plansManager.selectIndex(MY_GLOBAL.activePhotoIndex + 1)) {
-                MY_GLOBAL.activePhotoIndex++;
+            if (MY_GLOBAL.plansManager.selectIndex(activePhotoIndex + 1)) {
+                activePhotoIndex++;
             }
-            MY_GLOBAL.previewWindowManager.showPreviewForPlanIndex(MY_GLOBAL.activePhotoIndex);
+            MY_GLOBAL.previewWindowManager.showPreviewForPlanIndex(activePhotoIndex);
         });
     
+        $("#pageLeft").click(function() {
+            if (activePhotoIndex < screenSizeInNumOfPlan) {
+                if (MY_GLOBAL.plansManager.selectIndex(0)) {
+                    activePhotoIndex = 0;
+                }
+            } else {
+                if (MY_GLOBAL.plansManager.selectIndex(activePhotoIndex - screenSizeInNumOfPlan)) {
+                    activePhotoIndex = activePhotoIndex - screenSizeInNumOfPlan;
+                }
+            }
+            MY_GLOBAL.previewWindowManager.showPreviewForPlanIndex(activePhotoIndex);
+        });
+    
+        $("#pageRight").click(function() {
+            if (activePhotoIndex + screenSizeInNumOfPlan > numOfPlans - 1) {
+                if (MY_GLOBAL.plansManager.selectIndex(numOfPlans - 1)) {
+                    activePhotoIndex = numOfPlans - 1;
+                }
+            } else {
+                if (MY_GLOBAL.plansManager.selectIndex(activePhotoIndex + screenSizeInNumOfPlan)) {
+                    activePhotoIndex = activePhotoIndex + screenSizeInNumOfPlan;
+                }
+            }
+            MY_GLOBAL.previewWindowManager.showPreviewForPlanIndex(activePhotoIndex);
+        });
+        
         $("#addIndicator").click(function() {
             MY_GLOBAL.graphsRenderer.createRendererWithNameOntoRow('testing', 0);
         });
     
         $("#debug").click(function() {
-            MY_GLOBAL.plansManager.selectIndex(0);
-            MY_GLOBAL.activePhotoIndex = 0;
+            if (MY_GLOBAL.plansManager.selectIndex(35)) {
+                activePhotoIndex = 35;
+            }
         });
     });
     </script>
@@ -83,6 +112,8 @@
         <p>
             <button id="left">left</button>
             <button id="right">right</button>
+            <button id="pageLeft">pageLeft</button>
+            <button id="pageRight">pageRight</button>
 <!--            <button id="addIndicator">add indicator</button>-->
             <button id="debug">don't click me!!!</button>
         </p>

@@ -33,7 +33,6 @@ MY_GLOBAL.plansRenderer = {
                 }
             }
         }
-        
         MY_GLOBAL.thumbnailsRenderer.syncAllThumbnailsXPosWithArray(this.midXPosArray);
         MY_GLOBAL.graphsRenderer.syncAllDataPointsXPosWithArray(this.midXPosArray);
     },
