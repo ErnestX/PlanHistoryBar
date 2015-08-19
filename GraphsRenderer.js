@@ -66,8 +66,8 @@ MY_GLOBAL.graphsRenderer = {
             newLine.attr({
                 opacity: 0.0,
                 stroke: gradient,//'#FFFFFF',
-                'stroke-dasharray': "5, 5",
-                strokeWidth: 5
+                'stroke-dasharray': "2, 2",
+                strokeWidth: 2
             });
             
             $(newLine.node).velocity({opacity: 1.0}, {queue: false, duration: MY_GLOBAL.animationDuration});
@@ -80,7 +80,7 @@ MY_GLOBAL.graphsRenderer = {
         }
         
         // add point
-        var newPoint = this.graphsContainerSnap.circle(midXPos, value, 10);
+        var newPoint = this.graphsContainerSnap.circle(midXPos, value, 5);
         newPoint.attr({
             opacity: 0.0,
             fill:'#FFFFFF'

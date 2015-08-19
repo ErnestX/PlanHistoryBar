@@ -10,9 +10,7 @@ MY_GLOBAL.plansManager = {
         MY_GLOBAL.typeChecker.assertIsInteger(s);
         this.maxNumOfLoadedPlans = s;
 
-        for (var i=0; i < s; i++) { // try get full size
-            this.tryAddNewPlanAtRight();
-        }
+        this.resetWithRangeLeft(0);
     }, 
     
     selectIndex: function(planIndex) {
@@ -137,6 +135,7 @@ MY_GLOBAL.plansManager = {
         }
     }, 
     
+    /* animates from left to right */
     resetWithRangeLeft: function(rl) {
         if (rl < 0) {
             rl = 0;
@@ -157,6 +156,7 @@ MY_GLOBAL.plansManager = {
         }
     }, 
     
+    /* animates from right to left */
     resetWithRangeRight: function(rr) {
         // Step1: delete everything
         var r = this.rangeRight;
