@@ -6,9 +6,6 @@ MY_GLOBAL.plansManager = {
     rangeLeft: 0, 
     rangeRight: -1, 
 
-    /*
-    init this.thumbnailsBar, this.rangeLeft, this.rangeRight and place the plans
-    */
     initWithMaxSize: function(s) {
         MY_GLOBAL.typeChecker.assertIsInteger(s);
         this.maxNumOfLoadedPlans = s;
@@ -36,21 +33,25 @@ MY_GLOBAL.plansManager = {
             targetLeft = planIndex - (this.maxNumOfLoadedPlans-1)/2;
             targetRight = planIndex + (this.maxNumOfLoadedPlans-1)/2;
         }
-        console.log('tl:' + targetLeft.toString() + ', tr:' + targetRight.toString());
+//        console.log('tl:' + targetLeft.toString() + ', tr:' + targetRight.toString());
         
         // check whether the target range is within one screen
-        if ((targetLeft <= this.rangeLeft) && (this.rangeLeft <= targetRight) && (targetRight <= this.rangeRight)) {
+        if ((targetLeft <= this.rangeLeft) && (this.rangeLeft <= targetRight) 
+            && (targetRight <= this.rangeRight)) {
             // tl...rl...tr...rr
             // Step1: remove  tr+1...rr
-            for (var i=targetRight+1; i<=this.rangeRight; i++) {
+            var r = this.rangeRight;
+            for (var i=targetRight+1; i<=r; i++) {
                 this.tryDeletePlanAtRight();
             }
             // Step2: add tl...rl-1
-            for (var i=targetLeft; i<=this.rangeLeft-1; i++) {
+            var l = this.rangeLeft;
+            for (var i=targetLeft; i<=l-1; i++) {
                 this.tryAddNewPlanAtLeft();
             }
             console.log('case 1');
-        } else if ((this.rangeLeft <= targetLeft) && (targetLeft <= this.rangeRight) && (this.rangeRight <= targetRight)) {
+        } else if ((this.rangeLeft <= targetLeft) && (targetLeft <= this.rangeRight) 
+                   && (this.rangeRight <= targetRight)) {
             // rl...tl...rr...tr
             // Step1: remove rl...tl-1
             for (var i=this.rangeLeft; i<= targetLeft-1; i++) {
@@ -68,14 +69,16 @@ MY_GLOBAL.plansManager = {
                 this.tryDeletePlanAtLeft();
             }
             // Step2: remove tr+1...rr
-            for (var i=targetRight+1; i<=this.rangeRight; i++) {
+            var r = this.rangeRight;
+            for (var i=targetRight+1; i<=r; i++) {
                 this.tryDeletePlanAtRight();
             }
             console.log('case 3');
         } else if ((this.rangeLeft >= targetLeft) && (this.rangeRight <= targetRight)) {
             // tl...rl...rr...tr
             // Step1: add tl...rl-1
-            for (var i=targetLeft; i<=this.rangeLeft-1; i++) {
+            var l = this.rangeLeft;
+            for (var i=targetLeft; i<=l-1; i++) {
                 this.tryAddNewPlanAtLeft();
             }
             // Step2: add rr+1...tr
@@ -94,33 +97,13 @@ MY_GLOBAL.plansManager = {
         }
         
         // Step3: highlight
-//        if ((planIndex <= this.rangeRight) && (planIndex >= this.rangeLeft)) {
-            MY_GLOBAL.plansRenderer.unhighlightAllPlansOnScreen();
-            var planIndexInOnScreen =  planIndex - this.rangeLeft;
-            MY_GLOBAL.plansRenderer.highlightPlanOnScreenAtIndex(planIndexInOnScreen);
-            console.log('selected' + planIndex.toString());
-        
-            return true;
-//        }
-//        return false;
+        MY_GLOBAL.plansRenderer.unhighlightAllPlansOnScreen();
+        var planIndexInOnScreen =  planIndex - this.rangeLeft;
+        MY_GLOBAL.plansRenderer.highlightPlanOnScreenAtIndex(planIndexInOnScreen);
+        console.log('selected' + planIndex.toString());
+
+        return true;
     },
-    
-    /*
-    moves the thumbnailsBar with animation. Adds and deletes plans so that the number of plans on screen stays the same
-    */
-    moveBarLeftByOnePlan: function() {
-        this.tryAddNewPlanAtRight();
-        this.tryDeletePlanAtLeft();
-        console.log('l:' + this.rangeLeft.toString() + ',' + 'r:' + this.rangeRight.toString());
-    },
-    /*
-    moves the thumbnailsBar with animation. Adds and deletes plans so that the number of plans on screen stays the same
-    */
-    moveBarRightByOnePlan: function() {
-        this.tryAddNewPlanAtLeft();
-        this.tryDeletePlanAtRight();
-        console.log('l:' + this.rangeLeft.toString() + ',' + 'r:' + this.rangeRight.toString());
-    }, 
     
     tryAddNewPlanAtLeft: function() {
         if (this.rangeLeft > 0) {
@@ -133,7 +116,6 @@ MY_GLOBAL.plansManager = {
     }, 
     
     tryAddNewPlanAtRight: function() {
-//        if (this.rangeRight + 1 - this.rangeLeft + 1 <= )
         var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeRight + 1);
         if((newPlan !== null) && (typeof(newPlan) !== 'undefined')) {
             MY_GLOBAL.plansRenderer.appendPlan(newPlan);   
@@ -142,28 +124,29 @@ MY_GLOBAL.plansManager = {
     }, 
     
     tryDeletePlanAtLeft: function() {
-        // only when at full size
-//        if (this.rangeRight - this.rangeLeft > this.maxNumOfLoadedPlans - 1) { // should not delete when euqal to size
+        if (this.rangeLeft <= this.rangeRight) {
             this.rangeLeft++;
             MY_GLOBAL.plansRenderer.removeHeadPlan();
-//        }
+        }
     }, 
     
     tryDeletePlanAtRight: function() {
-        // only when at full size
-//        if (this.rangeRight - this.rangeLeft > this.maxNumOfLoadedPlans - 1) { // should not delete when euqal to size
+        if (this.rangeRight >= 0) {
             this.rangeRight--;
             MY_GLOBAL.plansRenderer.removeTailPlan();
-//        }
+        }
     }, 
     
     resetWithRangeLeft: function(rl) {
         MY_GLOBAL.assert(rl >= 0);
         // Step1: delete everything
-        for (var i=this.rangeLeft; i<=this.rangeRight; i++) {
+        console.log('l:' + this.rangeLeft.toString() + ', r:' + this.rangeRight.toString());
+        var r = this.rangeRight;
+        for (var i=this.rangeLeft; i<=r; i++) {
             this.tryDeletePlanAtRight();
+            console.log(i);
         }
-        
+        console.log('im here');
         // Step2: reset ranges
         this.rangeLeft = rl;
         this.rangeRight = rl-1;

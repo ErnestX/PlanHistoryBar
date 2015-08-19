@@ -41,7 +41,6 @@
         MY_GLOBAL.plansManager.selectIndex(MY_GLOBAL.activePhotoIndex);
         
         $("#left").click(function() {
-//            MY_GLOBAL.plansManager.moveBarRightByOnePlan();    
             if (MY_GLOBAL.plansManager.selectIndex(MY_GLOBAL.activePhotoIndex - 1)) {
                 MY_GLOBAL.activePhotoIndex--;
             }
@@ -49,7 +48,6 @@
         });
         
         $("#right").click(function() {
-//            MY_GLOBAL.plansManager.moveBarLeftByOnePlan(); 
             if (MY_GLOBAL.plansManager.selectIndex(MY_GLOBAL.activePhotoIndex + 1)) {
                 MY_GLOBAL.activePhotoIndex++;
             }
@@ -58,6 +56,11 @@
     
         $("#addIndicator").click(function() {
             MY_GLOBAL.graphsRenderer.createRendererWithNameOntoRow('testing', 0);
+        });
+    
+        $("#debug").click(function() {
+            MY_GLOBAL.plansManager.selectIndex(6);
+            MY_GLOBAL.activePhotoIndex = 6;
         });
     });
     </script>
@@ -79,6 +82,7 @@
             <button id="left">left</button>
             <button id="right">right</button>
 <!--            <button id="addIndicator">add indicator</button>-->
+            <button id="debug">don't click me!!!</button>
         </p>
     </div>
 </body>
