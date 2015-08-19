@@ -19,6 +19,10 @@ MY_GLOBAL.plansManager = {
     }, 
     
     selectIndex: function(planIndex) {
+        if (typeof(MY_GLOBAL.dataManager.getPlanAtIndex(planIndex)) === 'undefined') {
+            return false;
+        }
+        
         MY_GLOBAL.typeChecker.assertIsInteger(planIndex, 'planIndex not int');
         
         // calc target range
@@ -32,8 +36,8 @@ MY_GLOBAL.plansManager = {
             targetLeft = planIndex - (this.maxNumOfLoadedPlans-1)/2;
             targetRight = planIndex + (this.maxNumOfLoadedPlans-1)/2;
         }
-//        console.log(targetLeft);
-//        console.log(targetRight);
+        console.log('tl:' + targetLeft.toString() + ', tr:' + targetRight.toString());
+        
         // check whether the target range is within one screen
         if ((targetLeft <= this.rangeLeft) && (this.rangeLeft <= targetRight) && (targetRight <= this.rangeRight)) {
             // tl...rl...tr...rr
@@ -45,7 +49,7 @@ MY_GLOBAL.plansManager = {
             for (var i=targetLeft; i<=this.rangeLeft-1; i++) {
                 this.tryAddNewPlanAtLeft();
             }
-            
+            console.log('case 1');
         } else if ((this.rangeLeft <= targetLeft) && (targetLeft <= this.rangeRight) && (this.rangeRight <= targetRight)) {
             // rl...tl...rr...tr
             // Step1: remove rl...tl-1
@@ -56,6 +60,7 @@ MY_GLOBAL.plansManager = {
             for (var i=this.rangeRight+1; i<=targetRight; i++) {
                 this.tryAddNewPlanAtRight();
             }
+            console.log('case 2');
         } else if ((targetLeft >= this.rangeLeft) && (targetRight <= this.rangeRight)) {
             // rl...tl...tr...rr
             // Step1: remove rl..tl-1
@@ -66,6 +71,7 @@ MY_GLOBAL.plansManager = {
             for (var i=targetRight+1; i<=this.rangeRight; i++) {
                 this.tryDeletePlanAtRight();
             }
+            console.log('case 3');
         } else if ((this.rangeLeft >= targetLeft) && (this.rangeRight <= targetRight)) {
             // tl...rl...rr...tr
             // Step1: add tl...rl-1
@@ -76,13 +82,15 @@ MY_GLOBAL.plansManager = {
             for (var i=this.rangeRight+1; i<=targetRight; i++) {
                 this.tryAddNewPlanAtRight();
             }
+            console.log('case 4');
         } else if(targetRight <= this.rangeLeft) {
             // tl...tr...rl...rr
             this.resetWithRangeLeft(targetLeft);
-            
+            console.log('case 5');
         } else if(this.rangeRight <= targetLeft) {
             // rl...rr...tl...tr
             this.resetWithRangeLeft(targetLeft);
+            console.log('case 6');
         }
         
         // Step3: highlight
@@ -91,9 +99,10 @@ MY_GLOBAL.plansManager = {
             var planIndexInOnScreen =  planIndex - this.rangeLeft;
             MY_GLOBAL.plansRenderer.highlightPlanOnScreenAtIndex(planIndexInOnScreen);
             console.log('selected' + planIndex.toString());
+        
             return true;
 //        }
-        return false;
+//        return false;
     },
     
     /*
@@ -151,7 +160,7 @@ MY_GLOBAL.plansManager = {
         MY_GLOBAL.assert(rl >= 0);
         // Step1: delete everything
         for (var i=this.rangeLeft; i<=this.rangeRight; i++) {
-                this.tryDeletePlanAtRight();
+            this.tryDeletePlanAtRight();
         }
         
         // Step2: reset ranges
