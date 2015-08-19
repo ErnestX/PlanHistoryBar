@@ -8,8 +8,12 @@ MY_GLOBAL.plansManager = {
 
     initWithMaxSize: function(s) {
         MY_GLOBAL.typeChecker.assertIsInteger(s);
+        
+        // Step1: init components
+        MY_GLOBAL.previewWindowRenderer.initWithPreviewWindow($("#previewWindow"));
+        
+        // Step2: init self
         this.maxNumOfLoadedPlans = s;
-
         this.resetWithRangeLeft(0);
     }, 
     
@@ -99,6 +103,9 @@ MY_GLOBAL.plansManager = {
         var planIndexInOnScreen =  planIndex - this.rangeLeft;
         MY_GLOBAL.plansRenderer.highlightPlanOnScreenAtIndex(planIndexInOnScreen);
         console.log('selected ' + planIndex.toString());
+        
+        // Step4: render preview window
+        MY_GLOBAL.previewWindowRenderer.showPreviewForPlan(MY_GLOBAL.dataManager.getPlanAtIndex(planIndex));
 
         return true;
     },

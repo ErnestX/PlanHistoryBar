@@ -1,12 +1,11 @@
 'use strict';
 
-MY_GLOBAL.previewWindowManager = {
+MY_GLOBAL.previewWindowRenderer = {
     previewWindow: null, 
     frontImage: null,
     backImage:null,
-    initWithPreviewWindowAndIndex: function(w, i) {
+    initWithPreviewWindow: function(w, p) {
         MY_GLOBAL.typeChecker.assertIsJQueryObject(w);
-        MY_GLOBAL.typeChecker.assertIsInteger(i);
         
         this.previewWindow = w;
         /*NOTE: can dynamically adjust image size by setting pewviewWindow's height, 
@@ -17,14 +16,12 @@ MY_GLOBAL.previewWindowManager = {
         this.backImage = this.createPlaceHolderImage();
         this.previewWindow.append(this.backImage);
         this.previewWindow.append(this.frontImage);
-        
-        this.showPreviewForPlanIndex(i);
     }, 
     
-    showPreviewForPlanIndex: function(i) {
-        MY_GLOBAL.typeChecker.assertIsInteger(i);
+    showPreviewForPlan: function(p) {
+        MY_GLOBAL.typeChecker.assertIsObjectWithProto(p, MY_GLOBAL.planProto);
         
-        var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(i);
+        var newPlan = p;
         
         if((newPlan !== null) && (typeof(newPlan) !== 'undefined')) {
         
@@ -37,11 +34,11 @@ MY_GLOBAL.previewWindowManager = {
             // Step2: once finished fading in, remove css animation and update the back image
             this.frontImage.one('animationend', function() {
                 MY_GLOBAL.
-                previewWindowManager.
+                previewWindowRenderer.
                 frontImage.removeClass('fadingIn');
 
                 MY_GLOBAL.
-                previewWindowManager.
+                previewWindowRenderer.
                 backImage.attr('src', newPlan.previewWindowSrc);
             });
         }

@@ -12,7 +12,7 @@
     <script src="ThumbnailsRenderer.js"></script>
     <script src="Plan.js"></script>
     <script src="DataManager.js"></script>
-    <script src="PreviewWindowManager.js"></script>
+    <script src="PreviewWindowRenderer.js"></script>
     <script src="ThumbnailDivRenderer.js"></script>
     <script src="GraphsRenderer.js"></script>
     
@@ -37,9 +37,6 @@
         MY_GLOBAL.thumbnailsRenderer.initWithContainer($("#thumbnailsBar"));
         MY_GLOBAL.graphsRenderer.initWithGraphsContainerInString('#graphsContainer');
     
-        MY_GLOBAL.
-        previewWindowManager.
-        initWithPreviewWindowAndIndex($("#previewWindow"), activePhotoIndex);
         MY_GLOBAL.plansManager.initWithMaxSize(screenSizeInNumOfPlan);
     
         MY_GLOBAL.plansManager.selectIndex(activePhotoIndex);
@@ -48,14 +45,12 @@
             if (MY_GLOBAL.plansManager.selectIndex(activePhotoIndex - 1)) {
                 activePhotoIndex--;
             }
-            MY_GLOBAL.previewWindowManager.showPreviewForPlanIndex(activePhotoIndex);
         });
         
         $("#right").click(function() {
             if (MY_GLOBAL.plansManager.selectIndex(activePhotoIndex + 1)) {
                 activePhotoIndex++;
             }
-            MY_GLOBAL.previewWindowManager.showPreviewForPlanIndex(activePhotoIndex);
         });
     
         $("#pageLeft").click(function() {
@@ -68,7 +63,6 @@
                     activePhotoIndex = activePhotoIndex - screenSizeInNumOfPlan;
                 }
             }
-            MY_GLOBAL.previewWindowManager.showPreviewForPlanIndex(activePhotoIndex);
         });
     
         $("#pageRight").click(function() {
@@ -81,7 +75,6 @@
                     activePhotoIndex = activePhotoIndex + screenSizeInNumOfPlan;
                 }
             }
-            MY_GLOBAL.previewWindowManager.showPreviewForPlanIndex(activePhotoIndex);
         });
         
         $("#addIndicator").click(function() {
