@@ -88,7 +88,7 @@ MY_GLOBAL.plansManager = {
             console.log('case 4');
         } else if(targetRight <= this.rangeLeft) {
             // tl...tr...rl...rr
-            this.resetWithRangeLeft(targetLeft);
+            this.resetWithRangeRight(targetRight);
             console.log('case 5');
         } else if(this.rangeRight <= targetLeft) {
             // rl...rr...tl...tr
@@ -146,7 +146,7 @@ MY_GLOBAL.plansManager = {
         for (var i=this.rangeLeft; i<=r; i++) {
             this.tryDeletePlanAtRight();
         }
-        console.log('deleted everything');
+
         // Step2: reset ranges
         this.rangeLeft = rl;
         this.rangeRight = rl-1;
@@ -154,6 +154,23 @@ MY_GLOBAL.plansManager = {
         // Step3: load
         for (var i=0; i < this.maxNumOfLoadedPlans; i++) { // try get full size
             this.tryAddNewPlanAtRight();
+        }
+    }, 
+    
+    resetWithRangeRight: function(rr) {
+        // Step1: delete everything
+        var r = this.rangeRight;
+        for (var i=this.rangeLeft; i<=r; i++) {
+            this.tryDeletePlanAtLeft();
+        }
+
+        // Step2: reset ranges
+        this.rangeRight = rr;
+        this.rangeLeft = rr+1;
+
+        // Step3: load
+        for (var i=0; i < this.maxNumOfLoadedPlans; i++) { // try get full size
+            this.tryAddNewPlanAtLeft();
         }
     }
 };
