@@ -133,6 +133,7 @@ MY_GLOBAL.plansManager = {
     }, 
     
     tryAddNewPlanAtRight: function() {
+//        if (this.rangeRight + 1 - this.rangeLeft + 1 <= )
         var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeRight + 1);
         if((newPlan !== null) && (typeof(newPlan) !== 'undefined')) {
             MY_GLOBAL.plansRenderer.appendPlan(newPlan);   
@@ -142,18 +143,18 @@ MY_GLOBAL.plansManager = {
     
     tryDeletePlanAtLeft: function() {
         // only when at full size
-        if (this.rangeRight - this.rangeLeft > this.maxNumOfLoadedPlans - 1) { // should not delete when euqal to size
+//        if (this.rangeRight - this.rangeLeft > this.maxNumOfLoadedPlans - 1) { // should not delete when euqal to size
             this.rangeLeft++;
             MY_GLOBAL.plansRenderer.removeHeadPlan();
-        }
+//        }
     }, 
     
     tryDeletePlanAtRight: function() {
         // only when at full size
-        if (this.rangeRight - this.rangeLeft > this.maxNumOfLoadedPlans - 1) { // should not delete when euqal to size
+//        if (this.rangeRight - this.rangeLeft > this.maxNumOfLoadedPlans - 1) { // should not delete when euqal to size
             this.rangeRight--;
             MY_GLOBAL.plansRenderer.removeTailPlan();
-        }
+//        }
     }, 
     
     resetWithRangeLeft: function(rl) {
