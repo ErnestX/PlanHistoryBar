@@ -62,9 +62,11 @@ MY_GLOBAL.graphsRenderer = {
                                                         this.circlesArray[fromIndex].attr('cx'), 
                                                         this.circlesArray[fromIndex].attr('cy'));
             }
+            var gradient = this.graphsContainerSnap.gradient("l(0, 1, 1, 1)#fff-#58585A:45-#58585A:55-#fff");
             newLine.attr({
                 opacity: 0.0,
-                stroke: '#FFFFFF',
+                stroke: gradient,//'#FFFFFF',
+                'stroke-dasharray': "5, 5",
                 strokeWidth: 5
             });
             
