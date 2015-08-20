@@ -5,8 +5,8 @@ MY_GLOBAL.plansManager.plansRenderer = {
     initWithContainer: function(c) {
         MY_GLOBAL.typeChecker.assertIsJQueryObject(c);
         
-        MY_GLOBAL.thumbnailsRenderer.initWithContainer($("#thumbnailsBar"));
-        MY_GLOBAL.graphsRenderer.initWithGraphsContainerInString('#graphsContainer');
+        this.thumbnailsRenderer.initWithContainer($("#thumbnailsBar"));
+        this.graphsRenderer.initWithGraphsContainerInString('#graphsContainer');
         
         this.plansContainer = c;
     }, 
@@ -21,8 +21,8 @@ MY_GLOBAL.plansManager.plansRenderer = {
         }
         this.centerXPosRelativeToPlan(index);
         
-        MY_GLOBAL.thumbnailsRenderer.syncAllThumbnailsXPosWithArray(this.midXPosArray);
-        MY_GLOBAL.graphsRenderer.syncAllDataPointsXPosWithArray(this.midXPosArray);
+        this.thumbnailsRenderer.syncAllThumbnailsXPosWithArray(this.midXPosArray);
+        this.graphsRenderer.syncAllDataPointsXPosWithArray(this.midXPosArray);
     }, 
     
     unhighlightAllPlansOnScreen: function() {
@@ -36,8 +36,8 @@ MY_GLOBAL.plansManager.plansRenderer = {
                 }
             }
         }
-        MY_GLOBAL.thumbnailsRenderer.syncAllThumbnailsXPosWithArray(this.midXPosArray);
-        MY_GLOBAL.graphsRenderer.syncAllDataPointsXPosWithArray(this.midXPosArray);
+        this.thumbnailsRenderer.syncAllThumbnailsXPosWithArray(this.midXPosArray);
+        this.graphsRenderer.syncAllDataPointsXPosWithArray(this.midXPosArray);
     },
     
     appendPlan: function(p) {
@@ -55,11 +55,11 @@ MY_GLOBAL.plansManager.plansRenderer = {
         }
         this.midXPosArray.push(newXPos);
         
-        MY_GLOBAL.thumbnailsRenderer.appendThumbnailFromPlanAtMidXPos(p, newXPos);
-        MY_GLOBAL.graphsRenderer.appendDataPointFromPlanAtMidXPos(p, newXPos);
+        this.thumbnailsRenderer.appendThumbnailFromPlanAtMidXPos(p, newXPos);
+        this.graphsRenderer.appendDataPointFromPlanAtMidXPos(p, newXPos);
         
-        MY_GLOBAL.thumbnailsRenderer.syncAllThumbnailsXPosWithArray(this.midXPosArray);
-        MY_GLOBAL.graphsRenderer.syncAllDataPointsXPosWithArray(this.midXPosArray);
+        this.thumbnailsRenderer.syncAllThumbnailsXPosWithArray(this.midXPosArray);
+        this.graphsRenderer.syncAllDataPointsXPosWithArray(this.midXPosArray);
     }, 
     
     prependPlan: function(p) {
@@ -77,23 +77,23 @@ MY_GLOBAL.plansManager.plansRenderer = {
         }
         this.midXPosArray.unshift(newXPos);
     
-        MY_GLOBAL.thumbnailsRenderer.prependThumbnailFromPlanAtMidXPos(p, newXPos);
-        MY_GLOBAL.graphsRenderer.prependDataPointFromPlanAtMidXPos(p, newXPos);
+        this.thumbnailsRenderer.prependThumbnailFromPlanAtMidXPos(p, newXPos);
+        this.graphsRenderer.prependDataPointFromPlanAtMidXPos(p, newXPos);
         
-        MY_GLOBAL.thumbnailsRenderer.syncAllThumbnailsXPosWithArray(this.midXPosArray);
-        MY_GLOBAL.graphsRenderer.syncAllDataPointsXPosWithArray(this.midXPosArray);
+        this.thumbnailsRenderer.syncAllThumbnailsXPosWithArray(this.midXPosArray);
+        this.graphsRenderer.syncAllDataPointsXPosWithArray(this.midXPosArray);
     }, 
     
     removeHeadPlan: function() {
         this.midXPosArray.shift();
-        MY_GLOBAL.thumbnailsRenderer.removeHeadThumbnail();
-        MY_GLOBAL.graphsRenderer.removeHeadDataPoint();
+        this.thumbnailsRenderer.removeHeadThumbnail();
+        this.graphsRenderer.removeHeadDataPoint();
     }, 
     
     removeTailPlan: function() {
         this.midXPosArray.pop();
-        MY_GLOBAL.thumbnailsRenderer.removeTailThumbnail();
-        MY_GLOBAL.graphsRenderer.removeTailDataPoint();
+        this.thumbnailsRenderer.removeTailThumbnail();
+        this.graphsRenderer.removeTailDataPoint();
     }, 
     
     centerXPosRelativeToPlan: function(index) {

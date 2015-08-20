@@ -1,4 +1,4 @@
-MY_GLOBAL.thumbnailsRenderer = {
+MY_GLOBAL.plansManager.plansRenderer.thumbnailsRenderer = {
     thumbnailsContainer: null, 
     
     initWithContainer: function(c) {

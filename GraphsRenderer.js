@@ -1,4 +1,4 @@
-MY_GLOBAL.graphsRenderer = {
+MY_GLOBAL.plansManager.plansRenderer.graphsRenderer = {
     graphsContainerSnap:null,
     // NOTE: invariable: circlesArray and linesArray are in order
     circlesArray:[],
