@@ -1,18 +1,19 @@
 'use strict';
 
 MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
+    metricName: '', 
     graphContainerSnap:null,
     // NOTE: invariable: circlesArray and linesArray are in order
     circlesArray:[],
     linesArray:[],
     
-    initWithGraphsContainerInString: function(container) {
-        MY_GLOBAL.typeChecker.assertIsString(container);
+    initWithNameAndGraphsSnapContainer: function(name, container) {
+        MY_GLOBAL.typeChecker.assertIsString(name);
+        MY_GLOBAL.assert(typeof(container) !== 'undefined');
+        MY_GLOBAL.assert(container !== null);
         
-        if (container.charAt(0) === '#') {
-            container = container.slice(1); // remove '#'
-        }
-        this.graphContainerSnap = Snap('#' + container);
+        this.name = name;
+        this.graphContainerSnap = container;
     },
     
     syncAllDataPointsXPosWithArray: function(midXPosArray) {

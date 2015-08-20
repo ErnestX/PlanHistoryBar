@@ -1,7 +1,7 @@
 MY_GLOBAL.plansManager.plansRenderer = {
     plansContainer: null, 
     midXPosArray:[], 
-    
+    // TODO: plansOnScreen:[], reloadAllPlans()
     initWithContainer: function(c) {
         MY_GLOBAL.typeChecker.assertIsJQueryObject(c);
         
