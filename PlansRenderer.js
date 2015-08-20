@@ -1,9 +1,12 @@
-MY_GLOBAL.plansRenderer = {
+MY_GLOBAL.plansManager.plansRenderer = {
     plansContainer: null, 
     midXPosArray:[], 
     
     initWithContainer: function(c) {
         MY_GLOBAL.typeChecker.assertIsJQueryObject(c);
+        
+        MY_GLOBAL.thumbnailsRenderer.initWithContainer($("#thumbnailsBar"));
+        MY_GLOBAL.graphsRenderer.initWithGraphsContainerInString('#graphsContainer');
         
         this.plansContainer = c;
     }, 

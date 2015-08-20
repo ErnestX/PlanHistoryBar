@@ -1,6 +1,6 @@
 'use strict';
 
-MY_GLOBAL.previewWindowRenderer = {
+MY_GLOBAL.plansManager.previewWindowRenderer = {
     previewWindow: null, 
     frontImage: null,
     backImage:null,
@@ -32,14 +32,10 @@ MY_GLOBAL.previewWindowRenderer = {
             this.frontImage.addClass('fadingIn');
 
             // Step2: once finished fading in, remove css animation and update the back image
+            var that = this;
             this.frontImage.one('animationend', function() {
-                MY_GLOBAL.
-                previewWindowRenderer.
-                frontImage.removeClass('fadingIn');
-
-                MY_GLOBAL.
-                previewWindowRenderer.
-                backImage.attr('src', newPlan.previewWindowSrc);
+                that.frontImage.removeClass('fadingIn');
+                that.backImage.attr('src', newPlan.previewWindowSrc);
             });
         }
     }, 

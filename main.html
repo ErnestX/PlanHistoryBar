@@ -33,10 +33,6 @@
         var activePhotoIndex = 0; // the initial index to select
         var screenSizeInNumOfPlan = 15;
     
-        MY_GLOBAL.plansRenderer.initWithContainer($("#thumbnailsBar"));
-        MY_GLOBAL.thumbnailsRenderer.initWithContainer($("#thumbnailsBar"));
-        MY_GLOBAL.graphsRenderer.initWithGraphsContainerInString('#graphsContainer');
-    
         MY_GLOBAL.plansManager.initWithMaxSize(screenSizeInNumOfPlan);
     
         MY_GLOBAL.plansManager.selectIndex(activePhotoIndex);

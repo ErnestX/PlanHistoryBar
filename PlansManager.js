@@ -10,7 +10,8 @@ MY_GLOBAL.plansManager = {
         MY_GLOBAL.typeChecker.assertIsInteger(s);
         
         // Step1: init components
-        MY_GLOBAL.previewWindowRenderer.initWithPreviewWindow($("#previewWindow"));
+        this.previewWindowRenderer.initWithPreviewWindow($("#previewWindow"));
+        this.plansRenderer.initWithContainer($("#thumbnailsBar"));
         
         // Step2: init self
         this.maxNumOfLoadedPlans = s;
@@ -99,13 +100,13 @@ MY_GLOBAL.plansManager = {
         }
         
         // Step3: highlight
-        MY_GLOBAL.plansRenderer.unhighlightAllPlansOnScreen();
+        this.plansRenderer.unhighlightAllPlansOnScreen();
         var planIndexInOnScreen =  planIndex - this.rangeLeft;
-        MY_GLOBAL.plansRenderer.highlightPlanOnScreenAtIndex(planIndexInOnScreen);
+        this.plansRenderer.highlightPlanOnScreenAtIndex(planIndexInOnScreen);
         console.log('selected ' + planIndex.toString());
         
         // Step4: render preview window
-        MY_GLOBAL.previewWindowRenderer.showPreviewForPlan(MY_GLOBAL.dataManager.getPlanAtIndex(planIndex));
+        this.previewWindowRenderer.showPreviewForPlan(MY_GLOBAL.dataManager.getPlanAtIndex(planIndex));
 
         return true;
     },
@@ -114,7 +115,7 @@ MY_GLOBAL.plansManager = {
         if (this.rangeLeft > 0) {
             var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeLeft - 1);
             if ((newPlan !== null) && (typeof(newPlan) !== 'undefined')) {
-                MY_GLOBAL.plansRenderer.prependPlan(newPlan);
+                this.plansRenderer.prependPlan(newPlan);
                 this.rangeLeft--;
             }
         }
@@ -123,7 +124,7 @@ MY_GLOBAL.plansManager = {
     tryAddNewPlanAtRight: function() {
         var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeRight + 1);
         if((newPlan !== null) && (typeof(newPlan) !== 'undefined')) {
-            MY_GLOBAL.plansRenderer.appendPlan(newPlan);   
+            this.plansRenderer.appendPlan(newPlan);   
             this.rangeRight++;
         }
     }, 
@@ -131,14 +132,14 @@ MY_GLOBAL.plansManager = {
     tryDeletePlanAtLeft: function() {
         if (this.rangeLeft <= this.rangeRight) {
             this.rangeLeft++;
-            MY_GLOBAL.plansRenderer.removeHeadPlan();
+            this.plansRenderer.removeHeadPlan();
         }
     }, 
     
     tryDeletePlanAtRight: function() {
         if (this.rangeRight >= 0) {
             this.rangeRight--;
-            MY_GLOBAL.plansRenderer.removeTailPlan();
+            this.plansRenderer.removeTailPlan();
         }
     }, 
     
