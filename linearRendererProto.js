@@ -1,6 +1,7 @@
-MY_GLOBAL.plansManager.plansRenderer.graphsRenderer = {
-    indicatorRendererArray:[], 
-    graphsContainerSnap:null,
+'use strict';
+
+MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
+    graphContainerSnap:null,
     // NOTE: invariable: circlesArray and linesArray are in order
     circlesArray:[],
     linesArray:[],
@@ -11,7 +12,7 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer = {
         if (container.charAt(0) === '#') {
             container = container.slice(1); // remove '#'
         }
-        this.graphsContainerSnap = Snap('#' + container);
+        this.graphContainerSnap = Snap('#' + container);
     },
     
     syncAllDataPointsXPosWithArray: function(midXPosArray) {
@@ -54,16 +55,16 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer = {
             var fromIndex;
             if (appendOrNot) {
                 fromIndex = this.circlesArray.length - 1;
-                newLine = this.graphsContainerSnap.line(this.circlesArray[fromIndex].attr('cx'), 
+                newLine = this.graphContainerSnap.line(this.circlesArray[fromIndex].attr('cx'), 
                                                         this.circlesArray[fromIndex].attr('cy'), 
                                                         midXPos, value);
             } else {
                 fromIndex = 0;
-                newLine = this.graphsContainerSnap.line(midXPos,value, 
+                newLine = this.graphContainerSnap.line(midXPos,value, 
                                                         this.circlesArray[fromIndex].attr('cx'), 
                                                         this.circlesArray[fromIndex].attr('cy'));
             }
-            var gradient = this.graphsContainerSnap.gradient("l(0, 1, 1, 1)#fff-#58585A:45-#58585A:55-#fff");
+            var gradient = this.graphContainerSnap.gradient("l(0, 1, 1, 1)#fff-#58585A:45-#58585A:55-#fff");
             newLine.attr({
                 opacity: 0.0,
                 stroke: gradient,//'#FFFFFF',
@@ -81,7 +82,7 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer = {
         }
         
         // add point
-        var newPoint = this.graphsContainerSnap.circle(midXPos, value, 5);
+        var newPoint = this.graphContainerSnap.circle(midXPos, value, 5);
         newPoint.attr({
             opacity: 0.0,
             fill:'#FFFFFF'
@@ -120,3 +121,4 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer = {
         }
     }
 };
+    
