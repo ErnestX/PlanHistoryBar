@@ -14,6 +14,8 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
         
         this.name = name;
         this.graphContainerSnap = container;
+        this.circlesArray = [];
+        this.linesArray = [];
     },
     
     syncAllDataPointsXPosWithArray: function(midXPosArray) {
@@ -48,7 +50,7 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
     },
     
     addDataPoint: function(p, midXPos, appendOrNot) {
-        var value = p.getValueOfIndicator('testing');
+        var value = p.getValueOfIndicator(this.metricName);
         
         // add line
         if (this.circlesArray.length > 0) {

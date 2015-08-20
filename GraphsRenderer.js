@@ -1,3 +1,5 @@
+"use strict";
+
 MY_GLOBAL.plansManager.plansRenderer.graphsRenderer = {
     indicatorRendererArray:[], 
     graphsContainerSnap:null,
@@ -8,15 +10,26 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer = {
         if (container.charAt(0) !== '#') {
             container = '#' + container;
         }
-        this.graphsContainerSnap = Snap(container);
         
-        this.appendLinearRendererForMetricName('testing');
+        this.indicatorRendererArray = [];
+        this.graphsContainerSnap = Snap(container);
     },
     
-    appendLinearRendererForMetricName(name) {
+    appendLinearRendererForMetricNameAndInitWithPlansAndMidXPoses(name, plans, poses) {
+        MY_GLOBAL.typeChecker.assertIsString(name);
+        MY_GLOBAL.assert(Array.isArray(plans));
+        MY_GLOBAL.assert(Array.isArray(poses));
+        
+        console.log(plans.length);
+        console.log(poses.length);
+        
         var newRenderer = Object.create(this.linearRendererProto);
         newRenderer.initWithNameAndGraphsSnapContainer(name, this.graphsContainerSnap);
         this.indicatorRendererArray.push(newRenderer);
+        
+        for (var i=0; i<plans.length; i++) {
+            newRenderer.appendDataPointFromPlanAtMidXPos(plans[i], poses[i]);
+        }
     }, 
     
     syncAllDataPointsXPosWithArray: function(midXPosArray) {

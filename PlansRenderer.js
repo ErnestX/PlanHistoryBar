@@ -1,14 +1,27 @@
+"use strict";
+
 MY_GLOBAL.plansManager.plansRenderer = {
     plansContainer: null, 
+    // invariable: midXPosArray.length = plansOnScreenCache.length
     midXPosArray:[], 
     plansOnScreenCache:[], 
     initWithContainer: function(c) {
         MY_GLOBAL.typeChecker.assertIsJQueryObject(c);
         
+        this.plansContainer = c;
+        this.midXPosArray = [];
+        this.plansOnScreenCache = [];
+        
         this.thumbnailsRenderer.initWithContainer($("#thumbnailsBar"));
         this.graphsRenderer.initWithGraphsContainerInString('#graphsContainer');
+        // init indicator renderers
+        this.graphsRenderer.appendLinearRendererForMetricNameAndInitWithPlansAndMidXPoses('testing', this.plansOnScreenCache, this.midXPosArray);
+    }, 
+    
+    appendLinearIndicatorWithMetricName(name) {
+        MY_GLOBAL.typeChecker.assertIsString(name);
         
-        this.plansContainer = c;
+        this.graphsRenderer.appendLinearRendererForMetricNameAndInitWithPlansAndMidXPoses(name, this.plansOnScreenCache, this.midXPosArray);
     }, 
     
     highlightPlanOnScreenAtIndex: function(index) {
@@ -54,14 +67,13 @@ MY_GLOBAL.plansManager.plansRenderer = {
                 + MY_GLOBAL.thumbnailPadding;
         }
         this.midXPosArray.push(newXPos);
+        this.plansOnScreenCache.push(p);
         
         this.thumbnailsRenderer.appendThumbnailFromPlanAtMidXPos(p, newXPos);
         this.graphsRenderer.appendDataPointFromPlanAtMidXPos(p, newXPos);
         
         this.thumbnailsRenderer.syncAllThumbnailsXPosWithArray(this.midXPosArray);
         this.graphsRenderer.syncAllDataPointsXPosWithArray(this.midXPosArray);
-        
-        this.plansOnScreenCache.push(p);
     }, 
     
     prependPlan: function(p) {
@@ -78,30 +90,29 @@ MY_GLOBAL.plansManager.plansRenderer = {
                 - MY_GLOBAL.thumbnailPadding;
         }
         this.midXPosArray.unshift(newXPos);
-    
+        this.plansOnScreenCache.unshift(p);
+        
         this.thumbnailsRenderer.prependThumbnailFromPlanAtMidXPos(p, newXPos);
         this.graphsRenderer.prependDataPointFromPlanAtMidXPos(p, newXPos);
         
         this.thumbnailsRenderer.syncAllThumbnailsXPosWithArray(this.midXPosArray);
         this.graphsRenderer.syncAllDataPointsXPosWithArray(this.midXPosArray);
-        
-        this.plansOnScreenCache.unshift(p);
     }, 
     
     removeHeadPlan: function() {
         this.midXPosArray.shift();
+        this.plansOnScreenCache.shift();
+        
         this.thumbnailsRenderer.removeHeadThumbnail();
         this.graphsRenderer.removeHeadDataPoint();
-        
-        this.plansOnScreenCache.shift();
     }, 
     
     removeTailPlan: function() {
         this.midXPosArray.pop();
+        this.plansOnScreenCache.pop();
+        
         this.thumbnailsRenderer.removeTailThumbnail();
         this.graphsRenderer.removeTailDataPoint();
-        
-        this.plansOnScreenCache.pop();
     }, 
     
     
