@@ -75,8 +75,13 @@
         });
         
         $("#addIndicator").click(function() {
-            MY_GLOBAL.plansManager.plansRenderer.appendLinearIndicatorWithMetricName('test2');
+            MY_GLOBAL.plansManager.
+            plansRenderer.
+            appendLinearIndicatorWithMetricName($("#metricsName").val());
         });
+        $("#removeIndicator").click(function() {
+            
+        })
     
         $("#debug").click(function() {
             if (MY_GLOBAL.plansManager.selectIndex(35)) {
@@ -104,7 +109,13 @@
             <button id="right">right</button>
             <button id="pageLeft">pageLeft</button>
             <button id="pageRight">pageRight</button>
+        </p>
+        <p>
             <button id="addIndicator">add indicator</button>
+            <input id='metricsName' type="text" id="myinput" value="metrics name" style="text-align:center;"/>
+            <button id="addIndicator">remove indicator</button>
+        </p>
+        <p>
             <button id="debug">don't click me!!!</button>
         </p>
     </div>

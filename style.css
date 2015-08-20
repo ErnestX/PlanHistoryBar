@@ -123,12 +123,12 @@ body {
 /* line 147, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 .leftShiftting {
   animation-name: shiftLeftAnimation;
-  animation-duration: 0.25s; }
+  animation-duration: 0.2s; }
 
 /* line 152, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 .rightShiftting {
   animation-name: shiftRightAnimation;
-  animation-duration: 0.25s; }
+  animation-duration: 0.2s; }
 
 /* line 157, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 .hidden {
@@ -137,12 +137,12 @@ body {
 /* line 161, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 .fadingIn {
   animation-name: fadeInAnimation;
-  animation-duration: 0.25s; }
+  animation-duration: 0.2s; }
 
 /* line 166, /Users/XJL_THINK/Dropbox/MyApps/2015SummerResearch/PlanHistoryBar/style.scss */
 .fadingOut {
   animation-name: fadeOutAnimation;
-  animation-duration: 0.25s; }
+  animation-duration: 0.2s; }
 
 @keyframes shiftLeftAnimation {
   0% {
