@@ -1,7 +1,7 @@
 MY_GLOBAL.plansManager.plansRenderer = {
     plansContainer: null, 
     midXPosArray:[], 
-    // TODO: plansOnScreen:[], reloadAllPlans()
+    plansOnScreenCache:[], 
     initWithContainer: function(c) {
         MY_GLOBAL.typeChecker.assertIsJQueryObject(c);
         
@@ -60,6 +60,8 @@ MY_GLOBAL.plansManager.plansRenderer = {
         
         this.thumbnailsRenderer.syncAllThumbnailsXPosWithArray(this.midXPosArray);
         this.graphsRenderer.syncAllDataPointsXPosWithArray(this.midXPosArray);
+        
+        this.plansOnScreenCache.push(p);
     }, 
     
     prependPlan: function(p) {
@@ -82,19 +84,26 @@ MY_GLOBAL.plansManager.plansRenderer = {
         
         this.thumbnailsRenderer.syncAllThumbnailsXPosWithArray(this.midXPosArray);
         this.graphsRenderer.syncAllDataPointsXPosWithArray(this.midXPosArray);
+        
+        this.plansOnScreenCache.unshift(p);
     }, 
     
     removeHeadPlan: function() {
         this.midXPosArray.shift();
         this.thumbnailsRenderer.removeHeadThumbnail();
         this.graphsRenderer.removeHeadDataPoint();
+        
+        this.plansOnScreenCache.shift();
     }, 
     
     removeTailPlan: function() {
         this.midXPosArray.pop();
         this.thumbnailsRenderer.removeTailThumbnail();
         this.graphsRenderer.removeTailDataPoint();
+        
+        this.plansOnScreenCache.pop();
     }, 
+    
     
     centerXPosRelativeToPlan: function(index) {
         if (isNaN(index) 
