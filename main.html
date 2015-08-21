@@ -76,12 +76,13 @@
         
         $("#addIndicator").click(function() {
             MY_GLOBAL.plansManager.
-            plansRenderer.
+            plansRenderer. // hack: shouldn't call planRenderer from here
             appendLinearIndicatorWithMetricName($("#metricsName").val());
         });
         $("#removeIndicator").click(function() {
-            
-        })
+            MY_GLOBAL.plansManager.plansRenderer.
+            deleteIndicatorByMetricsNameFromRow($("#metricsName").val(), 0);
+        });
     
         $("#debug").click(function() {
             if (MY_GLOBAL.plansManager.selectIndex(35)) {
@@ -113,7 +114,7 @@
         <p>
             <button id="addIndicator">add indicator</button>
             <input id='metricsName' type="text" id="myinput" value="metrics name" style="text-align:center;"/>
-            <button id="addIndicator">remove indicator</button>
+            <button id="removeIndicator">remove indicator</button>
         </p>
         <p>
             <button id="debug">don't click me!!!</button>

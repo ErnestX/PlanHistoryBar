@@ -15,13 +15,12 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer = {
         this.graphsContainerSnap = Snap(container);
     },
     
-    appendLinearRendererForMetricNameAndInitWithPlansAndMidXPoses(name, plans, poses) {
+    appendLinearRendererForMetricNameAndInitWithPlansAndMidXPoses: function(name, plans, poses) {
         MY_GLOBAL.typeChecker.assertIsString(name);
         MY_GLOBAL.assert(Array.isArray(plans));
         MY_GLOBAL.assert(Array.isArray(poses));
         
-        console.log(plans.length);
-        console.log(poses.length);
+        console.log('try to add: ' + name);
         
         var newRenderer = Object.create(this.linearRendererProto);
         newRenderer.initWithNameAndGraphsSnapContainer(name, this.graphsContainerSnap);
@@ -30,6 +29,28 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer = {
         for (var i=0; i<plans.length; i++) {
             newRenderer.appendDataPointFromPlanAtMidXPos(plans[i], poses[i]);
         }
+    }, 
+    
+    deleteIndicatorByMetricsNameFromRow: function(name, row) {
+        // TODO: row
+//        console.log(this.indicatorRendererArray[1].name);
+        var indexToDelete = this.getRendererIndexByName(name);
+        if (indexToDelete !== -1) {
+            this.indicatorRendererArray[indexToDelete].deleteGraph();
+            this.indicatorRendererArray.splice(indexToDelete, 1);
+            console.log('deleted ' + name);
+        } else {
+            console.log('unable to delete ' + name + ': indicator not found');
+        }
+    },
+    
+    getRendererIndexByName: function(name) {
+        for (var i=0; i<this.indicatorRendererArray.length; i++) {
+            if (name === this.indicatorRendererArray[i].metricsName) {
+                return i;
+            }
+        }
+        return -1; // not found
     }, 
     
     syncAllDataPointsXPosWithArray: function(midXPosArray) {

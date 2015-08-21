@@ -1,7 +1,7 @@
 'use strict';
 
 MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
-    metricName: '', 
+    metricsName: '', 
     graphContainerSnap:null,
     // NOTE: invariable: circlesArray and linesArray are in order
     circlesArray:[],
@@ -12,7 +12,7 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
         MY_GLOBAL.assert(typeof(container) !== 'undefined');
         MY_GLOBAL.assert(container !== null);
         
-        this.name = name;
+        this.metricsName = name;
         this.graphContainerSnap = container;
         this.circlesArray = [];
         this.linesArray = [];
@@ -50,7 +50,7 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
     },
     
     addDataPoint: function(p, midXPos, appendOrNot) {
-        var value = p.getValueOfIndicator(this.metricName);
+        var value = p.getValueOfIndicator(this.metricsName);
         
         // add line
         if (this.circlesArray.length > 0) {
@@ -121,6 +121,13 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
         if (typeof(this.linesArray[this.linesArray.length - 1]) !== 'undefined') {
             this.linesArray[this.linesArray.length - 1].remove();
             this.linesArray.pop();
+        }
+    }, 
+    
+    deleteGraph: function() {
+        var l = this.circlesArray.length;
+        for (var i=0; i<l; i++) {
+            this.removeTailDataPoint();
         }
     }
 };

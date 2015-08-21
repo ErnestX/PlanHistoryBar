@@ -18,12 +18,6 @@ MY_GLOBAL.plansManager.plansRenderer = {
         this.graphsRenderer.appendLinearRendererForMetricNameAndInitWithPlansAndMidXPoses('testing', this.plansOnScreenCache, this.midXPosArray);
     }, 
     
-    appendLinearIndicatorWithMetricName(name) {
-        MY_GLOBAL.typeChecker.assertIsString(name);
-        
-        this.graphsRenderer.appendLinearRendererForMetricNameAndInitWithPlansAndMidXPoses(name, this.plansOnScreenCache, this.midXPosArray);
-    }, 
-    
     highlightPlanOnScreenAtIndex: function(index) {
         for (var i=0; i<this.midXPosArray.length; i++) {
             if (i < index) {
@@ -115,7 +109,6 @@ MY_GLOBAL.plansManager.plansRenderer = {
         this.graphsRenderer.removeTailDataPoint();
     }, 
     
-    
     centerXPosRelativeToPlan: function(index) {
         if (isNaN(index) 
             || typeof(this.midXPosArray[index]) === 'undefined') {
@@ -144,5 +137,15 @@ MY_GLOBAL.plansManager.plansRenderer = {
         for (var i=0; i<this.midXPosArray.length; i++) {
             this.midXPosArray[i] += translation;
         }
+    }, 
+    
+    appendLinearIndicatorWithMetricName(name) {
+        MY_GLOBAL.typeChecker.assertIsString(name);
+        this.graphsRenderer.
+        appendLinearRendererForMetricNameAndInitWithPlansAndMidXPoses(name, this.plansOnScreenCache, this.midXPosArray);
+    }, 
+    
+    deleteIndicatorByMetricsNameFromRow: function(name, row) {
+        this.graphsRenderer.deleteIndicatorByMetricsNameFromRow(name, row);
     }
 };
