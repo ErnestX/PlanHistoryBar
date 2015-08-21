@@ -1,7 +1,7 @@
 "use strict";
 
 MY_GLOBAL.dataManager = {
-    plansStore:[], 
+    _plansStore:[], 
     addPlanInitedWithParas: function(name, src, timeStamp) {
         MY_GLOBAL.typeChecker.assertIsString(name);
         MY_GLOBAL.typeChecker.assertIsString(src);
@@ -11,7 +11,7 @@ MY_GLOBAL.dataManager = {
         var newPlan = Object.create(MY_GLOBAL.planProto);
         newPlan.initWithFields(newDate, name, src, src);
         
-        this.plansStore.push(newPlan);
+        this._plansStore.push(newPlan);
     },
     
     /*
@@ -19,6 +19,6 @@ MY_GLOBAL.dataManager = {
     */
     getPlanAtIndex: function(index) {
         MY_GLOBAL.typeChecker.assertIsInteger(index);
-        return this.plansStore[index];
+        return this._plansStore[index];
     }
 };

@@ -1,10 +1,10 @@
 "use strict";
 
 MY_GLOBAL.plansManager = {
-    maxNumOfLoadedPlans: 0,
-    /* invariant: rangeRight - rangeLeft + 1 <= maxNumOfLoadedPlans */
-    rangeLeft: 0, 
-    rangeRight: -1, 
+    _maxNumOfLoadedPlans: 0,
+    /* invariant: _rangeRight - _rangeLeft + 1 <= _maxNumOfLoadedPlans */
+    _rangeLeft: 0, 
+    _rangeRight: -1, 
 
     initWithMaxSize: function(s) {
         MY_GLOBAL.typeChecker.assertIsInteger(s);
@@ -14,8 +14,8 @@ MY_GLOBAL.plansManager = {
         this.plansRenderer.initWithContainer($("#thumbnailsBar"));
         
         // Step2: init self
-        this.maxNumOfLoadedPlans = s;
-        this.resetWithRangeLeft(0);
+        this._maxNumOfLoadedPlans = s;
+        this._resetWithRangeLeft(0);
     }, 
     
     selectIndex: function(planIndex) {
@@ -27,81 +27,81 @@ MY_GLOBAL.plansManager = {
         
         // calc target range
         var targetLeft, targetRight;
-        if (this.maxNumOfLoadedPlans % 2 === 0) { //even
+        if (this._maxNumOfLoadedPlans % 2 === 0) { //even
             // ...(size/2)plans ... selectedPlan ... (size/2 - 1)plans...
-            targetLeft = planIndex - (this.maxNumOfLoadedPlans/2);
-            targetRight = planIndex + (this.maxNumOfLoadedPlans/2 - 1);
+            targetLeft = planIndex - (this._maxNumOfLoadedPlans/2);
+            targetRight = planIndex + (this._maxNumOfLoadedPlans/2 - 1);
         } else { //odd
             // ...((size-1)/2)plans ... selectedPlan ... ((size-1)/2)plans...
-            targetLeft = planIndex - (this.maxNumOfLoadedPlans-1)/2;
-            targetRight = planIndex + (this.maxNumOfLoadedPlans-1)/2;
+            targetLeft = planIndex - (this._maxNumOfLoadedPlans-1)/2;
+            targetRight = planIndex + (this._maxNumOfLoadedPlans-1)/2;
         }
 //        console.log('tl:' + targetLeft.toString() + ', tr:' + targetRight.toString());
         
         // check whether the target range is within one screen
-        if ((targetLeft <= this.rangeLeft) && (this.rangeLeft <= targetRight) 
-            && (targetRight <= this.rangeRight)) {
+        if ((targetLeft <= this._rangeLeft) && (this._rangeLeft <= targetRight) 
+            && (targetRight <= this._rangeRight)) {
             // tl...rl...tr...rr
             // Step1: remove  tr+1...rr
-            var r = this.rangeRight; // have to create const r b/c rangeRight changes within the loop when a plan gets deleted
+            var r = this._rangeRight; // have to create const r b/c _rangeRight changes within the loop when a plan gets deleted
             for (var i=targetRight+1; i<=r; i++) {
-                this.tryDeletePlanAtRight();
+                this._tryDeletePlanAtRight();
             }
             // Step2: add tl...rl-1
-            var l = this.rangeLeft;
+            var l = this._rangeLeft;
             for (var i=targetLeft; i<=l-1; i++) {
-                this.tryAddNewPlanAtLeft();
+                this._tryAddNewPlanAtLeft();
             }
             console.log('case 1');
-        } else if ((this.rangeLeft <= targetLeft) && (targetLeft <= this.rangeRight) 
-                   && (this.rangeRight <= targetRight)) {
+        } else if ((this._rangeLeft <= targetLeft) && (targetLeft <= this._rangeRight) 
+                   && (this._rangeRight <= targetRight)) {
             // rl...tl...rr...tr
             // Step1: remove rl...tl-1
-            for (var i=this.rangeLeft; i<= targetLeft-1; i++) {
-                this.tryDeletePlanAtLeft();
+            for (var i=this._rangeLeft; i<= targetLeft-1; i++) {
+                this._tryDeletePlanAtLeft();
             }
             // Step2: add rr+1...tr
-            for (var i=this.rangeRight+1; i<=targetRight; i++) {
-                this.tryAddNewPlanAtRight();
+            for (var i=this._rangeRight+1; i<=targetRight; i++) {
+                this._tryAddNewPlanAtRight();
             }
             console.log('case 2');
-        } else if ((targetLeft >= this.rangeLeft) && (targetRight <= this.rangeRight)) {
+        } else if ((targetLeft >= this._rangeLeft) && (targetRight <= this._rangeRight)) {
             // rl...tl...tr...rr
             // Step1: remove rl..tl-1
-            for (var i=this.rangeLeft; i<=targetLeft-1; i++) {
-                this.tryDeletePlanAtLeft();
+            for (var i=this._rangeLeft; i<=targetLeft-1; i++) {
+                this._tryDeletePlanAtLeft();
             }
             // Step2: remove tr+1...rr
-            var r = this.rangeRight;
+            var r = this._rangeRight;
             for (var i=targetRight+1; i<=r; i++) {
-                this.tryDeletePlanAtRight();
+                this._tryDeletePlanAtRight();
             }
             console.log('case 3');
-        } else if ((this.rangeLeft >= targetLeft) && (this.rangeRight <= targetRight)) {
+        } else if ((this._rangeLeft >= targetLeft) && (this._rangeRight <= targetRight)) {
             // tl...rl...rr...tr
             // Step1: add tl...rl-1
-            var l = this.rangeLeft;
+            var l = this._rangeLeft;
             for (var i=targetLeft; i<=l-1; i++) {
-                this.tryAddNewPlanAtLeft();
+                this._tryAddNewPlanAtLeft();
             }
             // Step2: add rr+1...tr
-            for (var i=this.rangeRight+1; i<=targetRight; i++) {
-                this.tryAddNewPlanAtRight();
+            for (var i=this._rangeRight+1; i<=targetRight; i++) {
+                this._tryAddNewPlanAtRight();
             }
             console.log('case 4');
-        } else if(targetRight <= this.rangeLeft) {
+        } else if(targetRight <= this._rangeLeft) {
             // tl...tr...rl...rr
-            this.resetWithRangeRight(targetRight);
+            this._resetWithRangeRight(targetRight);
             console.log('case 5');
-        } else if(this.rangeRight <= targetLeft) {
+        } else if(this._rangeRight <= targetLeft) {
             // rl...rr...tl...tr
-            this.resetWithRangeLeft(targetLeft);
+            this._resetWithRangeLeft(targetLeft);
             console.log('case 6');
         }
         
         // Step3: highlight
         this.plansRenderer.unhighlightAllPlansOnScreen();
-        var planIndexInOnScreen =  planIndex - this.rangeLeft;
+        var planIndexInOnScreen =  planIndex - this._rangeLeft;
         this.plansRenderer.highlightPlanOnScreenAtIndex(planIndexInOnScreen);
         console.log('selected ' + planIndex.toString());
         
@@ -111,74 +111,74 @@ MY_GLOBAL.plansManager = {
         return true;
     },
     
-    tryAddNewPlanAtLeft: function() {
-        if (this.rangeLeft > 0) {
-            var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeLeft - 1);
+    _tryAddNewPlanAtLeft: function() {
+        if (this._rangeLeft > 0) {
+            var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this._rangeLeft - 1);
             if ((newPlan !== null) && (typeof(newPlan) !== 'undefined')) {
                 this.plansRenderer.prependPlan(newPlan);
-                this.rangeLeft--;
+                this._rangeLeft--;
             }
         }
     }, 
     
-    tryAddNewPlanAtRight: function() {
-        var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this.rangeRight + 1);
+    _tryAddNewPlanAtRight: function() {
+        var newPlan = MY_GLOBAL.dataManager.getPlanAtIndex(this._rangeRight + 1);
         if((newPlan !== null) && (typeof(newPlan) !== 'undefined')) {
             this.plansRenderer.appendPlan(newPlan);   
-            this.rangeRight++;
+            this._rangeRight++;
         }
     }, 
     
-    tryDeletePlanAtLeft: function() {
-        if (this.rangeLeft <= this.rangeRight) {
-            this.rangeLeft++;
+    _tryDeletePlanAtLeft: function() {
+        if (this._rangeLeft <= this._rangeRight) {
+            this._rangeLeft++;
             this.plansRenderer.removeHeadPlan();
         }
     }, 
     
-    tryDeletePlanAtRight: function() {
-        if (this.rangeRight >= 0) {
-            this.rangeRight--;
+    _tryDeletePlanAtRight: function() {
+        if (this._rangeRight >= 0) {
+            this._rangeRight--;
             this.plansRenderer.removeTailPlan();
         }
     }, 
     
     /* animates from left to right */
-    resetWithRangeLeft: function(rl) {
+    _resetWithRangeLeft: function(rl) {
         if (rl < 0) {
             rl = 0;
         }
         // Step1: delete everything
-        var r = this.rangeRight;
-        for (var i=this.rangeLeft; i<=r; i++) {
-            this.tryDeletePlanAtRight();
+        var r = this._rangeRight;
+        for (var i=this._rangeLeft; i<=r; i++) {
+            this._tryDeletePlanAtRight();
         }
 
         // Step2: reset ranges
-        this.rangeLeft = rl;
-        this.rangeRight = rl-1;
+        this._rangeLeft = rl;
+        this._rangeRight = rl-1;
 
         // Step3: load
-        for (var i=0; i < this.maxNumOfLoadedPlans; i++) { // try get full size
-            this.tryAddNewPlanAtRight();
+        for (var i=0; i < this._maxNumOfLoadedPlans; i++) { // try get full size
+            this._tryAddNewPlanAtRight();
         }
     }, 
     
     /* animates from right to left */
-    resetWithRangeRight: function(rr) {
+    _resetWithRangeRight: function(rr) {
         // Step1: delete everything
-        var r = this.rangeRight;
-        for (var i=this.rangeLeft; i<=r; i++) {
-            this.tryDeletePlanAtLeft();
+        var r = this._rangeRight;
+        for (var i=this._rangeLeft; i<=r; i++) {
+            this._tryDeletePlanAtLeft();
         }
 
         // Step2: reset ranges
-        this.rangeRight = rr;
-        this.rangeLeft = rr+1;
+        this._rangeRight = rr;
+        this._rangeLeft = rr+1;
 
         // Step3: load
-        for (var i=0; i < this.maxNumOfLoadedPlans; i++) { // try get full size
-            this.tryAddNewPlanAtLeft();
+        for (var i=0; i < this._maxNumOfLoadedPlans; i++) { // try get full size
+            this._tryAddNewPlanAtLeft();
         }
     }
 };
