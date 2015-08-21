@@ -33,7 +33,6 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer = {
     
     deleteIndicatorByMetricsNameFromRow: function(name, row) {
         // TODO: row
-//        console.log(this.indicatorRendererArray[1].name);
         var indexToDelete = this.getRendererIndexByName(name);
         if (indexToDelete !== -1) {
             this.indicatorRendererArray[indexToDelete].deleteGraph();
