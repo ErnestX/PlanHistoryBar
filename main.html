@@ -77,11 +77,11 @@
         $("#addIndicator").click(function() {
             MY_GLOBAL.plansManager.
             plansRenderer. // hack: shouldn't call planRenderer from here
-            appendLinearIndicatorWithMetricName($("#metricsName").val());
+            appendLinearIndicatorWithMetricName($("#metricsNameAddIndicator").val());
         });
         $("#removeIndicator").click(function() {
             MY_GLOBAL.plansManager.plansRenderer.
-            deleteIndicatorByMetricsNameFromRow($("#metricsName").val(), 0);
+            deleteIndicatorByMetricsNameFromRow($("#metricsNameRemoveIndicator").val(), 0);
         });
     
         $("#debug").click(function() {
@@ -112,9 +112,19 @@
             <button id="pageRight">pageRight</button>
         </p>
         <p>
-            <button id="addIndicator">add indicator</button>
-            <input id='metricsName' type="text" id="myinput" value="metrics name" style="text-align:center;"/>
-            <button id="removeIndicator">remove indicator</button>
+            <button id="addIndicator">add indicator with name onto row:</button>
+            <input id='metricsNameAddIndicator' type="text" value="metrics name" style="text-align:center;"/>
+            <input id='rowNumAddIndicator' type="text" value="row number" style="text-align:center;"/>
+        </p>
+        <p>
+            <button id="removeIndicator">remove indicator with name from row:</button>
+            <input id='metricsNameRemoveIndicator' type="text" value="metrics name" style="text-align:center;"/>
+            <input id='rowNumRemoveIndicator' type="text" value="row number" style="text-align:center;"/>
+        </p>
+        <p>
+            <button id="addRow">add row at bottom</button>
+            <button id="addRowAbove">add row above row:</button>
+            <input id='rowNumAddRow' type="text" value="row number" style="text-align:center;"/>
         </p>
         <p>
             <button id="debug">don't click me!!!</button>
