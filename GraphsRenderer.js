@@ -55,10 +55,22 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer = {
     }, 
     
     syncAllDataPointsXPosWithArray: function(midXPosArray) {
-        for (var i=0; i<this._indicatorRendererArray.length; i++) {
-            this._indicatorRendererArray[i].syncAllDataPointsXPosWithArray(midXPosArray);
+        var duration = MY_GLOBAL.animationDurationInS;
+        var timer = 0.0;
+        var that = this;
+        paper.view.onFrame = function(event) {
+            if (timer < duration) {
+                for (var i=0; i<that._indicatorRendererArray.length; i++) {
+                    that._indicatorRendererArray[i].
+                    syncAllDataPointsXPosWithArrayOneFrame(midXPosArray, event, duration, timer);
+                }
+            } else {
+                for (var i=0; i<that._indicatorRendererArray.length; i++) {
+                    that._indicatorRendererArray[i].syncAllDataPointsXPosWithArray(midXPosArray);
+                }
+            }
+            timer += event.delta;
         }
-        paper.view.draw();
     }, 
     
     appendDataPointFromPlanAtMidXPos: function(p, midXPos) {

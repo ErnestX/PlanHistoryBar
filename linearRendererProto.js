@@ -19,27 +19,38 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
     },
     
     syncAllDataPointsXPosWithArray: function(midXPosArray) {
-        var duration = MY_GLOBAL.animationDurationInS;
-        var timer = 0.0;
-        var speeds = [];
-        
         for(var i=0; i<this._circlesArray.length; i++) {
-            speeds[i] = (midXPosArray[i] - this._circlesArray[i].position.x) / duration;
+            this._circlesArray[i].position.x = midXPosArray[i];
         }
+    },
+    
+    syncAllDataPointsXPosWithArrayOneFrame: function(midXPosArray, event, duration, timer) {
+//        var duration = MY_GLOBAL.animationDurationInS;
+//        var timer = 0.0;
+//        var speeds = [];
         
-        var that = this;
-        paper.view.onFrame = function(event) {
-            // points
-            timer += event.delta; // somehow this have to be put before the translation, or there's always one frame less animated. 
-            for(var i=0; i<that._circlesArray.length; i++) {
-                if (timer < duration) {
-                    var translation = speeds[i] * event.delta; 
-                    that._circlesArray[i].position.x += translation;    
-                } else {
-                    that._circlesArray[i].position.x = midXPosArray[i];
-                }
+//        for(var i=0; i<this._circlesArray.length; i++) {
+//            speeds[i] = (midXPosArray[i] - this._circlesArray[i].position.x) / duration;
+//        }
+        
+//        var that = this;
+//        paper.view.onFrame = function(event) {
+//            // points
+//            timer += event.delta; // somehow this have to be put before the translation, or there's always one frame less animated. 
+            for(var i=0; i<this._circlesArray.length; i++) {
+//                if (timer < duration) {
+                    var distanceLeft = midXPosArray[i] - this._circlesArray[i].position.x;
+                    var timeLeft = duration - timer;
+                    var translationPerSec = distanceLeft / timeLeft;
+                    var secsPassedLastFrame = event.delta;
+                    var translation = translationPerSec * secsPassedLastFrame;
+//                    var translation = speeds[i] * event.delta; 
+                    this._circlesArray[i].position.x += translation;    
+//                } else {
+//                    that._circlesArray[i].position.x = midXPosArray[i];
+//                }
             }
-        }
+//        }
     
     //        // lines
     //        for(var i=0; i<this._linesArray.length; i++) {
