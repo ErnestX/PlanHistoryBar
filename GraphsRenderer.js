@@ -2,17 +2,17 @@
 
 MY_GLOBAL.plansManager.plansRenderer.graphsRenderer = {
     _indicatorRendererArray:[], 
-    _graphsContainerSnap:null,
+    _graphsCanvasPaper:null,
     
-    initWithGraphsContainerInString: function(container) {
-        MY_GLOBAL.typeChecker.assertIsString(container);
+    initWithGraphsContainerInString: function(containerID) {
+        MY_GLOBAL.typeChecker.assertIsString(containerID);
         
-        if (container.charAt(0) !== '#') {
-            container = '#' + container;
+        if (containerID.charAt(0) === '#') {
+            containerID = containerID.substr(1);
         }
         
         this._indicatorRendererArray = [];
-        this._graphsContainerSnap = Snap(container);
+        this._graphsCanvasPaper = paper.setup(containerID);
     },
     
     appendLinearRendererForMetricNameAndInitWithPlansAndMidXPoses: function(name, plans, poses) {
@@ -23,7 +23,7 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer = {
         console.log('try to add: ' + name);
         
         var newRenderer = Object.create(this.linearRendererProto);
-        newRenderer.initWithNameAndGraphsSnapContainer(name, this._graphsContainerSnap);
+        newRenderer.initWithMetricsNameAndPaperCanvas(name, this._graphsCanvasPaper);
         this._indicatorRendererArray.push(newRenderer);
         
         for (var i=0; i<plans.length; i++) {

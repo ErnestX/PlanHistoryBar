@@ -5,6 +5,7 @@
     <script src="jquery-1.11.3.js"></script>
     <script src="velocity.js"></script>
     <script src="snap.svg-min.js"></script>
+    <script src="paper-core.js"></script>
     
     <script src="Helpers.js"></script>    
     <script src="PlansManager.js"></script>
@@ -32,7 +33,7 @@
         }
 
         var activePhotoIndex = 0; // the initial index to select
-        var screenSizeInNumOfPlan = 15;
+        var screenSizeInNumOfPlan = 5;
     
         MY_GLOBAL.plansManager.initWithMaxSize(screenSizeInNumOfPlan);
     
@@ -99,7 +100,7 @@
     <div id="bodyContainer">
         <div id="plansOuterContainer"> <!-- used to mask the plansContainer -->
             <div id="plansContainer">
-                <svg id="graphsContainer"></svg>
+                <canvas id="graphsContainer"></canvas>
                 <div id="thumbnailsBar"></div> <!-- the array of plans -->
             </div>
         </div>
