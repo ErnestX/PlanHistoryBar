@@ -9,7 +9,7 @@ MY_GLOBAL.plansManager.plansRenderer.thumbnailsRenderer = {
     
     syncAllThumbnailsXPosWithArray: function(midXPosArray) {
         for(var i=0; i<this._thumbnailsContainer.children().length; i++) {
-            this._thumbnailsContainer.children().eq(i).velocity({left: this._midXPosToLeftEdgePos(midXPosArray[i]).toString()}, {queue: false, duration: MY_GLOBAL.animationDuration});
+            this._thumbnailsContainer.children().eq(i).velocity({left: this._midXPosToLeftEdgePos(midXPosArray[i]).toString()}, {queue: false, duration: MY_GLOBAL.animationDurationInMS});
         }
     }, 
     
@@ -19,7 +19,7 @@ MY_GLOBAL.plansManager.plansRenderer.thumbnailsRenderer = {
         
         newPlanJQuery.css('opacity', 0);
         this._thumbnailsContainer.append(newPlanJQuery);
-        newPlanJQuery.velocity({opacity: 1.0}, {queue: false, duration: MY_GLOBAL.animationDuration});
+        newPlanJQuery.velocity({opacity: 1.0}, {queue: false, duration: MY_GLOBAL.animationDurationInMS});
     },
     
     prependThumbnailFromPlanAtMidXPos: function(p, midXPos) {
@@ -28,7 +28,7 @@ MY_GLOBAL.plansManager.plansRenderer.thumbnailsRenderer = {
         
         newPlanJQuery.css('opacity', 0);
         this._thumbnailsContainer.prepend(newPlanJQuery);
-        newPlanJQuery.velocity({opacity: 1.0}, {queue: false, duration: MY_GLOBAL.animationDuration});
+        newPlanJQuery.velocity({opacity: 1.0}, {queue: false, duration: MY_GLOBAL.animationDurationInMS});
     },
     
     removeHeadThumbnail: function() {

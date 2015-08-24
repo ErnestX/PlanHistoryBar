@@ -19,7 +19,7 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
     },
     
     syncAllDataPointsXPosWithArray: function(midXPosArray) {
-        var duration = 0.2;
+        var duration = MY_GLOBAL.animationDurationInS;
         var timer = 0.0;
         var speeds = [];
         
@@ -30,26 +30,17 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
         var that = this;
         paper.view.onFrame = function(event) {
             // points
+            timer += event.delta; // somehow this have to be put before the translation, or there's always one frame less animated. 
             for(var i=0; i<that._circlesArray.length; i++) {
                 if (timer < duration) {
-//                    var distanceLeft = midXPosArray[i] - that._circlesArray[i].position.x;
-//                    var timeLeft = duration - timer;
-//                    var translationPerSec = distanceLeft / timeLeft;
-//                    var secsPassedLastFrame = event.delta;
-                    var translation = speeds[i] * event.delta; //translationPerSec * secsPassedLastFrame;
+                    var translation = speeds[i] * event.delta; 
                     that._circlesArray[i].position.x += translation;    
-                    console.log(translation);
                 } else {
                     that._circlesArray[i].position.x = midXPosArray[i];
                 }
             }
-            timer += event.delta;
         }
-    //        for(var i=0; i<this._circlesArray.length; i++) {
-    //            $(this._circlesArray[i].node).velocity({cx: midXPosArray[i].toString()}, 
-    //                                                  {queue: false, duration: MY_GLOBAL.animationDuration});
-    //        }
-    //        
+    
     //        // lines
     //        for(var i=0; i<this._linesArray.length; i++) {
     //            var x1To, x2To;
@@ -62,7 +53,7 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
     //            }
     //            
     //            $(this._linesArray[i].node).velocity({x1: x1To, x2: x2To}, 
-    //                                                {queue: false, duration: MY_GLOBAL.animationDuration});
+    //                                                {queue: false, duration: MY_GLOBAL.animationDurationInMS});
     //        }
     }, 
     
@@ -100,7 +91,7 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
 //                strokeWidth: 2
 //            });
 //            
-//            $(newLine.node).velocity({opacity: 1.0}, {queue: false, duration: MY_GLOBAL.animationDuration});
+//            $(newLine.node).velocity({opacity: 1.0}, {queue: false, duration: MY_GLOBAL.animationDurationInMS});
 //            
 //            if (appendOrNot) {
 //                this._linesArray.push(newLine);
@@ -127,7 +118,7 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
 //            fill:'#FFFFFF'
 //        });
 //        
-//        $(newPoint.node).velocity({opacity: 1.0}, {queue: false, duration: MY_GLOBAL.animationDuration});
+//        $(newPoint.node).velocity({opacity: 1.0}, {queue: false, duration: MY_GLOBAL.animationDurationInMS});
         
 //        if (appendOrNot) {
 //            this._circlesArray.push(newPoint);
