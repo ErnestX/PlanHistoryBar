@@ -19,30 +19,51 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
     },
     
     syncAllDataPointsXPosWithArray: function(midXPosArray) {
-        // points
+        var duration = 0.2;
+        var timer = 0.0;
+        var speeds = [];
         
         for(var i=0; i<this._circlesArray.length; i++) {
-            this._circlesArray[i].position.x = midXPosArray[i];
+            speeds[i] = (midXPosArray[i] - this._circlesArray[i].position.x) / duration;
         }
-//        for(var i=0; i<this._circlesArray.length; i++) {
-//            $(this._circlesArray[i].node).velocity({cx: midXPosArray[i].toString()}, 
-//                                                  {queue: false, duration: MY_GLOBAL.animationDuration});
-//        }
-//        
-//        // lines
-//        for(var i=0; i<this._linesArray.length; i++) {
-//            var x1To, x2To;
-//            if (midXPosArray[i] < midXPosArray[i+1]) {
-//                x1To = midXPosArray[i].toString();
-//                x2To = midXPosArray[i+1].toString();
-//            } else {
-//                x1To = midXPosArray[i+1].toString();
-//                x2To = midXPosArray[i].toString();
-//            }
-//            
-//            $(this._linesArray[i].node).velocity({x1: x1To, x2: x2To}, 
-//                                                {queue: false, duration: MY_GLOBAL.animationDuration});
-//        }
+        
+        var that = this;
+        paper.view.onFrame = function(event) {
+            // points
+            for(var i=0; i<that._circlesArray.length; i++) {
+                if (timer < duration) {
+//                    var distanceLeft = midXPosArray[i] - that._circlesArray[i].position.x;
+//                    var timeLeft = duration - timer;
+//                    var translationPerSec = distanceLeft / timeLeft;
+//                    var secsPassedLastFrame = event.delta;
+                    var translation = speeds[i] * event.delta; //translationPerSec * secsPassedLastFrame;
+                    that._circlesArray[i].position.x += translation;    
+                    console.log(translation);
+                } else {
+                    that._circlesArray[i].position.x = midXPosArray[i];
+                }
+            }
+            timer += event.delta;
+        }
+    //        for(var i=0; i<this._circlesArray.length; i++) {
+    //            $(this._circlesArray[i].node).velocity({cx: midXPosArray[i].toString()}, 
+    //                                                  {queue: false, duration: MY_GLOBAL.animationDuration});
+    //        }
+    //        
+    //        // lines
+    //        for(var i=0; i<this._linesArray.length; i++) {
+    //            var x1To, x2To;
+    //            if (midXPosArray[i] < midXPosArray[i+1]) {
+    //                x1To = midXPosArray[i].toString();
+    //                x2To = midXPosArray[i+1].toString();
+    //            } else {
+    //                x1To = midXPosArray[i+1].toString();
+    //                x2To = midXPosArray[i].toString();
+    //            }
+    //            
+    //            $(this._linesArray[i].node).velocity({x1: x1To, x2: x2To}, 
+    //                                                {queue: false, duration: MY_GLOBAL.animationDuration});
+    //        }
     }, 
     
     appendDataPointFromPlanAtMidXPos: function(p, midXPos) {
