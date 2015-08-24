@@ -20,8 +20,9 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
     
     syncAllDataPointsXPosWithArray: function(midXPosArray) {
         // points
+        
         for(var i=0; i<this._circlesArray.length; i++) {
-            
+            this._circlesArray[i].position.x = midXPosArray[i];
         }
 //        for(var i=0; i<this._circlesArray.length; i++) {
 //            $(this._circlesArray[i].node).velocity({cx: midXPosArray[i].toString()}, 
