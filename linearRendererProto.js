@@ -19,7 +19,10 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
     },
     
     syncAllDataPointsXPosWithArray: function(midXPosArray) {
-//        // points
+        // points
+        for(var i=0; i<this._circlesArray.length; i++) {
+            
+        }
 //        for(var i=0; i<this._circlesArray.length; i++) {
 //            $(this._circlesArray[i].node).velocity({cx: midXPosArray[i].toString()}, 
 //                                                  {queue: false, duration: MY_GLOBAL.animationDuration});
@@ -87,9 +90,15 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
         // add point
         console.log("try adding point");
         var newPoint = new paper.Point(midXPos, value);
-        var newCircle = new paper.Path.Circle(newPoint, 50);
+        var newCircle = new paper.Path.Circle(newPoint, 5);
         newCircle.fillColor = 'white';
-        paper.view.draw();
+        
+        if (appendOrNot) {
+            this._circlesArray.push(newCircle);
+        } else {
+            this._circlesArray.unshift(newCircle);
+        }
+        
 //        var newPoint = this._graphsCanvasPaper.circle(midXPos, value, 5);
 //        newPoint.attr({
 //            opacity: 0.0,
@@ -98,14 +107,15 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
 //        
 //        $(newPoint.node).velocity({opacity: 1.0}, {queue: false, duration: MY_GLOBAL.animationDuration});
         
-        if (appendOrNot) {
-            this._circlesArray.push(newPoint);
-        } else {
-            this._circlesArray.unshift(newPoint);
-        }
+//        if (appendOrNot) {
+//            this._circlesArray.push(newPoint);
+//        } else {
+//            this._circlesArray.unshift(newPoint);
+//        }
     },
     
     removeHeadDataPoint: function() {
+        console.log('try to remove head');
         if (typeof(this._circlesArray[0]) !== 'undefined') {
             this._circlesArray[0].remove();
             this._circlesArray.shift();
@@ -118,6 +128,7 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
     }, 
     
     removeTailDataPoint: function() {
+        console.log('try to remove tail');
         if (typeof(this._circlesArray[this._circlesArray.length - 1]) !== 'undefined') {
             this._circlesArray[this._circlesArray.length - 1].remove();
             this._circlesArray.pop();

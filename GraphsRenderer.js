@@ -29,6 +29,7 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer = {
         for (var i=0; i<plans.length; i++) {
             newRenderer.appendDataPointFromPlanAtMidXPos(plans[i], poses[i]);
         }
+        paper.view.draw();
     }, 
     
     deleteIndicatorByMetricsNameFromRow: function(name, row) {
@@ -41,6 +42,7 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer = {
         } else {
             console.log('unable to delete ' + name + ': indicator not found');
         }
+        paper.view.draw();
     },
     
     getRendererIndexByName: function(name) {
@@ -56,29 +58,34 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer = {
         for (var i=0; i<this._indicatorRendererArray.length; i++) {
             this._indicatorRendererArray[i].syncAllDataPointsXPosWithArray(midXPosArray);
         }
+        paper.view.draw();
     }, 
     
     appendDataPointFromPlanAtMidXPos: function(p, midXPos) {
         for (var i=0; i<this._indicatorRendererArray.length; i++) {
             this._indicatorRendererArray[i].appendDataPointFromPlanAtMidXPos(p, midXPos);
         }
+        paper.view.draw();
     }, 
     
     prependDataPointFromPlanAtMidXPos: function(p, midXPos) {
         for (var i=0; i<this._indicatorRendererArray.length; i++) {
             this._indicatorRendererArray[i].prependDataPointFromPlanAtMidXPos(p, midXPos);
         }
+        paper.view.draw();
     },
     
     removeHeadDataPoint: function() {
         for (var i=0; i<this._indicatorRendererArray.length; i++) {
             this._indicatorRendererArray[i].removeHeadDataPoint();
         }
+        paper.view.draw();
     }, 
     
     removeTailDataPoint: function() {
         for (var i=0; i<this._indicatorRendererArray.length; i++) {
             this._indicatorRendererArray[i].removeTailDataPoint();
         }
+        paper.view.draw();
     }
 };
