@@ -56,6 +56,14 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer = {
     
     syncAllDataPointsXPosWithArray: function(midXPosArray) {
         var duration = MY_GLOBAL.animationDurationInS;
+        
+        // step1: calc all speeds
+        var speedss = []; // 2D array
+        for (var i=0; i<this._indicatorRendererArray.length; i++) {
+                    speedss[i] = this._indicatorRendererArray[i].
+                    calcXTranslationSpeedsGivenDurationAndDestinations(midXPosArray, duration);
+        }
+        
         var timer = 0.0;
         var that = this;
         paper.view.onFrame = function(event) {
@@ -63,7 +71,7 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer = {
             if (timer < duration) {
                 for (var i=0; i<that._indicatorRendererArray.length; i++) {
                     that._indicatorRendererArray[i].
-                    syncAllDataPointsXPosWithArrayOneFrame(midXPosArray, event, duration, timer);
+                    syncAllDataPointsXPosWithArrayOneFrame(midXPosArray, speedss[i], event, duration, timer);
                 }
             } else {
                 for (var i=0; i<that._indicatorRendererArray.length; i++) {

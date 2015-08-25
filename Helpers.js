@@ -5,8 +5,8 @@ var MY_GLOBAL = {};
 MY_GLOBAL.thumbnailWidth = 80; 
 MY_GLOBAL.thumbnailPadding = 3; 
 MY_GLOBAL.selectedThumbnailPadding = 45; 
-MY_GLOBAL.animationDurationInMS = 200;
-MY_GLOBAL.animationDurationInS = 0.2;
+MY_GLOBAL.animationDurationInS = 0.25;
+MY_GLOBAL.animationDurationInMS = MY_GLOBAL.animationDurationInS * 1000;
 
 MY_GLOBAL.typeChecker = {
     assertIsString: function(data, potentialErrorMessage) {

@@ -49,34 +49,23 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
         }
     },
     
-    syncAllDataPointsXPosWithArrayOneFrame: function(midXPosArray, event, duration, timer) {
-//        var duration = MY_GLOBAL.animationDurationInS;
-//        var timer = 0.0;
-//        var speeds = [];
-        
-//        for(var i=0; i<this._circlesArray.length; i++) {
-//            speeds[i] = (midXPosArray[i] - this._circlesArray[i].position.x) / duration;
-//        }
-        
-//        var that = this;
-//        paper.view.onFrame = function(event) {
-            // points
-//            timer += event.delta; // somehow this have to be put before the translation, or there's always one frame less animated. 
-        var timeLeft = duration - timer;
-        var secsPassedLastFrame = event.delta;
+    calcXTranslationSpeedsGivenDurationAndDestinations: function(midXPosArray, duration) {
+        var speeds = [];
+        for(var i=0; i<this._circlesArray.length; i++) {
+            speeds[i] = (midXPosArray[i] - this._circlesArray[i].position.x) / duration;
+        }
+        return speeds;
+    }, 
+    
+    syncAllDataPointsXPosWithArrayOneFrame: function(midXPosArray, speeds, event, duration, timer) {
     
         for(var i=0; i<this._circlesArray.length; i++) {
-//                if (timer < duration) {
-                var distanceLeft = midXPosArray[i] - this._circlesArray[i].position.x;
-                var translationPerSec = distanceLeft / timeLeft;
-                var translation = translationPerSec * secsPassedLastFrame;
-//                    var translation = speeds[i] * event.delta; 
+//                var distanceLeft = midXPosArray[i] - this._circlesArray[i].position.x;
+//                var translationPerSec = distanceLeft / timeLeft;
+//                var translation = translationPerSec * secsPassedLastFrame;
+                var translation = speeds[i] * event.delta; 
                 this._circlesArray[i].position.x += translation;    
-//                } else {
-//                    that._circlesArray[i].position.x = midXPosArray[i];
-//                }
         }
-//        }
     
         // lines
         for(var i=0; i<this._linesArray.length; i++) {
@@ -91,14 +80,16 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
             
             var line = this._linesArray[i];
             
-            var x1DistanceLeft = x1To - line.segments[0].point.x;
-            var x2DistanceLeft = x2To - line.segments[1].point.x;
+//            var x1DistanceLeft = x1To - line.segments[0].point.x;
+//            var x2DistanceLeft = x2To - line.segments[1].point.x;
+//
+//            var x1TranslationPerSec = x1DistanceLeft / timeLeft;
+//            var x2TranslationPerSec = x2DistanceLeft / timeLeft;
 
-            var x1TranslationPerSec = x1DistanceLeft / timeLeft;
-            var x2TranslationPerSec = x2DistanceLeft / timeLeft;
-
-            var x1Translation = x1TranslationPerSec * secsPassedLastFrame;
-            var x2Translation = x2TranslationPerSec * secsPassedLastFrame;
+//            var x1Translation = x1TranslationPerSec * secsPassedLastFrame;
+//            var x2Translation = x2TranslationPerSec * secsPassedLastFrame;
+            var x1Translation = speeds[i] * event.delta;
+            var x2Translation = speeds[i+1] * event.delta;
 
             line.segments[0].point.x += x1Translation;
             line.segments[1].point.x += x2Translation;
