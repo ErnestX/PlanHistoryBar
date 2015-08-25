@@ -1,7 +1,7 @@
 $thumbnailWidth: 80px;
 $initialPreviewWindowHeight: 400px;
 $animationDuration: 0.25s;
-$plansOuterContainerWidth: 1190px;
+$plansOuterContainerWidth: 1210px;
 $sideBarWidth: 140px;
 
 // GENERAL-----------------------------------------------------------------------------
@@ -19,7 +19,7 @@ body{
 
 #bodyContainer {
     margin-left: $sideBarWidth;
-    padding-left: 10px
+    padding-left: 0px
 }
 
 // BAR---------------------------------------------------------------------------------
@@ -30,6 +30,13 @@ body{
     width: $plansOuterContainerWidth;
     overflow: hidden; /*mask*/
     text-align: center;
+    -webkit-mask-image: -webkit-linear-gradient(left, 
+        rgba(0,0,0,0) 0%,
+        rgba(0,0,0,0) 1%,
+        rgba(0,0,0,1) 3%,
+        rgba(0,0,0,1) 50%,
+        rgba(0,0,0,1) 97%,
+        rgba(0,0,0,0) 100%); //NOTE: doesn't work on IE or Firefox
 }
 
 #graphsContainer {
@@ -98,10 +105,7 @@ body{
     display: inline-block;
     width: $thumbnailWidth;
     height: auto;
-    position: absolute;//relative; 
-//    transition-property: padding;
-//    transition-duration: $animationDuration;
-//    transition-timing-function: ease-in-out;
+    position: absolute;
 }
 
 .selected {

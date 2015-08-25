@@ -17,78 +17,80 @@
     <script src="GraphsRenderer.js"></script>
     <script src="linearRendererProto.js"></script>
     
-    <script>$(document).ready(function() {
-        var numOfPlans = 45;
-        for (var i=0; i< 5; i++) {
-            MY_GLOBAL.dataManager.addPlanInitedWithParas('000', 'google-maps.jpg', 'December 17, 1995 03:23:00');
-            MY_GLOBAL.dataManager.addPlanInitedWithParas('111', 'google-maps.jpg', 'December 17, 1995 03:20:00');
-            MY_GLOBAL.dataManager.addPlanInitedWithParas('222', 'google-maps-doodled.jpg', 'December 17, 1995 03:15:00');
-            MY_GLOBAL.dataManager.addPlanInitedWithParas('333', 'google-maps-doodled.jpg', 'December 17, 1995 05:24:00');
-            MY_GLOBAL.dataManager.addPlanInitedWithParas('444', 'google-maps.jpg', 'December 17, 1995 10:04:00');
-            MY_GLOBAL.dataManager.addPlanInitedWithParas('555', 'google-maps-doodled.jpg', 'December 17, 1995 03:24:00');
-            MY_GLOBAL.dataManager.addPlanInitedWithParas('666', 'google-maps.jpg', 'December 17, 1995 01:50:00');
-            MY_GLOBAL.dataManager.addPlanInitedWithParas('777', 'google-maps.jpg', 'December 17, 1995 05:30:00');
-            MY_GLOBAL.dataManager.addPlanInitedWithParas('888', 'google-maps-doodled.jpg', 'December 17, 1995 12:40:00');
-        }
+    <script>$(document).ready(function() { // in order to call jQuery objects safely
+        window.onload = function() { // in order to setup canvas correctly
+            var numOfPlans = 45;
+            for (var i=0; i< 5; i++) {
+                MY_GLOBAL.dataManager.addPlanInitedWithParas('000', 'google-maps.jpg', 'December 17, 1995 03:23:00');
+                MY_GLOBAL.dataManager.addPlanInitedWithParas('111', 'google-maps.jpg', 'December 17, 1995 03:20:00');
+                MY_GLOBAL.dataManager.addPlanInitedWithParas('222', 'google-maps-doodled.jpg', 'December 17, 1995 03:15:00');
+                MY_GLOBAL.dataManager.addPlanInitedWithParas('333', 'google-maps-doodled.jpg', 'December 17, 1995 05:24:00');
+                MY_GLOBAL.dataManager.addPlanInitedWithParas('444', 'google-maps.jpg', 'December 17, 1995 10:04:00');
+                MY_GLOBAL.dataManager.addPlanInitedWithParas('555', 'google-maps-doodled.jpg', 'December 17, 1995 03:24:00');
+                MY_GLOBAL.dataManager.addPlanInitedWithParas('666', 'google-maps.jpg', 'December 17, 1995 01:50:00');
+                MY_GLOBAL.dataManager.addPlanInitedWithParas('777', 'google-maps.jpg', 'December 17, 1995 05:30:00');
+                MY_GLOBAL.dataManager.addPlanInitedWithParas('888', 'google-maps-doodled.jpg', 'December 17, 1995 12:40:00');
+            }
 
-        var activePhotoIndex = 0; // the initial index to select
-        var screenSizeInNumOfPlan = 15;
-    
-        MY_GLOBAL.plansManager.initWithMaxSize(screenSizeInNumOfPlan);
-    
-        MY_GLOBAL.plansManager.selectIndex(activePhotoIndex);
-        
-        $("#left").click(function() {
-            if (MY_GLOBAL.plansManager.selectIndex(activePhotoIndex - 1)) {
-                activePhotoIndex--;
-            }
-        });
-        
-        $("#right").click(function() {
-            if (MY_GLOBAL.plansManager.selectIndex(activePhotoIndex + 1)) {
-                activePhotoIndex++;
-            }
-        });
-    
-        $("#pageLeft").click(function() {
-            if (activePhotoIndex < screenSizeInNumOfPlan) {
-                if (MY_GLOBAL.plansManager.selectIndex(0)) {
-                    activePhotoIndex = 0;
+            var activePhotoIndex = 0; // the initial index to select
+            var screenSizeInNumOfPlan = 15;
+
+            MY_GLOBAL.plansManager.initWithMaxSize(screenSizeInNumOfPlan);
+
+            MY_GLOBAL.plansManager.selectIndex(activePhotoIndex);
+
+            $("#left").click(function() {
+                if (MY_GLOBAL.plansManager.selectIndex(activePhotoIndex - 1)) {
+                    activePhotoIndex--;
                 }
-            } else {
-                if (MY_GLOBAL.plansManager.selectIndex(activePhotoIndex - screenSizeInNumOfPlan)) {
-                    activePhotoIndex = activePhotoIndex - screenSizeInNumOfPlan;
+            });
+
+            $("#right").click(function() {
+                if (MY_GLOBAL.plansManager.selectIndex(activePhotoIndex + 1)) {
+                    activePhotoIndex++;
                 }
-            }
-        });
-    
-        $("#pageRight").click(function() {
-            if (activePhotoIndex + screenSizeInNumOfPlan > numOfPlans - 1) {
-                if (MY_GLOBAL.plansManager.selectIndex(numOfPlans - 1)) {
-                    activePhotoIndex = numOfPlans - 1;
+            });
+
+            $("#pageLeft").click(function() {
+                if (activePhotoIndex < screenSizeInNumOfPlan) {
+                    if (MY_GLOBAL.plansManager.selectIndex(0)) {
+                        activePhotoIndex = 0;
+                    }
+                } else {
+                    if (MY_GLOBAL.plansManager.selectIndex(activePhotoIndex - screenSizeInNumOfPlan)) {
+                        activePhotoIndex = activePhotoIndex - screenSizeInNumOfPlan;
+                    }
                 }
-            } else {
-                if (MY_GLOBAL.plansManager.selectIndex(activePhotoIndex + screenSizeInNumOfPlan)) {
-                    activePhotoIndex = activePhotoIndex + screenSizeInNumOfPlan;
+            });
+
+            $("#pageRight").click(function() {
+                if (activePhotoIndex + screenSizeInNumOfPlan > numOfPlans - 1) {
+                    if (MY_GLOBAL.plansManager.selectIndex(numOfPlans - 1)) {
+                        activePhotoIndex = numOfPlans - 1;
+                    }
+                } else {
+                    if (MY_GLOBAL.plansManager.selectIndex(activePhotoIndex + screenSizeInNumOfPlan)) {
+                        activePhotoIndex = activePhotoIndex + screenSizeInNumOfPlan;
+                    }
                 }
-            }
-        });
-        
-        $("#addIndicator").click(function() {
-            MY_GLOBAL.plansManager.
-            plansRenderer. // hack: shouldn't call planRenderer from here
-            appendLinearIndicatorWithMetricName($("#metricsNameAddIndicator").val());
-        });
-        $("#removeIndicator").click(function() {
-            MY_GLOBAL.plansManager.plansRenderer.
-            deleteIndicatorByMetricsNameFromRow($("#metricsNameRemoveIndicator").val(), 0);
-        });
-    
-        $("#debug").click(function() {
-            if (MY_GLOBAL.plansManager.selectIndex(35)) {
-                activePhotoIndex = 35;
-            }
-        });
+            });
+
+            $("#addIndicator").click(function() {
+                MY_GLOBAL.plansManager.
+                plansRenderer. // hack: shouldn't call planRenderer from here
+                appendLinearIndicatorWithMetricName($("#metricsNameAddIndicator").val());
+            });
+            $("#removeIndicator").click(function() {
+                MY_GLOBAL.plansManager.plansRenderer.
+                deleteIndicatorByMetricsNameFromRow($("#metricsNameRemoveIndicator").val(), 0);
+            });
+
+            $("#debug").click(function() {
+                if (MY_GLOBAL.plansManager.selectIndex(35)) {
+                    activePhotoIndex = 35;
+                }
+            });
+        }
     });
     </script>
     <link rel=stylesheet href="style.css">
