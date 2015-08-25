@@ -27,15 +27,9 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
         }
         
         for(var i=0; i<this._linesArray.length; i++) {
-            var x1To, x2To;
-            x1To = midXPosArray[i];
-            x2To = midXPosArray[i+1];
-            
             var line = this._linesArray[i];
-            
-            line.segments[0].point.x = x1To;
-            line.segments[1].point.x = x2To;
-            
+            line.segments[0].point.x = midXPosArray[i];
+            line.segments[1].point.x = midXPosArray[i+1];
             line.strokeColor = {
                 gradient: this._gradientObject,
                 origin: line.bounds.leftCenter,
@@ -96,7 +90,7 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
             
             newLine.strokeWidth = 2;
             newLine.dashArray = [2, 2];
-            if (appendOrNot) {
+            if (appendOrNot) { // make sure x1 < x2
                 fromIndex = this._circlesArray.length - 1;
                 newLine.add(new paper.Point(this._circlesArray[fromIndex].position.x, 
                                              this._circlesArray[fromIndex].position.y));

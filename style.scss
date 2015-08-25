@@ -1,7 +1,8 @@
-$sideBarWidth: 120px;
 $thumbnailWidth: 80px;
 $initialPreviewWindowHeight: 400px;
 $animationDuration: 0.25s;
+$plansOuterContainerWidth: 1190px;
+$sideBarWidth: 140px;
 
 // GENERAL-----------------------------------------------------------------------------
 body{
@@ -24,7 +25,9 @@ body{
 // BAR---------------------------------------------------------------------------------
 #plansOuterContainer {
     height: auto; 
-    width: 100%;
+    display: block;
+    margin: auto;
+    width: $plansOuterContainerWidth;
     overflow: hidden; /*mask*/
     text-align: center;
 }
