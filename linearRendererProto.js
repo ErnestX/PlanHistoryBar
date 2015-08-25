@@ -27,14 +27,9 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
         }
         
         for(var i=0; i<this._linesArray.length; i++) {
-                var x1To, x2To;
-                if (midXPosArray[i] < midXPosArray[i+1]) {
-                    x1To = midXPosArray[i];
-                    x2To = midXPosArray[i+1];
-                } else {
-                    x1To = midXPosArray[i+1];
-                    x2To = midXPosArray[i];
-                }
+            var x1To, x2To;
+            x1To = midXPosArray[i];
+            x2To = midXPosArray[i+1];
             
             var line = this._linesArray[i];
             
@@ -49,7 +44,7 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
         }
     },
     
-    calcXTranslationSpeedsGivenDurationAndDestinations: function(midXPosArray, duration) {
+    calcXTranslationSpeedsGivenDestinationsAndDuration: function(midXPosArray, duration) {
         var speeds = [];
         for(var i=0; i<this._circlesArray.length; i++) {
             speeds[i] = (midXPosArray[i] - this._circlesArray[i].position.x) / duration;
@@ -57,37 +52,17 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
         return speeds;
     }, 
     
-    syncAllDataPointsXPosWithArrayOneFrame: function(midXPosArray, speeds, event, duration, timer) {
+    syncAllDataPointsXPosWithSpeedsOneFrame: function(speeds, event) {
     
         for(var i=0; i<this._circlesArray.length; i++) {
-//                var distanceLeft = midXPosArray[i] - this._circlesArray[i].position.x;
-//                var translationPerSec = distanceLeft / timeLeft;
-//                var translation = translationPerSec * secsPassedLastFrame;
-                var translation = speeds[i] * event.delta; 
-                this._circlesArray[i].position.x += translation;    
+            var translation = speeds[i] * event.delta; 
+            this._circlesArray[i].position.x += translation;    
         }
     
         // lines
         for(var i=0; i<this._linesArray.length; i++) {
-            var x1To, x2To;
-            if (midXPosArray[i] < midXPosArray[i+1]) {
-                x1To = midXPosArray[i];
-                x2To = midXPosArray[i+1];
-            } else {
-                x1To = midXPosArray[i+1];
-                x2To = midXPosArray[i];
-            }
-            
             var line = this._linesArray[i];
             
-//            var x1DistanceLeft = x1To - line.segments[0].point.x;
-//            var x2DistanceLeft = x2To - line.segments[1].point.x;
-//
-//            var x1TranslationPerSec = x1DistanceLeft / timeLeft;
-//            var x2TranslationPerSec = x2DistanceLeft / timeLeft;
-
-//            var x1Translation = x1TranslationPerSec * secsPassedLastFrame;
-//            var x2Translation = x2TranslationPerSec * secsPassedLastFrame;
             var x1Translation = speeds[i] * event.delta;
             var x2Translation = speeds[i+1] * event.delta;
 
