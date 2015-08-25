@@ -34,7 +34,6 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
                 }
             this._linesArray[i].segments[0].point.x = x1To;
             this._linesArray[i].segments[1].point.x = x2To;
-            this._linesArray[i].selected = true;
         }
     },
     
@@ -51,12 +50,13 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
 //        paper.view.onFrame = function(event) {
             // points
 //            timer += event.delta; // somehow this have to be put before the translation, or there's always one frame less animated. 
+        var timeLeft = duration - timer;
+        var secsPassedLastFrame = event.delta;
+    
             for(var i=0; i<this._circlesArray.length; i++) {
 //                if (timer < duration) {
                     var distanceLeft = midXPosArray[i] - this._circlesArray[i].position.x;
-                    var timeLeft = duration - timer;
                     var translationPerSec = distanceLeft / timeLeft;
-                    var secsPassedLastFrame = event.delta;
                     var translation = translationPerSec * secsPassedLastFrame;
 //                    var translation = speeds[i] * event.delta; 
                     this._circlesArray[i].position.x += translation;    
@@ -67,6 +67,28 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
 //        }
     
             // lines
+            for(var i=0; i<this._linesArray.length; i++) {
+                var x1To, x2To;
+                if (midXPosArray[i] < midXPosArray[i+1]) {
+                    x1To = midXPosArray[i];
+                    x2To = midXPosArray[i+1];
+                } else {
+                    x1To = midXPosArray[i+1];
+                    x2To = midXPosArray[i];
+                }
+                var x1DistanceLeft = x1To - this._linesArray[i].segments[0].point.x;
+                var x2DistanceLeft = x2To - this._linesArray[i].segments[1].point.x;
+                
+                var x1TranslationPerSec = x1DistanceLeft / timeLeft;
+                var x2TranslationPerSec = x2DistanceLeft / timeLeft;
+                
+                var x1Translation = x1TranslationPerSec * secsPassedLastFrame;
+                var x2Translation = x2TranslationPerSec * secsPassedLastFrame;
+                
+                this._linesArray[i].segments[0].point.x += x1Translation;
+                this._linesArray[i].segments[1].point.x += x2Translation;
+            }
+        
 //            for(var i=0; i<this._linesArray.length; i++) {
 //                var x1To, x2To;
 //                if (midXPosArray[i] < midXPosArray[i+1]) {
@@ -102,7 +124,7 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
             var fromIndex;
             var newLine = new paper.Path();
             newLine.strokeColor = 'white';
-            newLine.strokeWidth = 5;
+            newLine.strokeWidth = 2;
             if (appendOrNot) {
                 fromIndex = this._circlesArray.length - 1;
                 newLine.add(new paper.Point(this._circlesArray[fromIndex].position.x, 
