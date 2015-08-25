@@ -6,6 +6,9 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
     // NOTE: invariable: _circlesArray and _linesArray are in order
     _circlesArray:[],
     _linesArray:[],
+    _gradientObject: {
+        stops: [['#fff', 0.0], ['#58585A', 0.45], ['#58585A', 0.55], ['#fff',1.0]]
+    },
     
     initWithMetricsNameAndPaperCanvas: function(name, canvas) {
         MY_GLOBAL.typeChecker.assertIsString(name);
@@ -32,8 +35,17 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
                     x1To = midXPosArray[i+1];
                     x2To = midXPosArray[i];
                 }
-            this._linesArray[i].segments[0].point.x = x1To;
-            this._linesArray[i].segments[1].point.x = x2To;
+            
+            var line = this._linesArray[i];
+            
+            line.segments[0].point.x = x1To;
+            line.segments[1].point.x = x2To;
+            
+            line.strokeColor = {
+                gradient: this._gradientObject,
+                origin: line.bounds.leftCenter,
+                destination: line.bounds.rightCenter
+            };
         }
     },
     
@@ -53,58 +65,50 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
         var timeLeft = duration - timer;
         var secsPassedLastFrame = event.delta;
     
-            for(var i=0; i<this._circlesArray.length; i++) {
+        for(var i=0; i<this._circlesArray.length; i++) {
 //                if (timer < duration) {
-                    var distanceLeft = midXPosArray[i] - this._circlesArray[i].position.x;
-                    var translationPerSec = distanceLeft / timeLeft;
-                    var translation = translationPerSec * secsPassedLastFrame;
+                var distanceLeft = midXPosArray[i] - this._circlesArray[i].position.x;
+                var translationPerSec = distanceLeft / timeLeft;
+                var translation = translationPerSec * secsPassedLastFrame;
 //                    var translation = speeds[i] * event.delta; 
-                    this._circlesArray[i].position.x += translation;    
+                this._circlesArray[i].position.x += translation;    
 //                } else {
 //                    that._circlesArray[i].position.x = midXPosArray[i];
 //                }
-            }
+        }
 //        }
     
-            // lines
-            for(var i=0; i<this._linesArray.length; i++) {
-                var x1To, x2To;
-                if (midXPosArray[i] < midXPosArray[i+1]) {
-                    x1To = midXPosArray[i];
-                    x2To = midXPosArray[i+1];
-                } else {
-                    x1To = midXPosArray[i+1];
-                    x2To = midXPosArray[i];
-                }
-                var x1DistanceLeft = x1To - this._linesArray[i].segments[0].point.x;
-                var x2DistanceLeft = x2To - this._linesArray[i].segments[1].point.x;
-                
-                var x1TranslationPerSec = x1DistanceLeft / timeLeft;
-                var x2TranslationPerSec = x2DistanceLeft / timeLeft;
-                
-                var x1Translation = x1TranslationPerSec * secsPassedLastFrame;
-                var x2Translation = x2TranslationPerSec * secsPassedLastFrame;
-                
-                this._linesArray[i].segments[0].point.x += x1Translation;
-                this._linesArray[i].segments[1].point.x += x2Translation;
+        // lines
+        for(var i=0; i<this._linesArray.length; i++) {
+            var x1To, x2To;
+            if (midXPosArray[i] < midXPosArray[i+1]) {
+                x1To = midXPosArray[i];
+                x2To = midXPosArray[i+1];
+            } else {
+                x1To = midXPosArray[i+1];
+                x2To = midXPosArray[i];
             }
-        
-//            for(var i=0; i<this._linesArray.length; i++) {
-//                var x1To, x2To;
-//                if (midXPosArray[i] < midXPosArray[i+1]) {
-//                    x1To = midXPosArray[i].toString();
-//                    x2To = midXPosArray[i+1].toString();
-//                } else {
-//                    x1To = midXPosArray[i+1].toString();
-//                    x2To = midXPosArray[i].toString();
-//                }
-//                
-//                
-//            }
-    //            
-    //            $(this._linesArray[i].node).velocity({x1: x1To, x2: x2To}, 
-    //                                                {queue: false, duration: MY_GLOBAL.animationDurationInMS});
-    //        }
+            
+            var line = this._linesArray[i];
+            
+            var x1DistanceLeft = x1To - line.segments[0].point.x;
+            var x2DistanceLeft = x2To - line.segments[1].point.x;
+
+            var x1TranslationPerSec = x1DistanceLeft / timeLeft;
+            var x2TranslationPerSec = x2DistanceLeft / timeLeft;
+
+            var x1Translation = x1TranslationPerSec * secsPassedLastFrame;
+            var x2Translation = x2TranslationPerSec * secsPassedLastFrame;
+
+            line.segments[0].point.x += x1Translation;
+            line.segments[1].point.x += x2Translation;
+            
+            line.strokeColor = {
+                gradient: this._gradientObject,
+                origin: line.bounds.leftCenter,
+                destination: line.bounds.rightCenter
+            };
+        }
     }, 
     
     appendDataPointFromPlanAtMidXPos: function(p, midXPos) {
@@ -123,36 +127,27 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
             var newLine;
             var fromIndex;
             var newLine = new paper.Path();
-            newLine.strokeColor = 'white';
+            
             newLine.strokeWidth = 2;
+            newLine.dashArray = [2, 2];
             if (appendOrNot) {
                 fromIndex = this._circlesArray.length - 1;
                 newLine.add(new paper.Point(this._circlesArray[fromIndex].position.x, 
                                              this._circlesArray[fromIndex].position.y));
                 newLine.add(new paper.Point(midXPos, value));
-                                             
-//                newLine = this._graphsCanvasPaper.line(this._circlesArray[fromIndex].attr('cx'), 
-//                                                        this._circlesArray[fromIndex].attr('cy'), 
-//                                                        midXPos, value);
             } else {
                 fromIndex = 0;
                 newLine.add(new paper.Point(midXPos, value));
                 newLine.add(new paper.Point(this._circlesArray[fromIndex].position.x, 
                                              this._circlesArray[fromIndex].position.y));
-//                newLine = this._graphsCanvasPaper.line(midXPos,value, 
-//                                                        this._circlesArray[fromIndex].attr('cx'), 
-//                                                        this._circlesArray[fromIndex].attr('cy'));
             }
-//            var gradient = this._graphsCanvasPaper.gradient("l(0, 1, 1, 1)#fff-#58585A:45-#58585A:55-#fff");
-//            newLine.attr({
-//                opacity: 0.0,
-//                stroke: gradient,//'#FFFFFF',
-//                'stroke-dasharray': "2, 2",
-//                strokeWidth: 2
-//            });
-//            
-//            $(newLine.node).velocity({opacity: 1.0}, {queue: false, duration: MY_GLOBAL.animationDurationInMS});
-//            
+            
+            newLine.strokeColor = {
+                gradient: this._gradientObject,
+                origin: newLine.bounds.leftCenter,
+                destination: newLine.bounds.rightCenter
+            };
+            
             if (appendOrNot) {
                 this._linesArray.push(newLine);
             } else {
