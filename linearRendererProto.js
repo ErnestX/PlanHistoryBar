@@ -22,6 +22,20 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
         for(var i=0; i<this._circlesArray.length; i++) {
             this._circlesArray[i].position.x = midXPosArray[i];
         }
+        
+        for(var i=0; i<this._linesArray.length; i++) {
+                var x1To, x2To;
+                if (midXPosArray[i] < midXPosArray[i+1]) {
+                    x1To = midXPosArray[i];
+                    x2To = midXPosArray[i+1];
+                } else {
+                    x1To = midXPosArray[i+1];
+                    x2To = midXPosArray[i];
+                }
+            this._linesArray[i].segments[0].point.x = x1To;
+            this._linesArray[i].segments[1].point.x = x2To;
+            this._linesArray[i].selected = true;
+        }
     },
     
     syncAllDataPointsXPosWithArrayOneFrame: function(midXPosArray, event, duration, timer) {
@@ -35,7 +49,7 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
         
 //        var that = this;
 //        paper.view.onFrame = function(event) {
-//            // points
+            // points
 //            timer += event.delta; // somehow this have to be put before the translation, or there's always one frame less animated. 
             for(var i=0; i<this._circlesArray.length; i++) {
 //                if (timer < duration) {
@@ -52,16 +66,19 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
             }
 //        }
     
-    //        // lines
-    //        for(var i=0; i<this._linesArray.length; i++) {
-    //            var x1To, x2To;
-    //            if (midXPosArray[i] < midXPosArray[i+1]) {
-    //                x1To = midXPosArray[i].toString();
-    //                x2To = midXPosArray[i+1].toString();
-    //            } else {
-    //                x1To = midXPosArray[i+1].toString();
-    //                x2To = midXPosArray[i].toString();
-    //            }
+            // lines
+//            for(var i=0; i<this._linesArray.length; i++) {
+//                var x1To, x2To;
+//                if (midXPosArray[i] < midXPosArray[i+1]) {
+//                    x1To = midXPosArray[i].toString();
+//                    x2To = midXPosArray[i+1].toString();
+//                } else {
+//                    x1To = midXPosArray[i+1].toString();
+//                    x2To = midXPosArray[i].toString();
+//                }
+//                
+//                
+//            }
     //            
     //            $(this._linesArray[i].node).velocity({x1: x1To, x2: x2To}, 
     //                                                {queue: false, duration: MY_GLOBAL.animationDurationInMS});
@@ -79,21 +96,31 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
     _addDataPoint: function(p, midXPos, appendOrNot) {
         var value = p.getValueOfIndicator(this._metricsName);
         
-//        // add line
-//        if (this._circlesArray.length > 0) {
-//            var newLine;
-//            var fromIndex;
-//            if (appendOrNot) {
-//                fromIndex = this._circlesArray.length - 1;
+        // add line
+        if (this._circlesArray.length > 0) {
+            var newLine;
+            var fromIndex;
+            var newLine = new paper.Path();
+            newLine.strokeColor = 'white';
+            newLine.strokeWidth = 5;
+            if (appendOrNot) {
+                fromIndex = this._circlesArray.length - 1;
+                newLine.add(new paper.Point(this._circlesArray[fromIndex].position.x, 
+                                             this._circlesArray[fromIndex].position.y));
+                newLine.add(new paper.Point(midXPos, value));
+                                             
 //                newLine = this._graphsCanvasPaper.line(this._circlesArray[fromIndex].attr('cx'), 
 //                                                        this._circlesArray[fromIndex].attr('cy'), 
 //                                                        midXPos, value);
-//            } else {
-//                fromIndex = 0;
+            } else {
+                fromIndex = 0;
+                newLine.add(new paper.Point(midXPos, value));
+                newLine.add(new paper.Point(this._circlesArray[fromIndex].position.x, 
+                                             this._circlesArray[fromIndex].position.y));
 //                newLine = this._graphsCanvasPaper.line(midXPos,value, 
 //                                                        this._circlesArray[fromIndex].attr('cx'), 
 //                                                        this._circlesArray[fromIndex].attr('cy'));
-//            }
+            }
 //            var gradient = this._graphsCanvasPaper.gradient("l(0, 1, 1, 1)#fff-#58585A:45-#58585A:55-#fff");
 //            newLine.attr({
 //                opacity: 0.0,
@@ -104,15 +131,14 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
 //            
 //            $(newLine.node).velocity({opacity: 1.0}, {queue: false, duration: MY_GLOBAL.animationDurationInMS});
 //            
-//            if (appendOrNot) {
-//                this._linesArray.push(newLine);
-//            } else {
-//                this._linesArray.unshift(newLine);
-//            }
-//        }
+            if (appendOrNot) {
+                this._linesArray.push(newLine);
+            } else {
+                this._linesArray.unshift(newLine);
+            }
+        }
         
         // add point
-        console.log("try adding point");
         var newPoint = new paper.Point(midXPos, value);
         var newCircle = new paper.Path.Circle(newPoint, 5);
         newCircle.fillColor = 'white';
@@ -122,24 +148,9 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
         } else {
             this._circlesArray.unshift(newCircle);
         }
-        
-//        var newPoint = this._graphsCanvasPaper.circle(midXPos, value, 5);
-//        newPoint.attr({
-//            opacity: 0.0,
-//            fill:'#FFFFFF'
-//        });
-//        
-//        $(newPoint.node).velocity({opacity: 1.0}, {queue: false, duration: MY_GLOBAL.animationDurationInMS});
-        
-//        if (appendOrNot) {
-//            this._circlesArray.push(newPoint);
-//        } else {
-//            this._circlesArray.unshift(newPoint);
-//        }
     },
     
     removeHeadDataPoint: function() {
-        console.log('try to remove head');
         if (typeof(this._circlesArray[0]) !== 'undefined') {
             this._circlesArray[0].remove();
             this._circlesArray.shift();
@@ -152,7 +163,6 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
     }, 
     
     removeTailDataPoint: function() {
-        console.log('try to remove tail');
         if (typeof(this._circlesArray[this._circlesArray.length - 1]) !== 'undefined') {
             this._circlesArray[this._circlesArray.length - 1].remove();
             this._circlesArray.pop();

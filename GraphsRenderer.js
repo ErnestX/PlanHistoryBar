@@ -59,6 +59,7 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer = {
         var timer = 0.0;
         var that = this;
         paper.view.onFrame = function(event) {
+            timer += event.delta;
             if (timer < duration) {
                 for (var i=0; i<that._indicatorRendererArray.length; i++) {
                     that._indicatorRendererArray[i].
@@ -69,7 +70,6 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer = {
                     that._indicatorRendererArray[i].syncAllDataPointsXPosWithArray(midXPosArray);
                 }
             }
-            timer += event.delta;
         }
     }, 
     
