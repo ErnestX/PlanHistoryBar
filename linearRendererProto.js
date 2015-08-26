@@ -25,22 +25,27 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
         this._linesArray = [];
     },
     
-    syncAllDataPointsXPosWithArray: function(midXPosArray) {
-        for(var i=0; i<this._circlesArray.length; i++) {
-            this._circlesArray[i].position.x = midXPosArray[i];
-        }
+    updateScale: function(newScale) {
+        this._scaleFactor = newScale;
         
+        for(var i=0; i<this._circlesArray.length; i++) {
+            this._circlesArray[i].position.y = this._valuesOnScreenCache[i] * this._scaleFactor;    
+        }
+    
+        // lines
         for(var i=0; i<this._linesArray.length; i++) {
             var line = this._linesArray[i];
-            line.segments[0].point.x = midXPosArray[i];
-            line.segments[1].point.x = midXPosArray[i+1];
+
+            line.segments[0].point.y = this._valuesOnScreenCache[i] * this._scaleFactor;
+            line.segments[1].point.y = this._valuesOnScreenCache[i+1] * this._scaleFactor;
+            
             line.strokeColor = {
                 gradient: this._gradientObject,
                 origin: line.bounds.leftCenter,
                 destination: line.bounds.rightCenter
             };
         }
-    },
+    }, 
     
     calcScaleSpeedsGivenTargetScaleAndDuration: function(targetScaleFactor, duration) {
         return (targetScaleFactor - this._scaleFactor) / duration;
@@ -72,6 +77,23 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
             };
         }
     }, 
+    
+    syncAllDataPointsXPosWithArray: function(midXPosArray) {
+        for(var i=0; i<this._circlesArray.length; i++) {
+            this._circlesArray[i].position.x = midXPosArray[i];
+        }
+        
+        for(var i=0; i<this._linesArray.length; i++) {
+            var line = this._linesArray[i];
+            line.segments[0].point.x = midXPosArray[i];
+            line.segments[1].point.x = midXPosArray[i+1];
+            line.strokeColor = {
+                gradient: this._gradientObject,
+                origin: line.bounds.leftCenter,
+                destination: line.bounds.rightCenter
+            };
+        }
+    },
     
     calcXTranslationSpeedsGivenDestinationsAndDuration: function(midXPosArray, duration) {
         var speeds = [];

@@ -72,6 +72,10 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer = {
                     that._indicatorRendererArray[i].
                     updateScaleOneFrame(deltaScale[i], event);
                 }
+            } else {
+                for (var i=0; i<that._indicatorRendererArray.length; i++) {
+                    that._indicatorRendererArray[i].updateScale(newScale);
+                }
             }
         };
         this._graphsScale = newScale;
