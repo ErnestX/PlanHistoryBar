@@ -16,6 +16,7 @@
     <script src="ThumbnailDivRenderer.js"></script>
     <script src="GraphsRenderer.js"></script>
     <script src="LinearRendererProto.js"></script>
+    <script src="SideBarManager.js"></script>
     
     <script>$(document).ready(function() { // in order to call jQuery objects safely
         window.onload = function() { // in order to setup canvas correctly
@@ -97,7 +98,15 @@
 </head>
 
 <body>
-    <div id = "sideBar">this is the side bar</div>
+    <div id = "sideBar">
+        <div id = "legendLabelsContainer">
+            <p class="legendLabel">Metric 1</p>
+            <p class="legendLabel">Metric 2</p>
+            <p class="legendLabel">Metric 3</p>
+            <p class="legendLabel">Metric 4</p>
+            <p class="legendLabel">Metric 5</p>
+        </div>
+    </div>
     <div id="bodyContainer">
         <div id="plansOuterContainer"> <!-- used to mask the plansContainer -->
             <div id="plansContainer">

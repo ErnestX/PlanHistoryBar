@@ -120,7 +120,7 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
         
         // add point
         var newPoint = new paper.Point(midXPos, yPos);
-        var newCircle = new paper.Path.Circle(newPoint, 5);
+        var newCircle = new paper.Path.Circle(newPoint, 4);
         newCircle.fillColor = 'white';
         
         if (appendOrNot) {

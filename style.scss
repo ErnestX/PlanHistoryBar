@@ -14,7 +14,18 @@ body{
     width: $sideBarWidth;
     position: absolute;
     left: 0;
-    background-color: dimgray;
+}
+
+#legendLabelsContainer {
+    margin-top: -10px;
+}
+
+.legendLabel {
+    text-align: right;
+    color: white;
+    font-family: "Century Gothic";
+    font-weight: bold;
+    line-height: 12px;
 }
 
 #bodyContainer {

@@ -5,6 +5,7 @@ MY_GLOBAL.planProto = {
     saveName: '',
     thumbnailSrc: '', 
     previewWindowSrc: '', 
+    saver: '', 
     initWithFields: function(date, name, thumbnailSource, previewWindowSource) { //FUTURE: add more para
         MY_GLOBAL.typeChecker.assertIsDate(date);
         MY_GLOBAL.typeChecker.assertIsString(name);
@@ -15,12 +16,13 @@ MY_GLOBAL.planProto = {
         this.saveName = name;
         this.thumbnailSrc = thumbnailSource;
         this.previewWindowSrc = previewWindowSource;
+        this.saver = 'placeHolderSaver';
     }, 
     
     getValueOfIndicator: function(indicatorName) {
         MY_GLOBAL.typeChecker.assertIsString(indicatorName);
         
-        var fakeValue = Math.random() * 100 + 30;
+        var fakeValue = Math.random() * 120 + 10;
         return fakeValue;
     }
 };
