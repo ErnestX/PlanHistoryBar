@@ -96,7 +96,7 @@
             });
             $("#up").click(function() {
                 MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.updateYPosScaleTo(1.0);
-                $("#plansOuterContainer").velocity({height: (250).toString()}, {queue:false, duration:MY_GLOBAL.animationDurationInMS, easing:"linear"});
+                $("#plansOuterContainer").velocity({height: (230).toString()}, {queue:false, duration:MY_GLOBAL.animationDurationInMS, easing:"linear"});
                 $("#thumbnailsBar").velocity({"margin-top": (-280).toString()}, {queue:false, duration:MY_GLOBAL.animationDurationInMS, easing:"linear"});
                 $("#previewWindow").velocity({height: (400).toString()}, {queue:false, duration: MY_GLOBAL.animationDurationInMS, easing:"linear"});
             });
