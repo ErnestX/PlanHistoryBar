@@ -87,10 +87,12 @@
             });
             
             $("#down").click(function() {
-                
+                MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.updateYPosScaleTo(3.0);
+//                $("#graphsContainer").velocity({height: (140 * 3.0).toString()}, {queue: false, duration: MY_GLOBAL.animationDurationInMS, easing: "linear"});
+//                document.getElementById("graphsContainer").height = 140 * 3.0;
             });
             $("#up").click(function() {
-                
+                MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.updateYPosScaleTo(1.0);
             });
 
             $("#debug").click(function() {
@@ -117,7 +119,7 @@
     <div id="bodyContainer">
         <div id="plansOuterContainer"> <!-- used to mask the plansContainer -->
             <div id="plansContainer">
-                <canvas id="graphsContainer" resize="true" keepalive="true"></canvas>
+                <canvas id="graphsContainer" resize="false" keepalive="true"></canvas>
                 <div id="thumbnailsBar"></div> <!-- the array of plans -->
             </div>
         </div>

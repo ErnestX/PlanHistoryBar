@@ -22,7 +22,7 @@ MY_GLOBAL.planProto = {
     getValueOfIndicator: function(indicatorName) {
         MY_GLOBAL.typeChecker.assertIsString(indicatorName);
         
-        var fakeValue = Math.random() * 120 + 10;
+        var fakeValue = Math.random() * 130;
         return fakeValue;
     }
 };

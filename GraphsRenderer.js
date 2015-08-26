@@ -3,6 +3,7 @@
 MY_GLOBAL.plansManager.plansRenderer.graphsRenderer = {
     _indicatorRendererArray:[], 
     _graphsCanvasPaper:null,
+    _graphsScale: 1.0,
     
     initWithGraphsContainerInString: function(containerID) {
         MY_GLOBAL.typeChecker.assertIsString(containerID);
@@ -23,7 +24,7 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer = {
         console.log('try to add: ' + name);
         
         var newRenderer = Object.create(this.linearRendererProto);
-        newRenderer.initWithMetricsNameAndPaperCanvas(name, this._graphsCanvasPaper);
+        newRenderer.initWithMetricsNameScaleAndPaperCanvas(name, this._graphsScale, this._graphsCanvasPaper);
         this._indicatorRendererArray.push(newRenderer);
         
         for (var i=0; i<plans.length; i++) {
@@ -56,10 +57,24 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer = {
     
     updateYPosScaleTo: function(newScale) {
         var duration = MY_GLOBAL.animationDurationInS;
-        var deltaSpeeds = [];
+        var deltaScale = [];
         for (var i=0; i<this._indicatorRendererArray.length; i++) {
-            
+            deltaScale[i] = this._indicatorRendererArray[i].
+            calcScaleSpeedsGivenTargetScaleAndDuration(newScale, duration);
         }
+        
+        var timer = 0.0;
+        var that = this;
+        paper.view.onFrame = function(event) {
+            timer += event.delta;
+            if (timer < duration) {
+                for (var i=0; i<that._indicatorRendererArray.length; i++) {
+                    that._indicatorRendererArray[i].
+                    updateScaleOneFrame(deltaScale[i], event);
+                }
+            }
+        };
+        this._graphsScale = newScale;
     }, 
     
     syncAllDataPointsXPosWithArray: function(midXPosArray) {
@@ -68,8 +83,8 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer = {
         // step1: calc all speeds
         var speedss = []; // 2D array
         for (var i=0; i<this._indicatorRendererArray.length; i++) {
-                    speedss[i] = this._indicatorRendererArray[i].
-                    calcXTranslationSpeedsGivenDestinationsAndDuration(midXPosArray, duration);
+            speedss[i] = this._indicatorRendererArray[i].
+            calcXTranslationSpeedsGivenDestinationsAndDuration(midXPosArray, duration);
         }
         
         var timer = 0.0;
@@ -86,7 +101,7 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer = {
                     that._indicatorRendererArray[i].syncAllDataPointsXPosWithArray(midXPosArray);
                 }
             }
-        }
+        };
     }, 
     
     appendDataPointFromPlanAtMidXPos: function(p, midXPos) {

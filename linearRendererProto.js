@@ -12,17 +12,17 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
         stops: [['#fff', 0.0], ['#58585A', 0.45], ['#58585A', 0.55], ['#fff',1.0]]
     },
     
-    initWithMetricsNameAndPaperCanvas: function(name, canvas) {
+    initWithMetricsNameScaleAndPaperCanvas: function(name, scale, canvas) {
         MY_GLOBAL.typeChecker.assertIsString(name);
         MY_GLOBAL.assert(typeof(canvas) !== 'undefined');
         MY_GLOBAL.assert(canvas !== null);
         
         this._metricsName = name;
+        this._scaleFactor = scale;
         this._graphsCanvasPaper = canvas;
         this._valuesOnScreenCache = [];
         this._circlesArray = [];
         this._linesArray = [];
-        this._scaleFactor = 1.0;
     },
     
     syncAllDataPointsXPosWithArray: function(midXPosArray) {
