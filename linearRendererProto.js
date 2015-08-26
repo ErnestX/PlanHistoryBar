@@ -3,7 +3,8 @@
 MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
     _metricsName: '', 
     _graphsCanvasPaper:null,
-    // NOTE: invariable: _circlesArray and _linesArray are in order
+    // NOTE: invariable: _circlesArray and _linesArray are in the same order; _circlesArray.length = _yPosesOnScreenCache.length = _linesArray.length + 1
+    _yPosesOnScreenCache:[], 
     _circlesArray:[],
     _linesArray:[],
     _gradientObject: {
@@ -72,16 +73,18 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
     }, 
     
     appendDataPointFromPlanAtMidXPos: function(p, midXPos) {
-        this._addDataPoint(p, midXPos, true);
+        var yPos = p.getValueOfIndicator(this._metricsName);
+        this._addDataPoint(yPos, midXPos, true);
+        this._yPosesOnScreenCache.push(yPos);
     }, 
     
     prependDataPointFromPlanAtMidXPos: function(p, midXPos) {
-        this._addDataPoint(p, midXPos, false);
+        var yPos = p.getValueOfIndicator(this._metricsName);
+        this._addDataPoint(yPos, midXPos, false);
+        this._yPosesOnScreenCache.unshift(yPos);
     },
     
-    _addDataPoint: function(p, midXPos, appendOrNot) {
-        var value = p.getValueOfIndicator(this._metricsName);
-        
+    _addDataPoint: function(yPos, midXPos, appendOrNot) {
         // add line
         if (this._circlesArray.length > 0) {
             var newLine;
@@ -94,10 +97,10 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
                 fromIndex = this._circlesArray.length - 1;
                 newLine.add(new paper.Point(this._circlesArray[fromIndex].position.x, 
                                              this._circlesArray[fromIndex].position.y));
-                newLine.add(new paper.Point(midXPos, value));
+                newLine.add(new paper.Point(midXPos, yPos));
             } else {
                 fromIndex = 0;
-                newLine.add(new paper.Point(midXPos, value));
+                newLine.add(new paper.Point(midXPos, yPos));
                 newLine.add(new paper.Point(this._circlesArray[fromIndex].position.x, 
                                              this._circlesArray[fromIndex].position.y));
             }
@@ -116,7 +119,7 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
         }
         
         // add point
-        var newPoint = new paper.Point(midXPos, value);
+        var newPoint = new paper.Point(midXPos, yPos);
         var newCircle = new paper.Path.Circle(newPoint, 5);
         newCircle.fillColor = 'white';
         
@@ -137,6 +140,8 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
             this._linesArray[0].remove();
             this._linesArray.shift();
         }
+        
+        this._yPosesOnScreenCache.shift();
     }, 
     
     removeTailDataPoint: function() {
@@ -149,6 +154,8 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
             this._linesArray[this._linesArray.length - 1].remove();
             this._linesArray.pop();
         }
+        
+        this._yPosesOnScreenCache.pop();
     }, 
     
     deleteGraph: function() {
@@ -160,6 +167,10 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
     
     getMetricsName: function() {
         return this._metricsName;
+    }, 
+    
+    getValueOnScreenAtIndex: function(index) {
+        return this._yPosesOnScreenCache[index];
     }
 };
     
