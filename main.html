@@ -85,6 +85,13 @@
                 MY_GLOBAL.plansManager.plansRenderer.
                 deleteIndicatorByMetricsNameFromRow($("#metricsNameRemoveIndicator").val(), 0);
             });
+            
+            $("#down").click(function() {
+                
+            });
+            $("#up").click(function() {
+                
+            });
 
             $("#debug").click(function() {
                 if (MY_GLOBAL.plansManager.selectIndex(35)) {
@@ -139,6 +146,10 @@
             <input id='rowNumAddRow' type="text" value="row number" style="text-align:center;"/>
         </p>
 -->
+        <p>
+            <button id="down">down</button>
+            <button id="up">up</button>
+        </p>
         <p>
             <button id="debug">don't click me!!!</button>
         </p>

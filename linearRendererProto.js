@@ -3,10 +3,11 @@
 MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
     _metricsName: '', 
     _graphsCanvasPaper:null,
-    // NOTE: invariable: _circlesArray and _linesArray are in the same order; _circlesArray.length = _yPosesOnScreenCache.length = _linesArray.length + 1
-    _yPosesOnScreenCache:[], 
+    // NOTE: invariable: _circlesArray and _linesArray are in the same order; _circlesArray.length = _valuesOnScreenCache.length = _linesArray.length + 1
+    _valuesOnScreenCache:[], 
     _circlesArray:[],
     _linesArray:[],
+    _scaleFactor: 1.0,
     _gradientObject: {
         stops: [['#fff', 0.0], ['#58585A', 0.45], ['#58585A', 0.55], ['#fff',1.0]]
     },
@@ -18,8 +19,10 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
         
         this._metricsName = name;
         this._graphsCanvasPaper = canvas;
+        this._valuesOnScreenCache = [];
         this._circlesArray = [];
         this._linesArray = [];
+        this._scaleFactor = 1.0;
     },
     
     syncAllDataPointsXPosWithArray: function(midXPosArray) {
@@ -39,6 +42,37 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
         }
     },
     
+    calcScaleSpeedsGivenTargetScaleAndDuration: function(targetScaleFactor, duration) {
+        return (targetScaleFactor - this._scaleFactor) / duration;
+    }, 
+    
+    updateScaleOneFrame: function(scaleSpeed, event) {
+        var deltaScale = scaleSpeed * event.delta; 
+        this._scaleFactor += deltaScale;
+        
+        // dots
+        for(var i=0; i<this._circlesArray.length; i++) {
+            this._circlesArray[i].position.y = this._valuesOnScreenCache[i] * this._scaleFactor;    
+        }
+    
+        // lines
+        for(var i=0; i<this._linesArray.length; i++) {
+            var line = this._linesArray[i];
+            
+//            var x1Translation = speeds[i] * event.delta;
+//            var x2Translation = speeds[i+1] * event.delta;
+
+            line.segments[0].point.y = this._valuesOnScreenCache[i] * this._scaleFactor;
+            line.segments[1].point.y = this._valuesOnScreenCache[i+1] * this._scaleFactor;
+            
+            line.strokeColor = {
+                gradient: this._gradientObject,
+                origin: line.bounds.leftCenter,
+                destination: line.bounds.rightCenter
+            };
+        }
+    }, 
+    
     calcXTranslationSpeedsGivenDestinationsAndDuration: function(midXPosArray, duration) {
         var speeds = [];
         for(var i=0; i<this._circlesArray.length; i++) {
@@ -48,7 +82,8 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
     }, 
     
     syncAllDataPointsXPosWithSpeedsOneFrame: function(speeds, event) {
-    
+        
+        // dots
         for(var i=0; i<this._circlesArray.length; i++) {
             var translation = speeds[i] * event.delta; 
             this._circlesArray[i].position.x += translation;    
@@ -73,18 +108,18 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
     }, 
     
     appendDataPointFromPlanAtMidXPos: function(p, midXPos) {
-        var yPos = p.getValueOfIndicator(this._metricsName);
-        this._addDataPoint(yPos, midXPos, true);
-        this._yPosesOnScreenCache.push(yPos);
+        var value = p.getValueOfIndicator(this._metricsName);
+        this._addDataPoint(value, midXPos, true);
+        this._valuesOnScreenCache.push(value);
     }, 
     
     prependDataPointFromPlanAtMidXPos: function(p, midXPos) {
-        var yPos = p.getValueOfIndicator(this._metricsName);
-        this._addDataPoint(yPos, midXPos, false);
-        this._yPosesOnScreenCache.unshift(yPos);
+        var value = p.getValueOfIndicator(this._metricsName);
+        this._addDataPoint(value, midXPos, false);
+        this._valuesOnScreenCache.unshift(value);
     },
     
-    _addDataPoint: function(yPos, midXPos, appendOrNot) {
+    _addDataPoint: function(value, midXPos, appendOrNot) {
         // add line
         if (this._circlesArray.length > 0) {
             var newLine;
@@ -97,10 +132,10 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
                 fromIndex = this._circlesArray.length - 1;
                 newLine.add(new paper.Point(this._circlesArray[fromIndex].position.x, 
                                              this._circlesArray[fromIndex].position.y));
-                newLine.add(new paper.Point(midXPos, yPos));
+                newLine.add(new paper.Point(midXPos, value * this._scaleFactor));
             } else {
                 fromIndex = 0;
-                newLine.add(new paper.Point(midXPos, yPos));
+                newLine.add(new paper.Point(midXPos, value * this._scaleFactor));
                 newLine.add(new paper.Point(this._circlesArray[fromIndex].position.x, 
                                              this._circlesArray[fromIndex].position.y));
             }
@@ -119,7 +154,7 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
         }
         
         // add point
-        var newPoint = new paper.Point(midXPos, yPos);
+        var newPoint = new paper.Point(midXPos, value * this._scaleFactor);
         var newCircle = new paper.Path.Circle(newPoint, 4);
         newCircle.fillColor = 'white';
         
@@ -141,7 +176,7 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
             this._linesArray.shift();
         }
         
-        this._yPosesOnScreenCache.shift();
+        this._valuesOnScreenCache.shift();
     }, 
     
     removeTailDataPoint: function() {
@@ -155,7 +190,7 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
             this._linesArray.pop();
         }
         
-        this._yPosesOnScreenCache.pop();
+        this._valuesOnScreenCache.pop();
     }, 
     
     deleteGraph: function() {
@@ -170,7 +205,7 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
     }, 
     
     getValueOnScreenAtIndex: function(index) {
-        return this._yPosesOnScreenCache[index];
+        return this._valuesOnScreenCache[index];
     }
 };
     

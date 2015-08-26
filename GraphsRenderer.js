@@ -54,6 +54,14 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer = {
         return -1; // not found
     }, 
     
+    updateYPosScaleTo: function(newScale) {
+        var duration = MY_GLOBAL.animationDurationInS;
+        var deltaSpeeds = [];
+        for (var i=0; i<this._indicatorRendererArray.length; i++) {
+            
+        }
+    }, 
+    
     syncAllDataPointsXPosWithArray: function(midXPosArray) {
         var duration = MY_GLOBAL.animationDurationInS;
         
