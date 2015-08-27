@@ -87,7 +87,7 @@
             });
             
             $("#down").click(function() {
-                MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.updateYPosScaleTo(3.0);
+                MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.updateYPosScaleTo(MY_GLOBAL.scaleFactor);
                 $("#plansOuterContainer").
                 velocity({height: (MY_GLOBAL.plansOuterContainerHeightLarge).toString()},
                          {queue:false, duration:MY_GLOBAL.animationDurationInMS, easing:"linear"});
@@ -95,7 +95,7 @@
                 velocity({"margin-top": (0).toString()}, 
                          {queue:false, duration:MY_GLOBAL.animationDurationInMS, easing:"linear"});
                 $("#previewWindow").
-                velocity({height: (MY_GLOBAL.initialPreviewWindowHeight/3.0).toString()}, 
+                velocity({height: (MY_GLOBAL.previewWindowHeightSmall).toString()}, 
                          {queue:false, duration: MY_GLOBAL.animationDurationInMS, easing:"linear"});
             });
             

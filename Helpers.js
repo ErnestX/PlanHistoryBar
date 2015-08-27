@@ -8,12 +8,14 @@ MY_GLOBAL.selectedThumbnailPadding = 45;
 MY_GLOBAL.animationDurationInS = 0.25;
 MY_GLOBAL.animationDurationInMS = MY_GLOBAL.animationDurationInS * 1000;
 
+MY_GLOBAL.scaleFactor = 3.0;
 MY_GLOBAL.initialPreviewWindowHeight = 400;
-//MY_GLOBAL.totalCanvasHeight = 140 * 3;
+MY_GLOBAL.previewWindowHeightSmall = MY_GLOBAL.initialPreviewWindowHeight / MY_GLOBAL.scaleFactor;
 MY_GLOBAL.canvasHeightSmall = 140;
+MY_GLOBAL.totalCanvasHeight = MY_GLOBAL.canvasHeightSmall * MY_GLOBAL.scaleFactor;
 MY_GLOBAL.thumbnailsBarHeight = 75;
 MY_GLOBAL.plansOuterContainerHeightSmall = MY_GLOBAL.canvasHeightSmall + MY_GLOBAL.thumbnailsBarHeight;
-MY_GLOBAL.plansOuterContainerHeightLarge = MY_GLOBAL.canvasHeightSmall * 3 + MY_GLOBAL.thumbnailsBarHeight;
+MY_GLOBAL.plansOuterContainerHeightLarge = MY_GLOBAL.canvasHeightSmall * MY_GLOBAL.scaleFactor + MY_GLOBAL.thumbnailsBarHeight;
 MY_GLOBAL.thumbnailsBarTopMargin = (MY_GLOBAL.totalCanvasHeight - MY_GLOBAL.canvasHeightSmall) * -1;
 
 MY_GLOBAL.typeChecker = {
