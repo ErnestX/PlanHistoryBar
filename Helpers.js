@@ -2,6 +2,7 @@
 
 var MY_GLOBAL = {};
 
+// NOTE: MAKE SURE THOSE VALUES ARE THE SAME AS IN CSS!
 MY_GLOBAL.thumbnailWidth = 80; 
 MY_GLOBAL.thumbnailPadding = 3; 
 MY_GLOBAL.selectedThumbnailPadding = 45; 
