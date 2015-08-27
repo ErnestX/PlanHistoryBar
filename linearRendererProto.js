@@ -8,9 +8,8 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
     _circlesArray:[],
     _linesArray:[],
     _scaleFactor: 1.0,
-    _gradientObject: {
-        stops: [['#fff', 0.0], ['#58585A', 0.45], ['#58585A', 0.55], ['#fff',1.0]]
-    },
+    _color: '',
+    _gradientObject: null,
     
     initWithMetricsNameScaleAndPaperCanvas: function(name, scale, canvas) {
         MY_GLOBAL.typeChecker.assertIsString(name);
@@ -23,6 +22,11 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
         this._valuesOnScreenCache = [];
         this._circlesArray = [];
         this._linesArray = [];
+        
+        this._color = 'white';
+        this._gradientObject = {
+            stops: [[this._color, 0.1], [new paper.Color(0.35, 0.0), 0.5], [this._color,0.9]]
+        };//'#58585A'
     },
     
     updateScale: function(newScale) {
@@ -63,9 +67,6 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
         // lines
         for(var i=0; i<this._linesArray.length; i++) {
             var line = this._linesArray[i];
-            
-//            var x1Translation = speeds[i] * event.delta;
-//            var x2Translation = speeds[i+1] * event.delta;
 
             line.segments[0].point.y = this._valuesOnScreenCache[i] * this._scaleFactor;
             line.segments[1].point.y = this._valuesOnScreenCache[i+1] * this._scaleFactor;
@@ -178,7 +179,7 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
         // add point
         var newPoint = new paper.Point(midXPos, value * this._scaleFactor);
         var newCircle = new paper.Path.Circle(newPoint, 4);
-        newCircle.fillColor = 'white';
+        newCircle.fillColor = this._color;
         
         if (appendOrNot) {
             this._circlesArray.push(newCircle);
