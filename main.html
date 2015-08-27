@@ -88,17 +88,28 @@
             
             $("#down").click(function() {
                 MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.updateYPosScaleTo(3.0);
-                $("#plansOuterContainer").velocity({height: (500).toString()}, {queue:false, duration:MY_GLOBAL.animationDurationInMS, easing:"linear"});
-                $("#thumbnailsBar").velocity({"margin-top": (0).toString()}, {queue:false, duration:MY_GLOBAL.animationDurationInMS, easing:"linear"});
-                $("#previewWindow").velocity({height: (400/3).toString()}, {queue:false, duration: MY_GLOBAL.animationDurationInMS, easing:"linear"});
-//                $("#graphsContainer").velocity({height: (140 * 3.0).toString()}, {queue: false, duration: MY_GLOBAL.animationDurationInMS, easing: "linear"});
-//                document.getElementById("graphsContainer").height = 140 * 3.0;
+                $("#plansOuterContainer").
+                velocity({height: (MY_GLOBAL.plansOuterContainerHeightLarge).toString()},
+                         {queue:false, duration:MY_GLOBAL.animationDurationInMS, easing:"linear"});
+                $("#thumbnailsBar").
+                velocity({"margin-top": (0).toString()}, 
+                         {queue:false, duration:MY_GLOBAL.animationDurationInMS, easing:"linear"});
+                $("#previewWindow").
+                velocity({height: (MY_GLOBAL.initialPreviewWindowHeight/3.0).toString()}, 
+                         {queue:false, duration: MY_GLOBAL.animationDurationInMS, easing:"linear"});
             });
+            
             $("#up").click(function() {
                 MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.updateYPosScaleTo(1.0);
-                $("#plansOuterContainer").velocity({height: (230).toString()}, {queue:false, duration:MY_GLOBAL.animationDurationInMS, easing:"linear"});
-                $("#thumbnailsBar").velocity({"margin-top": (-280).toString()}, {queue:false, duration:MY_GLOBAL.animationDurationInMS, easing:"linear"});
-                $("#previewWindow").velocity({height: (400).toString()}, {queue:false, duration: MY_GLOBAL.animationDurationInMS, easing:"linear"});
+                $("#plansOuterContainer").
+                velocity({height: (MY_GLOBAL.plansOuterContainerHeightSmall).toString()}, 
+                         {queue:false, duration:MY_GLOBAL.animationDurationInMS, easing:"linear"});
+                $("#thumbnailsBar").
+                velocity({"margin-top": (MY_GLOBAL.thumbnailsBarTopMargin).toString()}, 
+                         {queue:false, duration:MY_GLOBAL.animationDurationInMS, easing:"linear"});
+                $("#previewWindow").
+                velocity({height: (MY_GLOBAL.initialPreviewWindowHeight).toString()}, 
+                         {queue:false, duration: MY_GLOBAL.animationDurationInMS, easing:"linear"});
             });
 
             $("#debug").click(function() {

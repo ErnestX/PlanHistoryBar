@@ -28,7 +28,7 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
         });
         this._gradientObject = {
             stops: [[this._color, 0.1], [new paper.Color(0.35, 0.0), 0.5], [this._color,0.9]]
-        };//'#58585A'
+        };
     },
     
     updateScale: function(newScale) {
