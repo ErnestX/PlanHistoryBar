@@ -23,7 +23,9 @@ MY_GLOBAL.plansManager.plansRenderer.graphsRenderer.linearRendererProto = {
         this._circlesArray = [];
         this._linesArray = [];
         
-        this._color = 'white';
+        this._color = new paper.Color({
+            hue:Math.random()*360, saturation:0.6, brightness:1.0, alpha: 1.0
+        });
         this._gradientObject = {
             stops: [[this._color, 0.1], [new paper.Color(0.35, 0.0), 0.5], [this._color,0.9]]
         };//'#58585A'
